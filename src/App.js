@@ -179,96 +179,105 @@ const messagesMock = [
   },
 ];
 
-const styles = theme => {console.log(theme);
-  return {
-    appFrame: {
-      display: 'flex',
-      flexDirection: 'row-reverse',
-      height: '100vh',
-    },
+const styles = theme => ({
+  appFrame: {
+    display: 'flex',
+    flexDirection: 'row-reverse',
+    height: '100vh',
+  },
 
-    mainArea: {
-      display: 'flex',
-      flexDirection: 'column',
-      position: 'relative',
-      width: '100%',
-      height: '100%',
-      overflow: 'hidden'
-    },
+  mainArea: {
+    display: 'flex',
+    flexDirection: 'column',
+    position: 'relative',
+    width: '100%',
+    height: '100%',
+    overflow: 'hidden'
+  },
 
-    appBar: {
-      flexShrink: 1,
-      minHeight: 64,
-    },
+  appBar: {
+    flexShrink: 1,
+    minHeight: 64,
+  },
 
-    accountBox: {
-      marginLeft: 'auto',
-    },
+  accountBox: {
+    marginLeft: 'auto',
+  },
 
-    chatAvatar: {
-      marginRight: '10px',
-      backgroundColor: deepOrange[500],
-    },
+  chatAvatar: {
+    marginRight: '10px',
+    backgroundColor: deepOrange[500],
+  },
 
-    drawerPaper: {
-      position: 'relative',
-      width: 320,
-      height: '100%',
-      overflow: 'hidden',
-    },
+  drawerPaper: {
+    position: 'relative',
+    width: 320,
+    height: '100%',
+    overflow: 'hidden',
+  },
 
-    drawerTopToolbar: {
-      ...theme.mixins.toolbar,
-      flexShrink: 1,
-    },
+  drawerTopToolbar: {
+    ...theme.mixins.toolbar,
+    flexShrink: 1,
+  },
 
-    searchChats: {
-      paddingTop: 5,
-      paddingLeft: theme.spacing.unit * 3,
-      paddingRight: theme.spacing.unit * 3,
-      overflow: 'hidden',
-    },
+  searchChats: {
+    paddingTop: 5,
+    paddingLeft: theme.spacing.unit * 3,
+    paddingRight: theme.spacing.unit * 3,
+    overflow: 'hidden',
+  },
 
-    chatsListHolder: {
-      flexShrink: 1,
-      flexGrow: 1,
-      overflowY: 'scroll'
-    },
+  chatsListHolder: {
+    flexShrink: 1,
+    flexGrow: 1,
+    overflowY: 'scroll'
+  },
 
-    chatNav: {
-      position: 'relative',
-      marginTop: 'auto',
-      flexShrink: 1,
-    },
+  chatNav: {
+    position: 'relative',
+    marginTop: 'auto',
+    flexShrink: 1,
+  },
 
-    buttonAdd: {
-      position: 'absolute',
-      bottom: 'calc(100% + 20px)',
-      right: 25,
-    },
+  buttonAdd: {
+    position: 'absolute',
+    bottom: 'calc(100% + 20px)',
+    right: 25,
+  },
 
-    paperRoot: theme.mixins.gutters({
-      paddingTop: 8,
-      paddingBottom: 8,
+  paperRoot: theme.mixins.gutters({
+    paddingTop: 8,
+    paddingBottom: 8,
+    paddingLeft: 8,
+    paddingRight: 8,
+    [theme.breakpoints.up('sm')]: {
       paddingLeft: 8,
       paddingRight: 8,
-      [theme.breakpoints.up('sm')]: {
-        paddingLeft: 8,
-        paddingRight: 8,
-      },
-    }),
-
-    messageAvatar: {
-      marginRight: theme.spacing.unit * 2,
     },
+  }),
 
-    chatArea: {
-      flexShrink: 1,
-      flexGrow: 1,
-      overflowY: 'auto',
-    }
-  };
-};
+  messageAvatar: {
+    marginRight: theme.spacing.unit * 2,
+  },
+
+  chatArea: {
+    flexShrink: 1,
+    flexGrow: 1,
+    overflowY: 'auto',
+  },
+
+  messageField: {
+    flexShrink: 1,
+    marginBottom: 15,
+    marginLeft: theme.spacing.unit * 3,
+    marginRight: theme.spacing.unit * 3,
+    paddingLeft: theme.spacing.unit * 2,
+    paddingRight: theme.spacing.unit * 2,
+    paddingTop: theme.spacing.unit * 2,
+    paddingBottom: theme.spacing.unit * 2,
+  },
+});
 
 const getAvatarAbbr = str => (
   str
@@ -334,6 +343,12 @@ class App extends Component {
               }
             </List>
           </div>
+
+          <Paper elevation={10} className={classes.messageField}>
+            <FormControl fullWidth>
+                <Input placeholder="Type your message..." />
+              </FormControl>
+          </Paper>
         </div>
 
         <Drawer
