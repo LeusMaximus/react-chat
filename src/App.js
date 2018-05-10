@@ -10,12 +10,16 @@ import Avatar from 'material-ui/Avatar';
 import IconButton from 'material-ui/IconButton';
 import Drawer from 'material-ui/Drawer';
 import Divider from 'material-ui/Divider';
+import { FormControl } from 'material-ui/Form';
+import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
 
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import Search from '@material-ui/icons/Search';
 
 import deepOrange from 'material-ui/colors/deepOrange';
 
-const styles = theme => ({
+const styles = theme => {console.log(theme);
+ return {
   flex: {
     flex: 1,
   },
@@ -47,7 +51,13 @@ const styles = theme => ({
   },
 
   toolbar: theme.mixins.toolbar,
-});
+
+  searchChats: {
+    paddingTop: 5,
+    paddingLeft: theme.spacing.unit * 3,
+    paddingRight: theme.spacing.unit * 3,
+  },
+}};
 
 const getAvatarAbbr = str => (
   str
@@ -72,7 +82,22 @@ class App extends Component {
             paper: classes.drawerPaper,
           }}
         >
-          <div className={classes.toolbar} />
+          <div className={classes.toolbar}>
+            <div className={classes.searchChats}>
+              <FormControl fullWidth>
+                <InputLabel htmlFor="search_chat">Search chats...</InputLabel>
+
+                <Input
+                  id="search_chat"
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <Search />
+                    </InputAdornment>
+                  }
+                />
+              </FormControl>
+            </div>
+          </div>
           <Divider />
         </Drawer>
 
