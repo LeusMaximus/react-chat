@@ -20,12 +20,9 @@ import deepOrange from 'material-ui/colors/deepOrange';
 
 const styles = theme => {console.log(theme);
  return {
-  flex: {
-    flex: 1,
-  },
-
   appFrame: {
     display: 'flex',
+    flexDirection: 'row-reverse',
     height: '100vh',
   },
 
@@ -38,6 +35,10 @@ const styles = theme => {console.log(theme);
 
   appBar: {
 
+  },
+
+  accountBox: {
+    marginLeft: 'auto',
   },
 
   chatAvatar: {
@@ -76,6 +77,27 @@ class App extends Component {
       <div className={classes.appFrame}>
         <CssBaseline />
 
+        <div className={classes.mainArea}>
+          <AppBar
+            position="sticky"
+            className={classes.appBar}
+          >
+            <Toolbar>
+              <Avatar className={classes.chatAvatar}>
+                {getAvatarAbbr(chatName)}
+              </Avatar>
+
+              <Typography variant="title" color="inherit" noWrap>
+                {chatName}
+              </Typography>
+
+              <IconButton color="inherit" className={classes.accountBox}>
+                <AccountCircle />
+              </IconButton>
+            </Toolbar>
+          </AppBar>
+        </div>
+
         <Drawer
           variant="permanent"
           classes={{
@@ -100,29 +122,6 @@ class App extends Component {
           </div>
           <Divider />
         </Drawer>
-
-        <div className={classes.mainArea}>
-          <AppBar
-            position="sticky"
-            className={classes.appBar}
-          >
-            <Toolbar>
-              <Avatar className={classes.chatAvatar}>
-                {getAvatarAbbr(chatName)}
-              </Avatar>
-
-              <Typography variant="title" color="inherit" className={classes.flex} noWrap>
-                {chatName}
-              </Typography>
-
-              <div>
-                <IconButton color="inherit">
-                  <AccountCircle />
-                </IconButton>
-              </div>
-            </Toolbar>
-          </AppBar>
-        </div>
       </div>
     );
   }
