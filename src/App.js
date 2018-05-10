@@ -12,9 +12,14 @@ import Drawer from 'material-ui/Drawer';
 import Divider from 'material-ui/Divider';
 import { FormControl } from 'material-ui/Form';
 import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
+import BottomNavigation, { BottomNavigationAction } from 'material-ui/BottomNavigation';
+import Button from 'material-ui/Button';
 
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Search from '@material-ui/icons/Search';
+import ChildCare from '@material-ui/icons/ChildCare';
+import Rowing from '@material-ui/icons/Rowing';
+import AddIcon from '@material-ui/icons/Add';
 
 import deepOrange from 'material-ui/colors/deepOrange';
 
@@ -57,6 +62,18 @@ const styles = theme => {console.log(theme);
     paddingTop: 5,
     paddingLeft: theme.spacing.unit * 3,
     paddingRight: theme.spacing.unit * 3,
+    overflow: 'hidden',
+  },
+
+  chatNav: {
+    position: 'relative',
+    marginTop: 'auto',
+  },
+
+  buttonAdd: {
+    position: 'absolute',
+    bottom: 'calc(100% + 20px)',
+    right: 10,
   },
 }};
 
@@ -121,6 +138,19 @@ class App extends Component {
             </div>
           </div>
           <Divider />
+
+          <div className={classes.chatNav}>
+            <Divider />
+
+            <Button variant="fab" color="secondary" aria-label="add" className={classes.buttonAdd}>
+              <AddIcon />
+            </Button>
+
+            <BottomNavigation showLabels>
+              <BottomNavigationAction label="My Chats" icon={<ChildCare />} />
+              <BottomNavigationAction label="All Chats" icon={<Rowing />} />
+            </BottomNavigation>
+          </div>
         </Drawer>
       </div>
     );
