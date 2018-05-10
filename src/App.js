@@ -17,6 +17,7 @@ import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
 import BottomNavigation, { BottomNavigationAction } from 'material-ui/BottomNavigation';
 import Button from 'material-ui/Button';
 import List, { ListItem, ListItemText } from 'material-ui/List';
+import Paper from 'material-ui/Paper';
 
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Search from '@material-ui/icons/Search';
@@ -115,71 +116,159 @@ const chatsMock = [
   },
 ];
 
+const messagesMock = [
+  {
+    name: 'Lorem Ipsum',
+    text: 'Hello!',
+    date: 'Jan 9, 2014'
+  },
+  {
+    name: 'Lorem Ipsum',
+    text: 'Sed porttitor lectus nibh. Sed porttitor lectus nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Curabitur aliquet quam id dui posuere blandit. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.',
+    date: '10 hours ago'
+  },
+  {
+    name: 'Lorem Ipsum',
+    text: 'Hello!',
+    date: '1 month ago'
+  },
+  {
+    name: 'Lorem Ipsum',
+    text: 'Hello!',
+    date: '10 hours ago'
+  },
+  {
+    name: 'Lorem Ipsum',
+    text: 'Hello!',
+    date: '10 hours ago'
+  },
+  {
+    name: 'Lorem Ipsum',
+    text: 'Hello!',
+    date: '10 hours ago'
+  },
+  {
+    name: 'Lorem Ipsum',
+    text: 'Hello!',
+    date: '10 hours ago'
+  },
+  {
+    name: 'Lorem Ipsum',
+    text: 'Hello!',
+    date: '10 hours ago'
+  },
+  {
+    name: 'Lorem Ipsum',
+    text: 'Hello!',
+    date: '10 hours ago'
+  },
+  {
+    name: 'Lorem Ipsum',
+    text: 'Hello!',
+    date: '10 hours ago'
+  },
+  {
+    name: 'Lorem Ipsum',
+    text: 'Hello!',
+    date: '10 hours ago'
+  },
+  {
+    name: 'Last Message',
+    text: 'Hello!',
+    date: '10 hours ago'
+  },
+];
+
 const styles = theme => {console.log(theme);
- return {
-  appFrame: {
-    display: 'flex',
-    flexDirection: 'row-reverse',
-    height: '100vh',
-  },
+  return {
+    appFrame: {
+      display: 'flex',
+      flexDirection: 'row-reverse',
+      height: '100vh',
+    },
 
-  mainArea: {
-    position: 'relative',
-    width: '100%',
-    height: '100%',
-    overflow: 'hidden'
-  },
+    mainArea: {
+      display: 'flex',
+      flexDirection: 'column',
+      position: 'relative',
+      width: '100%',
+      height: '100%',
+      overflow: 'hidden'
+    },
 
-  appBar: {
+    appBar: {
+      flexShrink: 1,
+      minHeight: 64,
+    },
 
-  },
+    accountBox: {
+      marginLeft: 'auto',
+    },
 
-  accountBox: {
-    marginLeft: 'auto',
-  },
+    chatAvatar: {
+      marginRight: '10px',
+      backgroundColor: deepOrange[500],
+    },
 
-  chatAvatar: {
-    marginRight: '10px',
-    backgroundColor: deepOrange[500],
-  },
+    drawerPaper: {
+      position: 'relative',
+      width: 320,
+      height: '100%',
+      overflow: 'hidden',
+    },
 
-  drawerPaper: {
-    position: 'relative',
-    width: 320,
-    height: '100%',
-    overflow: 'hidden',
-  },
+    drawerTopToolbar: {
+      ...theme.mixins.toolbar,
+      flexShrink: 1,
+    },
 
-  drawerTopToolbar: {
-    ...theme.mixins.toolbar,
-    flexShrink: 1,
-  },
+    searchChats: {
+      paddingTop: 5,
+      paddingLeft: theme.spacing.unit * 3,
+      paddingRight: theme.spacing.unit * 3,
+      overflow: 'hidden',
+    },
 
-  searchChats: {
-    paddingTop: 5,
-    paddingLeft: theme.spacing.unit * 3,
-    paddingRight: theme.spacing.unit * 3,
-    overflow: 'hidden',
-  },
+    chatsListHolder: {
+      flexShrink: 1,
+      flexGrow: 1,
+      overflowY: 'scroll'
+    },
 
-  chatsListHolder: {
-    flexShrink: 1,
-    flexGrow: 1,
-    overflowY: 'scroll'
-  },
+    chatNav: {
+      position: 'relative',
+      marginTop: 'auto',
+      flexShrink: 1,
+    },
 
-  chatNav: {
-    position: 'relative',
-    marginTop: 'auto',
-    flexShrink: 1,
-  },
+    buttonAdd: {
+      position: 'absolute',
+      bottom: 'calc(100% + 20px)',
+      right: 25,
+    },
 
-  buttonAdd: {
-    position: 'absolute',
-    bottom: 'calc(100% + 20px)',
-    right: 25,
-  },
-}};
+    paperRoot: theme.mixins.gutters({
+      paddingTop: 8,
+      paddingBottom: 8,
+      paddingLeft: 8,
+      paddingRight: 8,
+      [theme.breakpoints.up('sm')]: {
+        paddingLeft: 8,
+        paddingRight: 8,
+      },
+    }),
+
+    messageAvatar: {
+      marginRight: theme.spacing.unit * 2,
+    },
+
+    chatArea: {
+      flexShrink: 1,
+      flexGrow: 1,
+      overflowY: 'auto',
+    }
+  };
+};
 
 const getAvatarAbbr = str => (
   str
@@ -200,7 +289,7 @@ class App extends Component {
 
         <div className={classes.mainArea}>
           <AppBar
-            position="sticky"
+            position="static"
             className={classes.appBar}
           >
             <Toolbar>
@@ -217,6 +306,34 @@ class App extends Component {
               </IconButton>
             </Toolbar>
           </AppBar>
+
+          <div className={classes.chatArea}>
+            <List>
+              {
+                messagesMock.map(item => (
+                  <ListItem key={nanoid()}>
+                    <Avatar className={classes.messageAvatar}>
+                      {getAvatarAbbr(item.name)}
+                    </Avatar>
+
+                    <Paper elevation={4} className={classes.paperRoot}>
+                      <Typography variant="caption" component="strong">
+                        {item.name}
+                      </Typography>
+
+                      <Typography component="p">
+                        {item.text}
+                      </Typography>
+
+                      <Typography variant="caption" component="em">
+                        {item.date}
+                      </Typography>
+                    </Paper>
+                  </ListItem>
+                ))
+              }
+            </List>
+          </div>
         </div>
 
         <Drawer
