@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import nanoid from 'nanoid';
+
 import { withStyles } from 'material-ui/styles';
 import CssBaseline from 'material-ui/CssBaseline';
 
@@ -14,6 +16,7 @@ import { FormControl } from 'material-ui/Form';
 import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
 import BottomNavigation, { BottomNavigationAction } from 'material-ui/BottomNavigation';
 import Button from 'material-ui/Button';
+import List, { ListItem, ListItemText } from 'material-ui/List';
 
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Search from '@material-ui/icons/Search';
@@ -22,6 +25,95 @@ import Rowing from '@material-ui/icons/Rowing';
 import AddIcon from '@material-ui/icons/Add';
 
 import deepOrange from 'material-ui/colors/deepOrange';
+
+const chatsMock = [
+  {
+    name: 'Some Chat Name',
+    date: 'Jan 9, 2014'
+  },
+
+  {
+    name: 'React Chat',
+    date: '1 month ago'
+  },
+
+  {
+    name: 'Cars',
+    date: '12 days ago'
+  },
+
+  {
+    name: 'Footbal Chat',
+    date: '10 hours ago'
+  },
+
+  {
+    name: 'Some Chat Name',
+    date: 'Jan 9, 2014'
+  },
+
+  {
+    name: 'React Chat',
+    date: '1 month ago'
+  },
+
+  {
+    name: 'Cars',
+    date: '12 days ago'
+  },
+
+  {
+    name: 'Footbal Chat',
+    date: '10 hours ago'
+  },
+  {
+    name: 'Some Chat Name',
+    date: 'Jan 9, 2014'
+  },
+
+  {
+    name: 'React Chat',
+    date: '1 month ago'
+  },
+
+  {
+    name: 'Cars',
+    date: '12 days ago'
+  },
+
+  {
+    name: 'Footbal Chat',
+    date: '10 hours ago'
+  },
+  {
+    name: 'Cars',
+    date: '12 days ago'
+  },
+
+  {
+    name: 'Footbal Chat',
+    date: '10 hours ago'
+  },
+  {
+    name: 'Some Chat Name',
+    date: 'Jan 9, 2014'
+  },
+
+  {
+    name: 'React Chat',
+    date: '1 month ago'
+  },
+
+  {
+    name: 'Cars',
+    date: '12 days ago'
+  },
+
+  {
+    name: 'Footbal Chat',
+    date: '10 hours ago'
+  },
+];
 
 const styles = theme => {console.log(theme);
  return {
@@ -54,9 +146,14 @@ const styles = theme => {console.log(theme);
   drawerPaper: {
     position: 'relative',
     width: 320,
+    height: '100%',
+    overflow: 'hidden',
   },
 
-  toolbar: theme.mixins.toolbar,
+  drawerTopToolbar: {
+    ...theme.mixins.toolbar,
+    flexShrink: 1,
+  },
 
   searchChats: {
     paddingTop: 5,
@@ -65,15 +162,22 @@ const styles = theme => {console.log(theme);
     overflow: 'hidden',
   },
 
+  chatsListHolder: {
+    flexShrink: 1,
+    flexGrow: 1,
+    overflowY: 'scroll'
+  },
+
   chatNav: {
     position: 'relative',
     marginTop: 'auto',
+    flexShrink: 1,
   },
 
   buttonAdd: {
     position: 'absolute',
     bottom: 'calc(100% + 20px)',
-    right: 10,
+    right: 25,
   },
 }};
 
@@ -121,7 +225,7 @@ class App extends Component {
             paper: classes.drawerPaper,
           }}
         >
-          <div className={classes.toolbar}>
+          <div className={classes.drawerTopToolbar}>
             <div className={classes.searchChats}>
               <FormControl fullWidth>
                 <InputLabel htmlFor="search_chat">Search chats...</InputLabel>
@@ -138,6 +242,21 @@ class App extends Component {
             </div>
           </div>
           <Divider />
+
+          <div className={classes.chatsListHolder}>
+            <List>
+              {
+                chatsMock.map(item => (
+                  <ListItem button key={nanoid()}>
+                    <Avatar>
+                      {getAvatarAbbr(item.name)}
+                    </Avatar>
+                    <ListItemText primary={item.name} secondary={item.date} />
+                  </ListItem>
+                ))
+              }
+            </List>
+          </div>
 
           <div className={classes.chatNav}>
             <Divider />
