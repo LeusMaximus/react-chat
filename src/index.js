@@ -6,7 +6,7 @@ import registerServiceWorker from './registerServiceWorker';
 import 'typeface-roboto';
 
 ReactDOM.render(
-  <App />,
+  <App chatName="Some Chat Name" />,
   document.getElementById('root')
 );
 
