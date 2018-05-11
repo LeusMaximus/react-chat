@@ -5,23 +5,17 @@ import nanoid from 'nanoid';
 import { withStyles } from 'material-ui/styles';
 import CssBaseline from 'material-ui/CssBaseline';
 
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import Avatar from 'material-ui/Avatar';
-import IconButton from 'material-ui/IconButton';
 import { FormControl } from 'material-ui/Form';
 import Input from 'material-ui/Input';
 import List, { ListItem } from 'material-ui/List';
 import Paper from 'material-ui/Paper';
 
-import AccountCircle from '@material-ui/icons/AccountCircle';
-
-import deepOrange from 'material-ui/colors/deepOrange';
-
 import getInitials from './utils/getInitials';
 import { chats, messages } from './mock-data';
 import Sidebar from './components/Sidebar';
+import ChatHeader from './components/ChatHeader';
 
 const styles = theme => ({
   appFrame: {
@@ -37,20 +31,6 @@ const styles = theme => ({
     width: '100%',
     height: '100%',
     overflow: 'hidden'
-  },
-
-  appBar: {
-    flexShrink: 1,
-    minHeight: 64,
-  },
-
-  accountBox: {
-    marginLeft: 'auto',
-  },
-
-  chatAvatar: {
-    marginRight: '10px',
-    backgroundColor: deepOrange[500],
   },
 
   paperRoot: theme.mixins.gutters({
@@ -95,24 +75,7 @@ class App extends Component {
         <CssBaseline />
 
         <div className={classes.mainArea}>
-          <AppBar
-            position="static"
-            className={classes.appBar}
-          >
-            <Toolbar>
-              <Avatar className={classes.chatAvatar}>
-                {getInitials(chatName)}
-              </Avatar>
-
-              <Typography variant="title" color="inherit" noWrap>
-                {chatName}
-              </Typography>
-
-              <IconButton color="inherit" className={classes.accountBox}>
-                <AccountCircle />
-              </IconButton>
-            </Toolbar>
-          </AppBar>
+          <ChatHeader chatName={chatName} />
 
           <div className={classes.chatArea}>
             <List>
