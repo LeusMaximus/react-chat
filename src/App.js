@@ -28,158 +28,7 @@ import AddIcon from '@material-ui/icons/Add';
 import deepOrange from 'material-ui/colors/deepOrange';
 
 import getInitials from './utils/getInitials';
-
-const chatsMock = [
-  {
-    name: 'Some Chat Name',
-    date: 'Jan 9, 2014'
-  },
-
-  {
-    name: 'React Chat',
-    date: '1 month ago'
-  },
-
-  {
-    name: 'Cars',
-    date: '12 days ago'
-  },
-
-  {
-    name: 'Footbal Chat',
-    date: '10 hours ago'
-  },
-
-  {
-    name: 'Some Chat Name',
-    date: 'Jan 9, 2014'
-  },
-
-  {
-    name: 'React Chat',
-    date: '1 month ago'
-  },
-
-  {
-    name: 'Cars',
-    date: '12 days ago'
-  },
-
-  {
-    name: 'Footbal Chat',
-    date: '10 hours ago'
-  },
-  {
-    name: 'Some Chat Name',
-    date: 'Jan 9, 2014'
-  },
-
-  {
-    name: 'React Chat',
-    date: '1 month ago'
-  },
-
-  {
-    name: 'Cars',
-    date: '12 days ago'
-  },
-
-  {
-    name: 'Footbal Chat',
-    date: '10 hours ago'
-  },
-  {
-    name: 'Cars',
-    date: '12 days ago'
-  },
-
-  {
-    name: 'Footbal Chat',
-    date: '10 hours ago'
-  },
-  {
-    name: 'Some Chat Name',
-    date: 'Jan 9, 2014'
-  },
-
-  {
-    name: 'React Chat',
-    date: '1 month ago'
-  },
-
-  {
-    name: 'Cars',
-    date: '12 days ago'
-  },
-
-  {
-    name: 'Footbal Chat',
-    date: '10 hours ago'
-  },
-];
-
-const messagesMock = [
-  {
-    name: 'Lorem Ipsum',
-    text: 'Hello!',
-    date: 'Jan 9, 2014'
-  },
-  {
-    name: 'Lorem Ipsum',
-    text: 'Sed porttitor lectus nibh. Sed porttitor lectus nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Curabitur aliquet quam id dui posuere blandit. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.',
-    date: '10 hours ago'
-  },
-  {
-    name: 'Lorem Ipsum',
-    text: 'Hello!',
-    date: '1 month ago'
-  },
-  {
-    name: 'Lorem Ipsum',
-    text: 'Hello!',
-    date: '10 hours ago'
-  },
-  {
-    name: 'Lorem Ipsum',
-    text: 'Hello!',
-    date: '10 hours ago'
-  },
-  {
-    name: 'Lorem Ipsum',
-    text: 'Hello!',
-    date: '10 hours ago'
-  },
-  {
-    name: 'Lorem Ipsum',
-    text: 'Hello!',
-    date: '10 hours ago'
-  },
-  {
-    name: 'Lorem Ipsum',
-    text: 'Hello!',
-    date: '10 hours ago'
-  },
-  {
-    name: 'Lorem Ipsum',
-    text: 'Hello!',
-    date: '10 hours ago'
-  },
-  {
-    name: 'Lorem Ipsum',
-    text: 'Hello!',
-    date: '10 hours ago'
-  },
-  {
-    name: 'Lorem Ipsum',
-    text: 'Hello!',
-    date: '10 hours ago'
-  },
-  {
-    name: 'Last Message',
-    text: 'Hello!',
-    date: '10 hours ago'
-  },
-];
+import { chats, messages } from './mock-data';
 
 const styles = theme => ({
   appFrame: {
@@ -312,7 +161,7 @@ class App extends Component {
           <div className={classes.chatArea}>
             <List>
               {
-                messagesMock.map(item => (
+                messages.map(item => (
                   <ListItem key={nanoid()}>
                     <Avatar className={classes.messageAvatar}>
                       {getInitials(item.name)}
@@ -371,7 +220,7 @@ class App extends Component {
           <div className={classes.chatsListHolder}>
             <List>
               {
-                chatsMock.map(item => (
+                chats.map(item => (
                   <ListItem button key={nanoid()}>
                     <Avatar>
                       {getInitials(item.name)}
