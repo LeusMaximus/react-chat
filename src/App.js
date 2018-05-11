@@ -27,6 +27,8 @@ import AddIcon from '@material-ui/icons/Add';
 
 import deepOrange from 'material-ui/colors/deepOrange';
 
+import getInitials from './utils/getInitials';
+
 const chatsMock = [
   {
     name: 'Some Chat Name',
@@ -279,15 +281,6 @@ const styles = theme => ({
   },
 });
 
-const getAvatarAbbr = str => (
-  str
-    .split(' ')
-    .slice(0, 2)
-    .map(word => word[0].toUpperCase())
-    .join('')
-);
-
-
 class App extends Component {
   render() {
     const { classes, chatName } = this.props;
@@ -303,7 +296,7 @@ class App extends Component {
           >
             <Toolbar>
               <Avatar className={classes.chatAvatar}>
-                {getAvatarAbbr(chatName)}
+                {getInitials(chatName)}
               </Avatar>
 
               <Typography variant="title" color="inherit" noWrap>
@@ -322,7 +315,7 @@ class App extends Component {
                 messagesMock.map(item => (
                   <ListItem key={nanoid()}>
                     <Avatar className={classes.messageAvatar}>
-                      {getAvatarAbbr(item.name)}
+                      {getInitials(item.name)}
                     </Avatar>
 
                     <Paper elevation={4} className={classes.paperRoot}>
@@ -381,7 +374,7 @@ class App extends Component {
                 chatsMock.map(item => (
                   <ListItem button key={nanoid()}>
                     <Avatar>
-                      {getAvatarAbbr(item.name)}
+                      {getInitials(item.name)}
                     </Avatar>
                     <ListItemText primary={item.name} secondary={item.date} />
                   </ListItem>
