@@ -5,17 +5,15 @@ import React from 'react';
 import { withStyles } from 'material-ui/styles';
 import Drawer from 'material-ui/Drawer';
 import Divider from 'material-ui/Divider';
-import BottomNavigation, { BottomNavigationAction } from 'material-ui/BottomNavigation';
 import Button from 'material-ui/Button';
 
 // MUI icons
-import ChildCare from '@material-ui/icons/ChildCare';
-import Rowing from '@material-ui/icons/Rowing';
 import AddIcon from '@material-ui/icons/Add';
 
 // Own modules
 import SearchChat from './SearchChat';
 import ChatList from './ChatList';
+import ChatNav from './ChatNav';
 
 const styles = theme => ({
   drawerPaper: {
@@ -36,7 +34,7 @@ const styles = theme => ({
     overflowY: 'scroll'
   },
 
-  chatNav: {
+  chatNavHolder: {
     position: 'relative',
     marginTop: 'auto',
     flexShrink: 1,
@@ -65,17 +63,14 @@ const Sidebar = ({ classes, chats }) => (
       <ChatList chats={chats} />
     </div>
 
-    <div className={classes.chatNav}>
+    <div className={classes.chatNavHolder}>
       <Divider />
 
       <Button variant="fab" color="secondary" aria-label="add" className={classes.buttonAdd}>
         <AddIcon />
       </Button>
 
-      <BottomNavigation showLabels>
-        <BottomNavigationAction label="My Chats" icon={<ChildCare />} />
-        <BottomNavigationAction label="All Chats" icon={<Rowing />} />
-      </BottomNavigation>
+      <ChatNav />
     </div>
   </Drawer>
 );
