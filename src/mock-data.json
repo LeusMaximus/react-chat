@@ -1,153 +1,107 @@
+
 {
-  "chats": [
-    {
-      "name": "Some Chat Name",
-      "date": "Jan 9, 2014"
-    },
-
-    {
-      "name": "React Chat",
-      "date": "1 month ago"
-    },
-
-    {
-      "name": "Cars",
-      "date": "12 days ago"
-    },
-
-    {
-      "name": "Footbal Chat",
-      "date": "10 hours ago"
-    },
-
-    {
-      "name": "Some Chat Name",
-      "date": "Jan 9, 2014"
-    },
-
-    {
-      "name": "React Chat",
-      "date": "1 month ago"
-    },
-
-    {
-      "name": "Cars",
-      "date": "12 days ago"
-    },
-
-    {
-      "name": "Footbal Chat",
-      "date": "10 hours ago"
-    },
-    {
-      "name": "Some Chat Name",
-      "date": "Jan 9, 2014"
-    },
-
-    {
-      "name": "React Chat",
-      "date": "1 month ago"
-    },
-
-    {
-      "name": "Cars",
-      "date": "12 days ago"
-    },
-
-    {
-      "name": "Footbal Chat",
-      "date": "10 hours ago"
-    },
-    {
-      "name": "Cars",
-      "date": "12 days ago"
-    },
-
-    {
-      "name": "Footbal Chat",
-      "date": "10 hours ago"
-    },
-    {
-      "name": "Some Chat Name",
-      "date": "Jan 9, 2014"
-    },
-
-    {
-      "name": "React Chat",
-      "date": "1 month ago"
-    },
-
-    {
-      "name": "Cars",
-      "date": "12 days ago"
-    },
-
-    {
-      "name": "Footbal Chat",
-      "date": "10 hours ago"
-    }
-  ],
-
-  "messages":  [
-    {
-      "name": "Lorem Ipsum",
-      "text": "Hello!",
-      "date": "Jan 9, 2014"
-    },
-    {
-      "name": "Lorem Ipsum",
-      "text": "Sed porttitor lectus nibh. Sed porttitor lectus nibh. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Curabitur aliquet quam id dui posuere blandit. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus.",
-      "date": "10 hours ago"
-    },
-    {
-      "name": "Lorem Ipsum",
-      "text": "Hello!",
-      "date": "1 month ago"
-    },
-    {
-      "name": "Lorem Ipsum",
-      "text": "Hello!",
-      "date": "10 hours ago"
-    },
-    {
-      "name": "Lorem Ipsum",
-      "text": "Hello!",
-      "date": "10 hours ago"
-    },
-    {
-      "name": "Lorem Ipsum",
-      "text": "Hello!",
-      "date": "10 hours ago"
-    },
-    {
-      "name": "Lorem Ipsum",
-      "text": "Hello!",
-      "date": "10 hours ago"
-    },
-    {
-      "name": "Lorem Ipsum",
-      "text": "Hello!",
-      "date": "10 hours ago"
-    },
-    {
-      "name": "Lorem Ipsum",
-      "text": "Hello!",
-      "date": "10 hours ago"
-    },
-    {
-      "name": "Lorem Ipsum",
-      "text": "Hello!",
-      "date": "10 hours ago"
-    },
-    {
-      "name": "Lorem Ipsum",
-      "text": "Hello!",
-      "date": "10 hours ago"
-    },
-    {
-      "name": "Last Message",
-      "text": "Hello!",
-      "date": "10 hours ago"
-    }
-  ]
+  "chats": [{
+    "title": "Harvey Moss",
+    "date": "14 hours ago"
+  }, {
+    "title": "Marjorie Atnip",
+    "date": "14 hours ago"
+  }, {
+    "title": "Heather Richardson",
+    "date": "14 hours ago"
+  }, {
+    "title": "Alma Greenfeild",
+    "date": "14 hours ago"
+  }, {
+    "title": "Jim Bos",
+    "date": "14 hours ago"
+  }, {
+    "title": "Henry Willson",
+    "date": "14 hours ago"
+  }, {
+    "title": "Alma Reed",
+    "date": "14 hours ago"
+  }, {
+    "title": "John Joy",
+    "date": "14 hours ago"
+  }, {
+    "title": "Barny Bons",
+    "date": "14 hours ago"
+  }, {
+    "title": "Larry Hire",
+    "date": "14 hours ago"
+  }, {
+    "title": "Harvey Moss",
+    "date": "14 hours ago"
+  }, {
+    "title": "Philip Taylor",
+    "date": "14 hours ago"
+  }, {
+    "title": "Frank Underwood",
+    "date": "14 hours ago"
+  }, {
+    "title": "Claire Underwood",
+    "date": "14 hours ago"
+  }],
+  "messages": [{
+    "sender": "someone",
+    "content": "Hello, World!",
+    "date": "A day ago"
+  }, {
+    "sender": "someone",
+    "content": "Here's my very first message...",
+    "date": "A day ago"
+  }, {
+    "sender": "me",
+    "content": "Oh, hi 👋🏻",
+    "date": "A day ago"
+  }, {
+    "sender": "me",
+    "content": "What's up?",
+    "date": "A day ago"
+  }, {
+    "sender": "me",
+    "content": "Everything is up, buddy 😎",
+    "date": "A day ago"
+  }, {
+    "sender": "someone",
+    "content": "Neat 👍🏻\nKeep rocking",
+    "date": "A day ago"
+  }, {
+    "sender": "someone",
+    "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    "date": "A day ago"
+  }, {
+    "sender": "me",
+    "content": "What's that?",
+    "date": "A day ago"
+  }, {
+    "sender": "someone",
+    "content": "That's a HUUUUUGGGEEEE message!!11",
+    "date": "A day ago"
+  }, {
+    "sender": "me",
+    "content": "LOL",
+    "date": "A day ago"
+  }, {
+    "sender": "someone",
+    "content": "Wanna more?",
+    "date": "A day ago"
+  }, {
+    "sender": "me",
+    "content": "Sure 😁",
+    "date": "A day ago"
+  }, {
+    "sender": "someone",
+    "content": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.",
+    "date": "A day ago"
+  }, {
+    "sender": "me",
+    "content": "I can do this too!",
+    "date": "A day ago"
+  }, {
+    "sender": "me",
+    "content": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.",
+    "date": "A day ago"
+  }]
 }

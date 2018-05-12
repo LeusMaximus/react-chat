@@ -11,9 +11,9 @@ import getInitials from '../utils/getInitials';
 const ChatListItem = ({ item }) => (
   <ListItem button>
     <Avatar>
-      {getInitials(item.name)}
+      {getInitials(item.title)}
     </Avatar>
-    <ListItemText primary={item.name} secondary={item.date} />
+    <ListItemText primary={item.title} secondary={item.date} />
   </ListItem>
 );
 

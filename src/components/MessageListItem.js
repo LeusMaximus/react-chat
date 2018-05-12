@@ -8,46 +8,72 @@ import Avatar from 'material-ui/Avatar';
 import { ListItem } from 'material-ui/List';
 import Paper from 'material-ui/Paper';
 
+// Vendor modules
+import classnames from 'classnames';
+
 // Own modules
 import getInitials from '../utils/getInitials';
 
 const styles = theme => ({
-  paperRoot: theme.mixins.gutters({
+  ownMessageItem: {
+    flexDirection: 'row-reverse',
+  },
+
+  messagePaper: theme.mixins.gutters({
+    maxWidth: '70%',
+    minWidth: '10%',
     paddingTop: 8,
     paddingBottom: 8,
     paddingLeft: 8,
     paddingRight: 8,
+    marginLeft: theme.spacing.unit * 2,
+    marginRight: theme.spacing.unit * 2,
     [theme.breakpoints.up('sm')]: {
       paddingLeft: 8,
       paddingRight: 8,
     },
   }),
 
-  messageAvatar: {
-    marginRight: theme.spacing.unit * 2,
-  },
+  ownMessagePaper: {
+    backgroundColor: theme.palette.primary.light,
+    color: theme.palette.common.white,
+  }
+
 });
 
-const MessageListItem = ({ classes, item }) => (
-  <ListItem>
-    <Avatar className={classes.messageAvatar}>
-      {getInitials(item.name)}
-    </Avatar>
+const MessageListItem = ({ classes, item }) => {
+  const isOwnMessage = item.sender === 'me';
 
-    <Paper elevation={4} className={classes.paperRoot}>
-      <Typography variant="caption" component="strong">
-        {item.name}
-      </Typography>
+  const itemClasses = classnames({
+    [classes.ownMessageItem]: isOwnMessage,
+  });
 
-      <Typography component="p">
-        {item.text}
-      </Typography>
+  const paperClasses = classnames({
+    [classes.messagePaper]: true,
+    [classes.ownMessagePaper]: isOwnMessage
+  });
 
-      <Typography variant="caption" component="em">
-        {item.date}
-      </Typography>
-    </Paper>
-  </ListItem>
-);
+  return (
+    <ListItem className={itemClasses}>
+      <Avatar>
+        {getInitials(item.sender)}
+      </Avatar>
+
+      <Paper elevation={4} className={paperClasses}>
+        <Typography variant="caption" component="strong" color="inherit">
+          {item.sender}
+        </Typography>
+
+        <Typography component="p" color="inherit">
+          {item.content}
+        </Typography>
+
+        <Typography variant="caption" component="em" color="inherit">
+          {item.date}
+        </Typography>
+      </Paper>
+    </ListItem>
+  );
+};
 
 export default withStyles(styles)(MessageListItem);
