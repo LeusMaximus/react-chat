@@ -5,8 +5,6 @@ import React from 'react';
 import { withStyles } from 'material-ui/styles';
 import Drawer from 'material-ui/Drawer';
 import Divider from 'material-ui/Divider';
-import List, { ListItem, ListItemText } from 'material-ui/List';
-import Avatar from 'material-ui/Avatar';
 import BottomNavigation, { BottomNavigationAction } from 'material-ui/BottomNavigation';
 import Button from 'material-ui/Button';
 
@@ -15,12 +13,9 @@ import ChildCare from '@material-ui/icons/ChildCare';
 import Rowing from '@material-ui/icons/Rowing';
 import AddIcon from '@material-ui/icons/Add';
 
-// vendor modules
-import nanoid from 'nanoid';
-
 // Own modules
-import getInitials from '../utils/getInitials';
 import SearchChat from './SearchChat';
+import ChatList from './ChatList';
 
 const styles = theme => ({
   drawerPaper: {
@@ -67,18 +62,7 @@ const Sidebar = ({ classes, chats }) => (
     <Divider />
 
     <div className={classes.chatsListHolder}>
-      <List>
-        {
-          chats.map(item => (
-            <ListItem button key={nanoid()}>
-              <Avatar>
-                {getInitials(item.name)}
-              </Avatar>
-              <ListItemText primary={item.name} secondary={item.date} />
-            </ListItem>
-          ))
-        }
-      </List>
+      <ChatList chats={chats} />
     </div>
 
     <div className={classes.chatNav}>
