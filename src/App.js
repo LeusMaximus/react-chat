@@ -8,8 +8,8 @@ import CssBaseline from 'material-ui/CssBaseline';
 // Own modules
 import Sidebar from './components/Sidebar';
 import ChatHeader from './components/ChatHeader';
-import MessagesList from './components/MessagesList';
 import MessageField from './components/MessageField';
+import ChatSection from './components/ChatSection';
 
 import { chats, messages } from './mock-data';
 
@@ -28,12 +28,6 @@ const styles = theme => ({
     height: '100%',
     overflow: 'hidden'
   },
-
-  chatArea: {
-    flexShrink: 1,
-    flexGrow: 1,
-    overflowY: 'auto',
-  },
 });
 
 class App extends Component {
@@ -47,9 +41,7 @@ class App extends Component {
         <div className={classes.mainArea}>
           <ChatHeader chatName={chatName} />
 
-          <main className={classes.chatArea}>
-            <MessagesList messages={messages} />
-          </main>
+          <ChatSection messages={messages} />
 
           <MessageField />
         </div>
