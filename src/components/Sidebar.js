@@ -5,15 +5,12 @@ import React from 'react';
 import { withStyles } from 'material-ui/styles';
 import Drawer from 'material-ui/Drawer';
 import Divider from 'material-ui/Divider';
-import { FormControl } from 'material-ui/Form';
-import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
 import List, { ListItem, ListItemText } from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
 import BottomNavigation, { BottomNavigationAction } from 'material-ui/BottomNavigation';
 import Button from 'material-ui/Button';
 
 // MUI icons
-import Search from '@material-ui/icons/Search';
 import ChildCare from '@material-ui/icons/ChildCare';
 import Rowing from '@material-ui/icons/Rowing';
 import AddIcon from '@material-ui/icons/Add';
@@ -23,6 +20,7 @@ import nanoid from 'nanoid';
 
 // Own modules
 import getInitials from '../utils/getInitials';
+import SearchChat from './SearchChat';
 
 const styles = theme => ({
   drawerPaper: {
@@ -35,13 +33,6 @@ const styles = theme => ({
   drawerTopToolbar: {
     ...theme.mixins.toolbar,
     flexShrink: 1,
-  },
-
-  searchChats: {
-    paddingTop: 5,
-    paddingLeft: theme.spacing.unit * 3,
-    paddingRight: theme.spacing.unit * 3,
-    overflow: 'hidden',
   },
 
   chatsListHolder: {
@@ -71,20 +62,7 @@ const Sidebar = ({ classes, chats }) => (
     }}
   >
     <div className={classes.drawerTopToolbar}>
-      <div className={classes.searchChats}>
-        <FormControl fullWidth>
-          <InputLabel htmlFor="search_chat">Search chats...</InputLabel>
-
-          <Input
-            id="search_chat"
-            endAdornment={
-              <InputAdornment position="end">
-                <Search />
-              </InputAdornment>
-            }
-          />
-        </FormControl>
-      </div>
+      <SearchChat />
     </div>
     <Divider />
 
