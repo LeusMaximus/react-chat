@@ -1,21 +1,17 @@
+// React
 import React, { Component } from 'react';
 
-
-
+// MUI components
 import { withStyles } from 'material-ui/styles';
 import CssBaseline from 'material-ui/CssBaseline';
 
-
-import { FormControl } from 'material-ui/Form';
-import Input from 'material-ui/Input';
-
-import Paper from 'material-ui/Paper';
-
-
-import { chats, messages } from './mock-data';
+// Own modules
 import Sidebar from './components/Sidebar';
 import ChatHeader from './components/ChatHeader';
 import MessagesList from './components/MessagesList';
+import MessageField from './components/MessageField';
+
+import { chats, messages } from './mock-data';
 
 const styles = theme => ({
   appFrame: {
@@ -38,17 +34,6 @@ const styles = theme => ({
     flexGrow: 1,
     overflowY: 'auto',
   },
-
-  messageField: {
-    flexShrink: 1,
-    marginBottom: 15,
-    marginLeft: theme.spacing.unit * 3,
-    marginRight: theme.spacing.unit * 3,
-    paddingLeft: theme.spacing.unit * 2,
-    paddingRight: theme.spacing.unit * 2,
-    paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2,
-  },
 });
 
 class App extends Component {
@@ -66,11 +51,7 @@ class App extends Component {
             <MessagesList messages={messages} />
           </main>
 
-          <Paper elevation={10} className={classes.messageField}>
-            <FormControl fullWidth>
-                <Input placeholder="Type your message..." />
-              </FormControl>
-          </Paper>
+          <MessageField />
         </div>
 
         <Sidebar chats={chats} />
