@@ -6,12 +6,12 @@ import { withStyles } from 'material-ui/styles';
 import CssBaseline from 'material-ui/CssBaseline';
 
 // Own modules
-import Sidebar from './components/Sidebar';
-import ChatHeader from './components/ChatHeader';
-import MessageField from './components/MessageField';
-import ChatSection from './components/ChatSection';
+import Sidebar from './Sidebar';
+import ChatHeader from './ChatHeader';
+import MessageField from './MessageField';
+import ChatSection from './ChatSection';
 
-import { chats, messages } from './mock-data';
+import { chats, messages } from '../mock-data';
 
 const styles = theme => ({
   appFrame: {
