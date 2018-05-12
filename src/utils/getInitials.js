@@ -1,3 +1,8 @@
+/**
+ * Get the first letters from the first two words of the title in uppercase.
+ * @param {string} title
+ * @return {string}
+ */
 export default function(title) {
   try {
     return title

@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 
-import nanoid from 'nanoid';
+
 
 import { withStyles } from 'material-ui/styles';
 import CssBaseline from 'material-ui/CssBaseline';
 
-import Typography from 'material-ui/Typography';
-import Avatar from 'material-ui/Avatar';
+
 import { FormControl } from 'material-ui/Form';
 import Input from 'material-ui/Input';
-import List, { ListItem } from 'material-ui/List';
+
 import Paper from 'material-ui/Paper';
 
-import getInitials from './utils/getInitials';
+
 import { chats, messages } from './mock-data';
 import Sidebar from './components/Sidebar';
 import ChatHeader from './components/ChatHeader';
+import MessagesList from './components/MessagesList';
 
 const styles = theme => ({
   appFrame: {
@@ -31,21 +31,6 @@ const styles = theme => ({
     width: '100%',
     height: '100%',
     overflow: 'hidden'
-  },
-
-  paperRoot: theme.mixins.gutters({
-    paddingTop: 8,
-    paddingBottom: 8,
-    paddingLeft: 8,
-    paddingRight: 8,
-    [theme.breakpoints.up('sm')]: {
-      paddingLeft: 8,
-      paddingRight: 8,
-    },
-  }),
-
-  messageAvatar: {
-    marginRight: theme.spacing.unit * 2,
   },
 
   chatArea: {
@@ -77,33 +62,9 @@ class App extends Component {
         <div className={classes.mainArea}>
           <ChatHeader chatName={chatName} />
 
-          <div className={classes.chatArea}>
-            <List>
-              {
-                messages.map(item => (
-                  <ListItem key={nanoid()}>
-                    <Avatar className={classes.messageAvatar}>
-                      {getInitials(item.name)}
-                    </Avatar>
-
-                    <Paper elevation={4} className={classes.paperRoot}>
-                      <Typography variant="caption" component="strong">
-                        {item.name}
-                      </Typography>
-
-                      <Typography component="p">
-                        {item.text}
-                      </Typography>
-
-                      <Typography variant="caption" component="em">
-                        {item.date}
-                      </Typography>
-                    </Paper>
-                  </ListItem>
-                ))
-              }
-            </List>
-          </div>
+          <main className={classes.chatArea}>
+            <MessagesList messages={messages} />
+          </main>
 
           <Paper elevation={10} className={classes.messageField}>
             <FormControl fullWidth>
