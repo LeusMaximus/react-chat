@@ -15,10 +15,37 @@ const styles = theme => ({
   },
 });
 
-const ChatSection = ({ classes, messages }) => (
-  <main className={classes.chatArea}>
-    <MessagesList messages={messages} />
-  </main>
-);
+class ChatSection extends React.Component {
+  constructor(props) {
+    super(props);
+    this.chatAreaRef = React.createRef();
+  }
+
+  componentDidMount() {
+    this.scrollToLastMessage();
+  }
+
+  componentDidUpdate() {
+    this.scrollToLastMessage();
+  }
+
+  scrollToLastMessage = () => {
+    const el = this.chatAreaRef.current;
+
+    if (el) {
+      el.scrollTop = el.scrollHeight;
+    }
+  }
+
+  render() {
+    const { classes, messages } = this.props;
+
+    return (
+      <main className={classes.chatArea} ref={this.chatAreaRef}>
+        <MessagesList messages={messages} />
+      </main>
+    );
+  }
+};
 
 export default withStyles(styles)(ChatSection);
