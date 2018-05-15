@@ -2,9 +2,11 @@
 import React from 'react';
 
 // MUI components
-import { withStyles } from 'material-ui';
-import { FormControl } from 'material-ui/Form';
-import Input, { InputLabel, InputAdornment } from 'material-ui/Input';
+import { withStyles } from '@material-ui/core';
+import FormControl from '@material-ui/core/FormControl';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import InputAdornment from '@material-ui/core/InputAdornment';
 
 // MUI icons
 import Search from '@material-ui/icons/Search';

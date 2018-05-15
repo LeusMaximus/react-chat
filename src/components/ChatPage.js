@@ -2,8 +2,8 @@
 import React from 'react';
 
 // MUI components
-import { withStyles } from 'material-ui/styles';
-import CssBaseline from 'material-ui/CssBaseline';
+import { withStyles } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 // Own modules
 import Sidebar from './Sidebar';

@@ -2,10 +2,10 @@
 import React from 'react';
 
 // MUI components
-import { withStyles } from 'material-ui/styles';
-import Drawer from 'material-ui/Drawer';
-import Divider from 'material-ui/Divider';
-import Button from 'material-ui/Button';
+import { withStyles } from '@material-ui/core/styles';
+import Drawer from '@material-ui/core/Drawer';
+import Divider from '@material-ui/core/Divider';
+import Button from '@material-ui/core/Button';
 
 // MUI icons
 import AddIcon from '@material-ui/icons/Add';

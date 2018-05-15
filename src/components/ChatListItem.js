@@ -2,8 +2,9 @@
 import React from 'react';
 
 // MUI components
-import { ListItem, ListItemText } from 'material-ui/List';
-import Avatar from 'material-ui/Avatar';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Avatar from '@material-ui/core/Avatar';
 
 // Own modules
 import getInitials from '../utils/getInitials';

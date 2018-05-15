@@ -2,10 +2,10 @@
 import React from 'react';
 
 // MUI components
-import { withStyles } from 'material-ui/styles';
-import { FormControl } from 'material-ui/Form';
-import Input from 'material-ui/Input';
-import Paper from 'material-ui/Paper';
+import { withStyles } from '@material-ui/core/styles';
+import FormControl from '@material-ui/core/FormControl';
+import Input from '@material-ui/core/Input';
+import Paper from '@material-ui/core/Paper';
 
 const styles = theme => ({
   messageField: {
