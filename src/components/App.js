@@ -32,14 +32,14 @@ const styles = theme => ({
 
 class App extends Component {
   render() {
-    const { classes, chatName } = this.props;
+    const { classes } = this.props;
 
     return (
       <div className={classes.appFrame}>
         <CssBaseline />
 
         <div className={classes.mainArea}>
-          <ChatHeader chatName={chatName} />
+          <ChatHeader chatName="Some Chat Name" />
 
           <ChatSection messages={messages} />
 
