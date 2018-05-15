@@ -1,55 +1,19 @@
 // React
-import React, { Component } from 'react';
-
-// MUI components
-import { withStyles } from 'material-ui/styles';
-import CssBaseline from 'material-ui/CssBaseline';
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
 // Own modules
-import Sidebar from './Sidebar';
-import ChatHeader from './ChatHeader';
-import MessageField from './MessageField';
-import ChatSection from './ChatSection';
+import WelcomePage from './WelcomePage';
+import ChatPage from './ChatPage';
 
-import { chats, messages } from '../mock-data';
+const App = () => (
+  <Router>
+    <Switch>
+      <Route exact path="/" component={WelcomePage} />
+      <Route path="/chat" component={ChatPage} />
+      <Redirect to="/" />
+    </Switch>
+  </Router>
+);
 
-const styles = theme => ({
-  appFrame: {
-    display: 'flex',
-    flexDirection: 'row-reverse',
-    height: '100vh',
-  },
-
-  mainArea: {
-    display: 'flex',
-    flexDirection: 'column',
-    position: 'relative',
-    width: '100%',
-    height: '100%',
-    overflow: 'hidden'
-  },
-});
-
-class App extends Component {
-  render() {
-    const { classes } = this.props;
-
-    return (
-      <div className={classes.appFrame}>
-        <CssBaseline />
-
-        <div className={classes.mainArea}>
-          <ChatHeader chatName="Some Chat Name" />
-
-          <ChatSection messages={messages} />
-
-          <MessageField />
-        </div>
-
-        <Sidebar chats={chats} />
-      </div>
-    );
-  }
-}
-
-export default withStyles(styles)(App);
+export default App;
