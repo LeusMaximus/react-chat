@@ -2,7 +2,8 @@
 import React from 'react';
 
 // MUI components
-import BottomNavigation, { BottomNavigationAction } from 'material-ui/BottomNavigation';
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 
 // MUI icons
 import ChildCare from '@material-ui/icons/ChildCare';

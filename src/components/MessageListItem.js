@@ -2,11 +2,11 @@
 import React from 'react';
 
 // MUI Components
-import { withStyles } from 'material-ui/styles';
-import Typography from 'material-ui/Typography';
-import Avatar from 'material-ui/Avatar';
-import { ListItem } from 'material-ui/List';
-import Paper from 'material-ui/Paper';
+import { withStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import Avatar from '@material-ui/core/Avatar';
+import ListItem from '@material-ui/core/ListItem';
+import Paper from '@material-ui/core/Paper';
 
 // Vendor modules
 import classnames from 'classnames';

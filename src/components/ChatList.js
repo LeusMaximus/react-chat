@@ -2,7 +2,7 @@
 import React from 'react';
 
 // MUI components
-import List from 'material-ui/List';
+import List from '@material-ui/core/List';
 
 // vendor modules
 import nanoid from 'nanoid';
