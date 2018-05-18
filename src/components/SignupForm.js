@@ -9,6 +9,10 @@ import Button from '@material-ui/core/Button';
 // Vendor modules
 import fetch from 'isomorphic-fetch';
 
+// Own modules
+import isTextFieldValid from '../utils/isTextFieldValid';
+import isEqualStrings from '../utils/isEqualStrings';
+
 import config from '../config';
 
 const styles = theme => ({
@@ -19,21 +23,61 @@ const styles = theme => ({
 
 class SignupForm extends React.Component {
   state = {
-    username: '',
-    password: '',
-    repeatPassword: '',
+    username: {
+      value: '',
+      isValid: true,
+    },
+    password: {
+      value: '',
+      isValid: true,
+    },
+    repeatPassword: {
+      value: '',
+      isValid: true,
+    },
+  }
+
+  validate = () => {
+    const { username, password, repeatPassword } = this.state;
+    const isUserNameValid = isTextFieldValid(username.value);
+    const isPasswordValid = isTextFieldValid(password.value);
+    const isRepeatPasswordValid = isEqualStrings(password.value, repeatPassword.value);
+
+    this.setState({
+      username: {
+        ...username,
+        isValid: isUserNameValid,
+      },
+      password: {
+        ...password,
+        isValid: isPasswordValid,
+      },
+      repeatPassword: {
+        ...repeatPassword,
+        isValid: isRepeatPasswordValid,
+      }
+    });
+
+    return isUserNameValid && isPasswordValid && isRepeatPasswordValid;
   }
 
   handleChange = event => {
     const { name, value } = event.target;
 
     this.setState(prevState => ({
-      [name]: value
+      [name]: {
+        ...prevState[name],
+        value,
+      }
     }));
   }
 
   handleSubmit = event => {
     event.preventDefault();
+
+    const isValid = this.validate();
+
+    if (!isValid) return;
 
     const { username, password } = this.state;
 
@@ -46,8 +90,8 @@ class SignupForm extends React.Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        username,
-        password,
+        username: username.value,
+        password: password.value,
       }),
     })
       .then(response => response.json())
@@ -64,33 +108,36 @@ class SignupForm extends React.Component {
         <TextField
           label="Username"
           name="username"
-          value={username}
+          value={username.value}
           fullWidth
           required
           margin="normal"
           onChange={this.handleChange}
+          error={!username.isValid}
         />
 
         <TextField
           label="Password"
           name="password"
-          value={password}
+          value={password.value}
           type="password"
           fullWidth
           required
           margin="normal"
           onChange={this.handleChange}
+          error={!password.isValid}
         />
 
         <TextField
           label="Repeat Password"
           name="repeatPassword"
-          value={repeatPassword}
+          value={repeatPassword.value}
           type="password"
           fullWidth
           required
           margin="normal"
           onChange={this.handleChange}
+          error={!repeatPassword.isValid}
         />
 
         <Button
