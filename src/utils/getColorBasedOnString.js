@@ -13,7 +13,7 @@ export default function colorFrom(value) {
 
     return colors[colorIndex][500];
   } catch (e) {
-    console.error(e);
+    console.warn(e);
     return 'lightgrey';
   }
 }

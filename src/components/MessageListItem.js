@@ -7,11 +7,15 @@ import Typography from '@material-ui/core/Typography';
 import ListItem from '@material-ui/core/ListItem';
 import Paper from '@material-ui/core/Paper';
 
+// MUI Colors
+import deepPurple from '@material-ui/core/colors//deepPurple';
+
 // Vendor modules
 import classnames from 'classnames';
 
 // Own modules
 import Avatar from './Avatar';
+import getColorBasedOnString from '../utils/getColorBasedOnString';
 
 const styles = theme => ({
   ownMessageItem: {
@@ -34,7 +38,7 @@ const styles = theme => ({
   }),
 
   ownMessagePaper: {
-    backgroundColor: theme.palette.primary.light,
+    backgroundColor: deepPurple[50],
     color: theme.palette.common.white,
   }
 
@@ -59,15 +63,15 @@ const MessageListItem = ({ classes, item }) => {
       </Avatar>
 
       <Paper elevation={4} className={paperClasses}>
-        <Typography variant="caption" component="strong" color="inherit">
+        <Typography variant="caption" component="strong" style={{ color: getColorBasedOnString(item.sender) }}>
           {item.sender}
         </Typography>
 
-        <Typography component="p" color="inherit">
+        <Typography component="p">
           {item.content}
         </Typography>
 
-        <Typography variant="caption" component="em" color="inherit">
+        <Typography variant="caption" component="em">
           {item.date}
         </Typography>
       </Paper>
