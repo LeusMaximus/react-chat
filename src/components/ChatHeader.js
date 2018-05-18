@@ -5,18 +5,14 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 
 // MUI icons
 import AccountCircle from '@material-ui/icons/AccountCircle';
 
-// MUI colors
-import deepOrange from '@material-ui/core/colors/deepOrange';
-
 // Own modules
-import getInitials from '../utils/getInitials';
+import Avatar from './Avatar';
 
 const styles = theme => ({
   appBar: {
@@ -30,7 +26,6 @@ const styles = theme => ({
 
   chatAvatar: {
     marginRight: '10px',
-    backgroundColor: deepOrange[500],
   },
 });
 
@@ -41,7 +36,7 @@ const ChatHeader = ({ classes, chatName }) => (
   >
     <Toolbar>
       <Avatar className={classes.chatAvatar}>
-        {getInitials(chatName)}
+        {chatName}
       </Avatar>
 
       <Typography variant="title" color="inherit" noWrap>
