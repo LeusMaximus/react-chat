@@ -4,7 +4,6 @@ import React from 'react';
 // MUI Components
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import Avatar from '@material-ui/core/Avatar';
 import ListItem from '@material-ui/core/ListItem';
 import Paper from '@material-ui/core/Paper';
 
@@ -12,7 +11,7 @@ import Paper from '@material-ui/core/Paper';
 import classnames from 'classnames';
 
 // Own modules
-import getInitials from '../utils/getInitials';
+import Avatar from './Avatar';
 
 const styles = theme => ({
   ownMessageItem: {
@@ -56,7 +55,7 @@ const MessageListItem = ({ classes, item }) => {
   return (
     <ListItem className={itemClasses}>
       <Avatar>
-        {getInitials(item.sender)}
+        {item.sender}
       </Avatar>
 
       <Paper elevation={4} className={paperClasses}>
