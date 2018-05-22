@@ -6,14 +6,9 @@ import { withStyles } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
-// Vendor modules
-import fetch from 'isomorphic-fetch';
-
 // Own modules
 import isTextFieldValid from '../utils/isTextFieldValid';
 import isEqualStrings from '../utils/isEqualStrings';
-
-import config from '../config';
 
 const styles = theme => ({
   button: {
@@ -81,22 +76,7 @@ class SignupForm extends React.Component {
 
     const { username, password } = this.state;
 
-    // TODO: need change
-
-    fetch(`${config.API_URI}/signup`, {
-      method: "POST",
-      headers: {
-        'Accept': 'spplication/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        username: username.value,
-        password: password.value,
-      }),
-    })
-      .then(response => response.json())
-      .then(data => console.log(data))
-      .catch(error => console.log(error))
+    this.props.onSubmit(username.value, password.value);
   }
 
   render() {

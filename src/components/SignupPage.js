@@ -1,5 +1,6 @@
 // React
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 
 // MUI components
 import { withStyles } from '@material-ui/core';
@@ -26,20 +27,33 @@ const styles = theme => ({
     maxWidth: 500,
   },
 });
-const SignupPage = ({ classes }) => (
-  <div>
-    <PageHeader />
 
-    <div className={classes.contentWrapper}>
-      <Typography variant="headline" component="h1" align="center" gutterBottom>
-        Join Chat
-      </Typography>
+class SignupPage extends React.Component {
+  render() {
+    const { classes, signup, isAuthenticated } = this.props;
 
-      <Paper elevation={10} className={classes.formHolder}>
-        <SignupForm />
-      </Paper>
-    </div>
-  </div>
-);
+    if (isAuthenticated) {
+      return (
+        <Redirect to="/chat" />
+      );
+    }
+
+    return (
+      <div>
+        <PageHeader />
+
+        <div className={classes.contentWrapper}>
+          <Typography variant="headline" component="h1" align="center" gutterBottom>
+            Join Chat
+          </Typography>
+
+          <Paper elevation={10} className={classes.formHolder}>
+            <SignupForm onSubmit={signup} />
+          </Paper>
+        </div>
+      </div>
+    );
+  }
+};
 
 export default withStyles(styles)(SignupPage);
