@@ -64,8 +64,9 @@ class LoginForm extends React.Component {
 
     if (!isValid) return;
 
-    // TODO: should implement submit functionality
-    alert('Soon...')
+    const { username, password } = this.state;
+
+    this.props.onSubmit(username.value, password.value);
   }
 
   render() {
