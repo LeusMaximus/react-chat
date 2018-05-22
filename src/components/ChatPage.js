@@ -1,5 +1,6 @@
 // React
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 
 // MUI components
 import { withStyles } from '@material-ui/core/styles';
@@ -28,18 +29,30 @@ const styles = theme => ({
   },
 });
 
-const ChatPage = ({ classes }) => (
-  <div className={classes.appFrame}>
-    <div className={classes.mainArea}>
-      <ChatHeader chatName="Some Chat Name" />
+class ChatPage extends React.Component {
+  render() {
+    const { classes, isAuthenticated } = this.props;
 
-      <ChatSection messages={messages} />
+    if (!isAuthenticated) {
+      return (
+        <Redirect to="/" />
+      );
+    }
 
-      <MessageField />
-    </div>
+    return (
+      <div className={classes.appFrame}>
+        <div className={classes.mainArea}>
+          <ChatHeader chatName="Some Chat Name" />
 
-    <Sidebar chats={chats} />
-  </div>
-);
+          <ChatSection messages={messages} />
+
+          <MessageField />
+        </div>
+
+        <Sidebar chats={chats} />
+      </div>
+    );
+  }
+};
 
 export default withStyles(styles)(ChatPage);
