@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 // Own modules
-import ChatPage from './ChatPage';
+import ChatPage from '../containers/ChatPage';
 import LoginPage from '../containers/LoginPage';
 import SignupPage from '../containers/SignupPage';
 import configureStore from '../stores/index';
