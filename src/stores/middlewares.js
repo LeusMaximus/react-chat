@@ -1,11 +1,13 @@
 import thunkMiddleware from 'redux-thunk';
 import loggerMiddleware from 'redux-logger';
 
-const generalMiddlewares = [thunkMiddleware];
+import isProductionEnv from '../utils/isProductionEnv';
+
+const commonMiddlewares = [thunkMiddleware];
 const devMiddlewares = [loggerMiddleware];
 
-const middlewaresList = process.env.NODE_ENV === 'production'
-  ? [...generalMiddlewares]
-  : [...generalMiddlewares, ...devMiddlewares];
+const middlewaresList = isProductionEnv()
+  ? commonMiddlewares
+  : [...commonMiddlewares, ...devMiddlewares];
 
 export default middlewaresList;
