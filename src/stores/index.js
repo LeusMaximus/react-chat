@@ -11,13 +11,23 @@ export default function configureStore() {
       applyMiddleware(...middlewaresList)
     );
   } else {
+    // For redux devtools
     const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
       ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({serialize: true})
       : compose;
 
-    return createStore(
+    const store = createStore(
       rootReducer,
       composeEnhancers(applyMiddleware(...middlewaresList))
     );
+
+    // For Hot Module Replacement
+    if (module.hot) {
+      module.hot.accept('../reducers', () => {
+        store.replaceReducer(rootReducer);
+      });
+    }
+
+    return store;
   }
 }
