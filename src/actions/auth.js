@@ -9,7 +9,7 @@ import cachedToken from '../utils/cachedToken';
 import {
   SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_FAILURE,
   LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE,
-} from '../constants/index';
+} from '../constants';
 
 
 export function signup(username, password) {

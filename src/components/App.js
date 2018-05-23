@@ -9,7 +9,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import ChatPage from '../containers/ChatPage';
 import LoginPage from '../containers/LoginPage';
 import SignupPage from '../containers/SignupPage';
-import configureStore from '../stores/index';
+import configureStore from '../stores';
 
 const store = configureStore();
 
