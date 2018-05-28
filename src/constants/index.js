@@ -14,3 +14,5 @@ export const LOGOUT_FAILURE = Symbol('LOGOUT_FAILURE');
 export const VERIFY_AUTH_REQUEST = Symbol('VERIFY_AUTH_REQUEST');
 export const VERIFY_AUTH_SUCCESS = Symbol('VERIFY_AUTH_SUCCESS');
 export const VERIFY_AUTH_FAILURE = Symbol('VERIFY_AUTH_FAILURE');
+
+export const REDIRECT = Symbol('REDIRECT');
