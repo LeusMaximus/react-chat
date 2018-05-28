@@ -1,9 +1,6 @@
-// Vendor modules
-import fetch from 'isomorphic-fetch';
-
 // Own modules
-import config from '../config';
 import cachedToken from '../utils/cachedToken';
+import makeRequest from '../utils/makeRequest';
 
 // Constants
 import * as actTypes from '../constants';
@@ -15,23 +12,17 @@ export function signup(username, password) {
       type: actTypes.SIGNUP_REQUEST,
     });
 
-    return fetch(`${config.API_URI}/signup`, {
-      method: "POST",
-      headers: {
-        'Accept': 'spplication/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
+    return makeRequest({
+      endpoint: '/signup',
+      body: {
         username,
         password,
-      }),
+      },
+      requestOptions: {
+        method: "POST"
+      },
     })
-      .then(response => response.json())
       .then(data => {
-        if (!data.success) {
-          throw new Error(data.message);
-        }
-
         if (!data.token) {
           throw new Error('Token hasn\'t provided');
         }
@@ -60,23 +51,17 @@ export function login(username, password) {
       type: actTypes.LOGIN_REQUEST,
     });
 
-    return fetch(`${config.API_URI}/login`, {
-      method: "POST",
-      headers: {
-        'Accept': 'spplication/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
+    return makeRequest({
+      endpoint: '/login',
+      body: {
         username,
         password,
-      }),
+      },
+      requestOptions: {
+        method: "POST"
+      },
     })
-      .then(response => response.json())
       .then(data => {
-        if (!data.success) {
-          throw new Error(data.message);
-        }
-
         if (!data.token) {
           throw new Error('Token hasn\'t provided');
         }
@@ -108,23 +93,10 @@ export function verifyAuth() {
         type: actTypes.VERIFY_AUTH_FAILURE,
       });
     }
-
-    return fetch(`${config.API_URI}/users/me`, {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Accept': 'spplication/json',
-        'Content-Type': 'application/json'
-      },
+    return makeRequest({
+      endpoint: '/users/me',
+      token,
     })
-      .then(response => response.json())
-      .then(data => {
-        if (!data.success) {
-          throw new Error(data.message);
-        }
-
-        return data;
-      })
       .then(data => {
         dispatch({
           type: actTypes.VERIFY_AUTH_SUCCESS,
