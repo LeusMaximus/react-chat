@@ -6,16 +6,13 @@ import config from '../config';
 import cachedToken from '../utils/cachedToken';
 
 // Constants
-import {
-  SIGNUP_REQUEST, SIGNUP_SUCCESS, SIGNUP_FAILURE,
-  LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE,
-} from '../constants';
+import * as actTypes from '../constants';
 
 
 export function signup(username, password) {
   return (dispatch) => {
     dispatch({
-      type: SIGNUP_REQUEST,
+      type: actTypes.SIGNUP_REQUEST,
     });
 
     return fetch(`${config.API_URI}/signup`, {
@@ -46,12 +43,12 @@ export function signup(username, password) {
         cachedToken.set(data.token);
 
         dispatch({
-          type: SIGNUP_SUCCESS,
+          type: actTypes.SIGNUP_SUCCESS,
           payload: data,
         });
       })
       .catch(error => dispatch({
-        type: SIGNUP_FAILURE,
+        type: actTypes.SIGNUP_FAILURE,
         payload: error,
       }));
   }
@@ -60,7 +57,7 @@ export function signup(username, password) {
 export function login(username, password) {
   return (dispatch) => {
     dispatch({
-      type: LOGIN_REQUEST,
+      type: actTypes.LOGIN_REQUEST,
     });
 
     return fetch(`${config.API_URI}/login`, {
@@ -91,12 +88,51 @@ export function login(username, password) {
         cachedToken.set(data.token);
 
         dispatch({
-          type: LOGIN_SUCCESS,
+          type: actTypes.LOGIN_SUCCESS,
           payload: data,
         });
       })
       .catch(error => dispatch({
-        type: LOGIN_FAILURE,
+        type: actTypes.LOGIN_FAILURE,
+        payload: error,
+      }));
+  }
+}
+
+export function verifyAuth() {
+  return (dispatch, getState) => {
+    const { token } = getState().auth;
+
+    if (!token) {
+      return dispatch({
+        type: actTypes.VERIFY_AUTH_FAILURE,
+      });
+    }
+
+    return fetch(`${config.API_URI}/users/me`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'spplication/json',
+        'Content-Type': 'application/json'
+      },
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (!data.success) {
+          throw new Error(data.message);
+        }
+
+        return data;
+      })
+      .then(data => {
+        dispatch({
+          type: actTypes.VERIFY_AUTH_SUCCESS,
+          payload: data,
+        });
+      })
+      .catch(error => dispatch({
+        type: actTypes.VERIFY_AUTH_FAILURE,
         payload: error,
       }));
   }

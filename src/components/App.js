@@ -9,6 +9,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import ChatPage from '../containers/ChatPage';
 import LoginPage from '../containers/LoginPage';
 import SignupPage from '../containers/SignupPage';
+import PrivateRoute from '../containers/PrivateRoute';
 import configureStore from '../stores';
 
 const store = configureStore();
@@ -23,7 +24,7 @@ const App = () => (
         <Switch>
           <Route exact path="/(login)?" component={LoginPage} />
           <Route path="/signup" component={SignupPage} />
-          <Route path="/chat" component={ChatPage} />
+          <PrivateRoute path="/chat" component={ChatPage} />
           <Redirect to="/" />
         </Switch>
       </Router>
