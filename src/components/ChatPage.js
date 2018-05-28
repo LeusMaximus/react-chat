@@ -1,6 +1,5 @@
 // React
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 
 // MUI components
 import { withStyles } from '@material-ui/core/styles';
@@ -31,13 +30,7 @@ const styles = theme => ({
 
 class ChatPage extends React.Component {
   render() {
-    const { classes, isAuthenticated } = this.props;
-
-    if (!isAuthenticated) {
-      return (
-        <Redirect to="/" />
-      );
-    }
+    const { classes } = this.props;
 
     return (
       <div className={classes.appFrame}>

@@ -9,3 +9,8 @@ export const LOGIN_FAILURE = Symbol('LOGIN_FAILURE');
 export const LOGOUT_REQUEST = Symbol('LOGOUT_REQUEST');
 export const LOGOUT_SUCCESS = Symbol('LOGOUT_SUCCESS');
 export const LOGOUT_FAILURE = Symbol('LOGOUT_FAILURE');
+
+
+export const VERIFY_AUTH_REQUEST = Symbol('VERIFY_AUTH_REQUEST');
+export const VERIFY_AUTH_SUCCESS = Symbol('VERIFY_AUTH_SUCCESS');
+export const VERIFY_AUTH_FAILURE = Symbol('VERIFY_AUTH_FAILURE');

@@ -1,7 +1,4 @@
-import {
-  SIGNUP_SUCCESS, SIGNUP_FAILURE,
-  LOGIN_SUCCESS, LOGIN_FAILURE,
-} from '../constants';
+import * as actTypes from '../constants';
 
 import cachedToken from '../utils/cachedToken';
 
@@ -15,16 +12,23 @@ const initialState = {
 
 export default function auth(state = initialState, action) {
   switch (action.type) {
-    case SIGNUP_SUCCESS:
-    case LOGIN_SUCCESS:
+    case actTypes.SIGNUP_SUCCESS:
+    case actTypes.LOGIN_SUCCESS:
       return {
         ...state,
         isAuthenticated: true,
         user: action.payload.user,
         token: action.payload.token,
       }
-    case SIGNUP_FAILURE:
-    case LOGIN_FAILURE:
+    case actTypes.VERIFY_AUTH_SUCCESS:
+      return {
+        ...state,
+        isAuthenticated: true,
+        user: action.payload.user,
+      }
+    case actTypes.SIGNUP_FAILURE:
+    case actTypes.LOGIN_FAILURE:
+    case actTypes.VERIFY_AUTH_FAILURE:
       return {
         ...state,
         isAuthenticated: false,
