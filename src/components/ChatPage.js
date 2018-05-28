@@ -9,7 +9,7 @@ import Sidebar from './Sidebar';
 import ChatHeader from './ChatHeader';
 import MessageField from './MessageField';
 import ChatSection from './ChatSection';
-import { chats, messages } from '../mock-data';
+import { messages } from '../mock-data';
 
 const styles = theme => ({
   appFrame: {
@@ -29,8 +29,17 @@ const styles = theme => ({
 });
 
 class ChatPage extends React.Component {
+  componentDidMount() {
+    const { getAllChats, getMyChats } = this.props;
+
+    Promise.all([
+      getAllChats(),
+      getMyChats(),
+    ]);
+  }
+
   render() {
-    const { classes } = this.props;
+    const { classes, chats } = this.props;
 
     return (
       <div className={classes.appFrame}>

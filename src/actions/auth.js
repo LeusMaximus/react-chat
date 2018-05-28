@@ -3,7 +3,7 @@ import cachedToken from '../utils/cachedToken';
 import makeRequest from '../utils/makeRequest';
 
 // Constants
-import * as actTypes from '../constants';
+import * as actTypes from '../constants/auth';
 
 
 export function signup(username, password) {
