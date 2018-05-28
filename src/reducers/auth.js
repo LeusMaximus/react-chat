@@ -1,4 +1,4 @@
-import * as actTypes from '../constants';
+import * as actTypes from '../constants/auth';
 
 import cachedToken from '../utils/cachedToken';
 
