@@ -6,9 +6,12 @@ import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
 
 // MUI icons
 import AddIcon from '@material-ui/icons/Add';
+import SentimentVeryDissatisfied from '@material-ui/icons/SentimentVeryDissatisfied';
 
 // Own modules
 import SearchChat from './SearchChat';
@@ -45,34 +48,69 @@ const styles = theme => ({
     bottom: 'calc(100% + 20px)',
     right: 25,
   },
+
+  notChatsMessage: {
+    display: 'flex',
+    justifyContent: 'center',
+    margin: 10,
+    padding: '10px 5px',
+  },
 });
 
-const Sidebar = ({ classes, chats }) => (
-  <Drawer
-    variant="permanent"
-    classes={{
-      paper: classes.drawerPaper,
-    }}
-  >
-    <div className={classes.drawerTopToolbar}>
-      <SearchChat />
-    </div>
-    <Divider />
+class Sidebar extends React.Component {
+  state = {
+    isMyChatsActive: true,
+  };
 
-    <div className={classes.chatsListHolder}>
-      <ChatList chats={chats} />
-    </div>
+  handleChatsTabChange = (e, value) => {
+    this.setState({
+      isMyChatsActive: value === 0 ? true : false,
+    });
+  };
 
-    <div className={classes.chatNavHolder}>
-      <Divider />
+  render() {
+    const { classes, allChats, myChats } = this.props;
+    const { isMyChatsActive } = this.state;
+    const chats = isMyChatsActive ? myChats : allChats;
 
-      <Button variant="fab" color="secondary" aria-label="add" className={classes.buttonAdd}>
-        <AddIcon />
-      </Button>
+    return (
+      <Drawer
+        variant="permanent"
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+      >
+        <div className={classes.drawerTopToolbar}>
+          <SearchChat />
+        </div>
+        <Divider />
 
-      <ChatNav />
-    </div>
-  </Drawer>
-);
+        <div className={classes.chatsListHolder}>
+          {
+            chats.length
+              ? <ChatList chats={isMyChatsActive ? myChats : allChats} />
+              : <Paper elevation={4} className={classes.notChatsMessage}>
+                  <Typography variant="body1" align="center">
+                    There is not chats yet...
+                  </Typography>
+
+                  <SentimentVeryDissatisfied style={{ marginLeft: 10 }} />
+              </Paper>
+          }
+        </div>
+
+        <div className={classes.chatNavHolder}>
+          <Divider />
+
+          <Button variant="fab" color="secondary" aria-label="add" className={classes.buttonAdd}>
+            <AddIcon />
+          </Button>
+
+          <ChatNav tabsChange={this.handleChatsTabChange} tabNumber={isMyChatsActive ? 0 : 1} />
+        </div>
+      </Drawer>
+    );
+  }
+};
 
 export default withStyles(styles)(Sidebar);
