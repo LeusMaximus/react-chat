@@ -1,4 +1,7 @@
+const storage = localStorage;
+
 export default {
-  set: token => localStorage.setItem('token', token),
-  get: () => localStorage.getItem('token'),
+  set: token => storage.setItem('token', token),
+  get: () => storage.getItem('token'),
+  remove: () => storage.removeItem('token'),
 }

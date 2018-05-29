@@ -63,10 +63,12 @@ class ChatSection extends React.Component {
     const btn = this.btnDownHolderRef.current;
     const isScrolledToBottom = area.scrollTop > area.scrollHeight - area.offsetHeight - 100;
 
-    if (isScrolledToBottom) {
-      btn.style.visibility = 'hidden';
-    } else {
-      btn.style.visibility = 'visible';
+    if (btn) {
+      if (isScrolledToBottom) {
+        btn.style.visibility = 'hidden';
+      } else {
+        btn.style.visibility = 'visible';
+      }
     }
   }
 

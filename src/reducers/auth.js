@@ -29,6 +29,7 @@ export default function auth(state = initialState, action) {
     case actTypes.SIGNUP_FAILURE:
     case actTypes.LOGIN_FAILURE:
     case actTypes.VERIFY_AUTH_FAILURE:
+    case actTypes.LOGOUT_SUCCESS:
       return {
         ...state,
         isAuthenticated: false,
