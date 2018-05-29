@@ -39,7 +39,7 @@ class ChatPage extends React.Component {
   }
 
   render() {
-    const { classes, chats } = this.props;
+    const { classes, allChats, myChats } = this.props;
 
     return (
       <div className={classes.appFrame}>
@@ -51,7 +51,7 @@ class ChatPage extends React.Component {
           <MessageField />
         </div>
 
-        <Sidebar chats={chats} />
+        <Sidebar allChats={allChats} myChats={myChats} />
       </div>
     );
   }

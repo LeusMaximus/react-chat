@@ -4,7 +4,8 @@ import { getAllChats, getMyChats, setActiveChat } from '../actions/chat';
 import * as fromChats from '../reducers/chats';
 
 const mapStateToProps = state => ({
-  chats: fromChats.getByIds(state.chats, state.chats.allIds),
+  allChats: fromChats.getByIds(state.chats, state.chats.allIds),
+  myChats: fromChats.getByIds(state.chats, state.chats.myIds),
 });
 
 const mapDispatchToProps = dispatch => ({
