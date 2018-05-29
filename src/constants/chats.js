@@ -10,6 +10,9 @@ export const GET_CHAT_REQUEST = Symbol('chats/GET_CHAT_REQUEST');
 export const GET_CHAT_SUCCESS = Symbol('chats/GET_CHAT_SUCCESS');
 export const GET_CHAT_FAILURE = Symbol('chats/GET_CHAT_FAILURE');
 
+export const CREATE_CHAT_REQUEST = Symbol('chats/CREATE_CHAT_REQUEST');
+export const CREATE_CHAT_SUCCESS = Symbol('chats/CREATE_CHAT_SUCCESS');
+export const CREATE_CHAT_FAILURE = Symbol('chats/CREATE_CHAT_FAILURE');
 
 
 export const SET_ACTIVE_CHAT = Symbol('chats/SET_ACTIVE_CHAT');
