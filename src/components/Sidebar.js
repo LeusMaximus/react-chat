@@ -5,18 +5,17 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
-import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
 // MUI icons
-import AddIcon from '@material-ui/icons/Add';
 import SentimentVeryDissatisfied from '@material-ui/icons/SentimentVeryDissatisfied';
 
 // Own modules
 import SearchChat from './SearchChat';
 import ChatList from './ChatList';
 import ChatNav from './ChatNav';
+import ChatCreate from '../containers/ChatCreate';
 
 const styles = theme => ({
   drawerPaper: {
@@ -41,12 +40,6 @@ const styles = theme => ({
     position: 'relative',
     marginTop: 'auto',
     flexShrink: 1,
-  },
-
-  buttonAdd: {
-    position: 'absolute',
-    bottom: 'calc(100% + 20px)',
-    right: 25,
   },
 
   notChatsMessage: {
@@ -102,9 +95,7 @@ class Sidebar extends React.Component {
         <div className={classes.chatNavHolder}>
           <Divider />
 
-          <Button variant="fab" color="secondary" aria-label="add" className={classes.buttonAdd}>
-            <AddIcon />
-          </Button>
+          <ChatCreate />
 
           <ChatNav tabsChange={this.handleChatsTabChange} tabNumber={isMyChatsActive ? 0 : 1} />
         </div>

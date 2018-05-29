@@ -97,3 +97,38 @@ export function setActiveChat (chatId) {
       });
   };
 }
+
+export function chatCreate(title) {
+  return (dispatch, getState) => {
+    const { token } = getState().auth;
+
+    dispatch({
+      type: actTypes.CREATE_CHAT_REQUEST,
+    });
+
+    return makeRequest({
+      endpoint: `/chats`,
+      token,
+      body: {
+        data: {
+          title,
+        }
+      },
+      requestOptions: {
+        method: 'POST',
+      }
+    })
+      .then(data => {
+        dispatch({
+          type: actTypes.CREATE_CHAT_SUCCESS,
+          payload: data,
+        });
+
+        return data;
+      })
+      .catch(error => dispatch({
+        type: actTypes.CREATE_CHAT_FAILURE,
+        payload: error,
+      }));
+  };
+}
