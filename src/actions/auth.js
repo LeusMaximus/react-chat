@@ -84,6 +84,31 @@ export function login(username, password) {
   }
 }
 
+export function logout() {
+  return (dispatch) => {
+    dispatch({
+      type: actTypes.LOGOUT_REQUEST,
+    });
+
+    return makeRequest({
+      endpoint: '/logout',
+    })
+      .then(data => {
+        // Remove cached JWT token
+        cachedToken.remove();
+
+        dispatch({
+          type: actTypes.LOGOUT_SUCCESS,
+          payload: data,
+        });
+      })
+      .catch(error => dispatch({
+        type: actTypes.LOGOUT_FAILURE,
+        payload: error,
+      }));
+  }
+}
+
 export function verifyAuth() {
   return (dispatch, getState) => {
     const { token } = getState().auth;
