@@ -4,6 +4,7 @@ import React from 'react';
 // MUI components
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
 // MUI icons
 import ExpandMore from '@material-ui/icons/ExpandMore';
@@ -12,6 +13,7 @@ import debounce from 'debounce';
 
 // Own modules
 import MessagesList from './MessagesList';
+import MessageField from './MessageField';
 
 const styles = theme => ({
   chatArea: {
@@ -25,9 +27,17 @@ const styles = theme => ({
     right: 30,
     bottom: 100,
   },
+
+  noMessages: {
+    position: 'absolute',
+    top: '50%',
+    width: 'calc(100% - 40px)',
+    transform: 'translateY(-50%)',
+    textAlign: 'center',
+  }
 });
 
-class ChatSection extends React.Component {
+class MessagesSection extends React.Component {
   constructor(props) {
     super(props);
     this.chatAreaRef = React.createRef();
@@ -78,20 +88,32 @@ class ChatSection extends React.Component {
   }
 
   render() {
-    const { classes, messages } = this.props;
+    const { classes, chat } = this.props;
+    console.log('chat: ', chat);
+
 
     return (
-      <main className={classes.chatArea} ref={this.chatAreaRef}>
-        <MessagesList messages={messages} />
+      <React.Fragment>
+        <div className={classes.chatArea} ref={this.chatAreaRef}>
+          {
+            chat.messages.length
+              ? <MessagesList messages={chat.messages} />
+              : <Typography className={classes.noMessages} variant="display2">
+                  There is no messages yet...
+                </Typography>
+          }
 
-        <div className={classes.btnDownHolder} ref={this.btnDownHolderRef}>
-          <Button variant="fab" color="primary" onClick={this.handleGoBottom}>
-            <ExpandMore />
-          </Button>
+          <div className={classes.btnDownHolder} ref={this.btnDownHolderRef}>
+            <Button variant="fab" color="primary" onClick={this.handleGoBottom}>
+              <ExpandMore />
+            </Button>
+          </div>
         </div>
-      </main>
+
+        <MessageField />
+      </React.Fragment>
     );
   }
 };
 
-export default withStyles(styles)(ChatSection);
+export default withStyles(styles)(MessagesSection);

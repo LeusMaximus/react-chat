@@ -89,6 +89,7 @@ class EditProfileForm extends React.Component {
           value={username.value}
           fullWidth
           required
+          autoFocus
           margin="normal"
           onChange={this.handleChange}
           error={!username.isValid}

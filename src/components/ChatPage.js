@@ -3,13 +3,13 @@ import React from 'react';
 
 // MUI components
 import { withStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
 
 // Own modules
 import Sidebar from './Sidebar';
 import ChatHeader from './ChatHeader';
-import MessageField from './MessageField';
-import ChatSection from './ChatSection';
-import { messages } from '../mock-data';
+import MessagesSection from './MessagesSection';
 
 const styles = theme => ({
   appFrame: {
@@ -26,6 +26,20 @@ const styles = theme => ({
     height: '100%',
     overflow: 'hidden'
   },
+
+  content: {
+    display: 'flex',
+    flexDirection: 'column',
+    flexShrink: 1,
+    flexGrow: 1,
+  },
+
+  introMessage: theme.mixins.gutters({
+    maxWidth: 'calc(100% - 40px)',
+    margin: 'auto',
+    paddingTop: 16,
+    paddingBottom: 16,
+  }),
 });
 
 class ChatPage extends React.Component {
@@ -39,16 +53,24 @@ class ChatPage extends React.Component {
   }
 
   render() {
-    const { classes, allChats, myChats } = this.props;
+    const { classes, allChats, myChats, activeChat } = this.props;
 
     return (
       <div className={classes.appFrame}>
         <div className={classes.mainArea}>
-          <ChatHeader chatName="Some Chat Name" />
+          <ChatHeader activeChat={activeChat} />
 
-          <ChatSection messages={messages} />
-
-          <MessageField />
+          <main className={classes.content}>
+            {
+              activeChat
+                ? <MessagesSection chat={activeChat} />
+                : <Paper className={classes.introMessage} elevation={4} rounded={20}>
+                    <Typography variant="display1" component="h2" align="center">
+                      Please select some chat to start messaging...
+                    </Typography>
+                  </Paper>
+            }
+          </main>
         </div>
 
         <Sidebar allChats={allChats} myChats={myChats} />

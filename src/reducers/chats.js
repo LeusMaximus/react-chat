@@ -3,6 +3,7 @@ import * as actTypes from '../constants/chats';
 
 const initialState = {
   activeId: '',
+  activeChat: null,
   allIds: [],
   myIds: [],
   byIds: {},
@@ -11,8 +12,19 @@ const initialState = {
 const activeId = (state = initialState.activeId, action) => {
   switch (action.type) {
     case actTypes.SET_ACTIVE_CHAT:
-    case actTypes.CREATE_CHAT_SUCCESS:
+    case actTypes.JOIN_CHAT_SUCCESS:
       return action.payload.chat._id;
+    case actTypes.UNSET_ACTIVE_CHAT:
+      return '';
+    default:
+      return state;
+  }
+};
+
+const activeChat = (state = initialState.activeChat, action) => {
+  switch (action.type) {
+    case actTypes.SET_ACTIVE_CHAT:
+      return action.payload.chat;
     case actTypes.UNSET_ACTIVE_CHAT:
       return '';
     default:
@@ -39,6 +51,7 @@ const myIds = (state = initialState.myIds, action) => {
     case actTypes.GET_MY_CHATS_SUCCESS:
       return action.payload.chats.map(getChatId);
     case actTypes.CREATE_CHAT_SUCCESS:
+    case actTypes.JOIN_CHAT_SUCCESS:
       return [
         ...state,
         action.payload.chat._id,
@@ -60,6 +73,7 @@ const byIds = (state = initialState.byIds, action) => {
         }), {}),
       };
     case actTypes.CREATE_CHAT_SUCCESS:
+    case actTypes.JOIN_CHAT_SUCCESS:
       return {
         ...state,
         [action.payload.chat._id]: {...action.payload.chat}
@@ -71,6 +85,7 @@ const byIds = (state = initialState.byIds, action) => {
 
 export default combineReducers({
   activeId,
+  activeChat,
   allIds,
   myIds,
   byIds,
@@ -79,3 +94,4 @@ export default combineReducers({
 // Selectors
 export const getChatId = chat => chat._id;
 export const getByIds = (state, ids) => ids.map(id => state.byIds[id]);
+export const getChat = (state, id) => state.byIds[id];

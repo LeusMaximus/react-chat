@@ -26,18 +26,20 @@ const styles = theme => ({
   },
 });
 
-const ChatHeader = ({ classes, chatName }) => (
+const ChatHeader = ({ classes, activeChat }) => (
   <AppBar
     position="static"
     className={classes.appBar}
   >
     <Toolbar>
-      <Avatar className={classes.chatAvatar}>
-        {chatName}
-      </Avatar>
+      {activeChat &&
+        <Avatar className={classes.chatAvatar}>
+          {activeChat.title}
+        </Avatar>
+      }
 
       <Typography variant="title" color="inherit" noWrap>
-        {chatName}
+        {activeChat ? activeChat.title : 'Super Messanger'}
       </Typography>
 
       <UserNav className={classes.accountBox} />

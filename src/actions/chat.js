@@ -124,7 +124,7 @@ export function chatCreate(title) {
           payload: data,
         });
 
-        return data;
+        return dispatch(setActiveChat(data.chat._id));
       })
       .catch(error => dispatch({
         type: actTypes.CREATE_CHAT_FAILURE,
@@ -132,3 +132,34 @@ export function chatCreate(title) {
       }));
   };
 }
+
+export function joinChat(id) {
+  return (dispatch, getState) => {
+    const { token } = getState().auth;
+
+    dispatch({
+      type: actTypes.JOIN_CHAT_REQUEST,
+    });
+
+    return makeRequest({
+      endpoint: `/chats/${id}/join`,
+      token,
+      requestOptions: {
+        method: 'POST',
+      }
+    })
+      .then(data => {
+        dispatch({
+          type: actTypes.JOIN_CHAT_SUCCESS,
+          payload: data,
+        });
+
+        return data;
+      })
+      .catch(error => dispatch({
+        type: actTypes.JOIN_CHAT_FAILURE,
+        payload: error,
+      }));
+  };
+}
+
