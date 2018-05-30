@@ -4,13 +4,17 @@ import React from 'react';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
 
 // MUI icons
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import ChatModal from './ChatModal';
+import EditProfileForm from './EditProfileForm';
 
 class UserNav extends React.Component {
   state = {
     anchorEl: null,
+    modalOpen: false,
   };
 
   handleClick = event => {
@@ -21,9 +25,28 @@ class UserNav extends React.Component {
     this.setState({ anchorEl: null });
   };
 
+  handleModalOpen = () => {
+    this.setState({
+      anchorEl: null,
+      modalOpen: true
+    });
+  };
+
+  handleModalClose = () => {
+    this.setState({ modalOpen: false });
+  };
+
+  handleSubmit = params => {
+    this.props.editProfile(params)
+      .then(data => {
+        this.handleModalClose();
+        return data;
+      });
+  };
+
   render() {
-    const { anchorEl } = this.state;
-    const { logout, className } = this.props;
+    const { anchorEl, modalOpen } = this.state;
+    const { logout, className, user } = this.props;
 
     return (
       <div className={className}>
@@ -42,8 +65,17 @@ class UserNav extends React.Component {
           open={Boolean(anchorEl)}
           onClose={this.handleClose}
         >
+          <MenuItem onClick={this.handleModalOpen}>Edit Profile</MenuItem>
           <MenuItem onClick={logout}>Logout</MenuItem>
         </Menu>
+
+        <ChatModal modalOpen={modalOpen} handleModalClose={this.handleModalClose}>
+          <Typography variant="title" align="center" gutterBottom>
+            Edit profile
+          </Typography>
+
+          <EditProfileForm onSubmit={this.handleSubmit} user={user}/>
+        </ChatModal>
       </div>
     );
   }

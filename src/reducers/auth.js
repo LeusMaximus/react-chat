@@ -19,11 +19,16 @@ export default function auth(state = initialState, action) {
         isAuthenticated: true,
         user: action.payload.user,
         token: action.payload.token,
-      }
+      };
     case actTypes.VERIFY_AUTH_SUCCESS:
       return {
         ...state,
         isAuthenticated: true,
+        user: action.payload.user,
+      };
+    case actTypes.EDIT_PROFILE_SUCCESS:
+      return {
+        ...state,
         user: action.payload.user,
       }
     case actTypes.SIGNUP_FAILURE:
@@ -35,7 +40,7 @@ export default function auth(state = initialState, action) {
         isAuthenticated: false,
         user: null,
         token: '',
-      }
+      };
     default:
       return state;
   }

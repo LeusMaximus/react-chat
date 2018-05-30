@@ -118,6 +118,7 @@ export function verifyAuth() {
         type: actTypes.VERIFY_AUTH_FAILURE,
       });
     }
+
     return makeRequest({
       endpoint: '/users/me',
       token,
@@ -130,6 +131,47 @@ export function verifyAuth() {
       })
       .catch(error => dispatch({
         type: actTypes.VERIFY_AUTH_FAILURE,
+        payload: error,
+      }));
+  }
+}
+
+export function editProfile({ username, firstName = '', lastName = '' }) {
+  return (dispatch, getState) => {
+    const { token } = getState().auth;
+
+    dispatch({
+      type: actTypes.EDIT_PROFILE_REQUEST,
+    });
+
+    if (!token) {
+      return dispatch({
+        type: actTypes.EDIT_PROFILE_FAILURE,
+      });
+    }
+
+    return makeRequest({
+      endpoint: '/users/me',
+      token,
+      body: {
+        data: {
+          username,
+          firstName,
+          lastName,
+        },
+      },
+      requestOptions: {
+        method: "POST"
+      },
+    })
+      .then(data => {
+        dispatch({
+          type: actTypes.EDIT_PROFILE_SUCCESS,
+          payload: data,
+        });
+      })
+      .catch(error => dispatch({
+        type: actTypes.EDIT_PROFILE_FAILURE,
         payload: error,
       }));
   }
