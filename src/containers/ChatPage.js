@@ -7,12 +7,13 @@ const mapStateToProps = state => ({
   allChats: fromChats.getByIds(state.chats, state.chats.allIds),
   myChats: fromChats.getByIds(state.chats, state.chats.myIds),
   activeChat: state.chats.activeChat,
+  activeId: state.chats.activeId,
 });
 
 const mapDispatchToProps = dispatch => ({
   getAllChats: () => dispatch(getAllChats()),
   getMyChats: () => dispatch(getMyChats()),
-  setActiveChat: () => dispatch(setActiveChat()),
+  setActiveChat: chatId => dispatch(setActiveChat(chatId)),
 });
 
 export default connect(
