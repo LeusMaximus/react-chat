@@ -89,8 +89,6 @@ class MessagesSection extends React.Component {
 
   render() {
     const { classes, chat } = this.props;
-    console.log('chat: ', chat);
-
 
     return (
       <React.Fragment>

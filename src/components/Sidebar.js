@@ -62,7 +62,7 @@ class Sidebar extends React.Component {
   };
 
   render() {
-    const { classes, allChats, myChats } = this.props;
+    const { classes, allChats, myChats, setActiveChat, activeId } = this.props;
     const { isMyChatsActive } = this.state;
     const chats = isMyChatsActive ? myChats : allChats;
 
@@ -81,7 +81,7 @@ class Sidebar extends React.Component {
         <div className={classes.chatsListHolder}>
           {
             chats.length
-              ? <ChatList chats={isMyChatsActive ? myChats : allChats} />
+              ? <ChatList chats={isMyChatsActive ? myChats : allChats} setActiveChat={setActiveChat} activeId={activeId} />
               : <Paper elevation={4} className={classes.notChatsMessage}>
                   <Typography variant="body1" align="center">
                     There is not chats yet...
