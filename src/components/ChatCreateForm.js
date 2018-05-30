@@ -72,6 +72,7 @@ class ChatCreateForm extends React.Component {
           value={chatName.value}
           fullWidth
           required
+          autoFocus
           margin="normal"
           onChange={this.handleChange}
           error={!chatName.isValid}
