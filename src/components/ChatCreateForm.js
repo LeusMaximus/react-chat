@@ -21,7 +21,7 @@ class ChatCreateForm extends React.Component {
       value: '',
       isValid: true,
     },
-  }
+  };
 
   validate = () => {
     const { chatName } = this.state;

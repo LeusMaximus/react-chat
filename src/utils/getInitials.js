@@ -11,7 +11,7 @@ export default function(title) {
       .map(word => word[0].toUpperCase())
       .join('');
   } catch (e) {
-    console.warn(e);
+    // console.warn(e);
     return '';
   }
 };

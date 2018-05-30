@@ -4,7 +4,6 @@ import React from 'react';
 // MUI Components
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import Modal from '@material-ui/core/Modal';
 import Typography from '@material-ui/core/Typography';
 
 // MUI icons
@@ -12,6 +11,7 @@ import AddIcon from '@material-ui/icons/Add';
 
 // Own modules
 import ChatCreateForm from './ChatCreateForm';
+import ChatModal from './ChatModal';
 
 const styles = theme => ({
   buttonAdd: {
@@ -43,8 +43,17 @@ class ChatCreate extends React.Component {
     this.setState({ modalOpen: false });
   };
 
+  handleSubmit = chatName => {
+    this.props.chatCreate(chatName)
+      .then(data => {
+        this.handleModalClose();
+        return data;
+      });
+  };
+
   render() {
-    const { classes, chatCreate } = this.props;
+    const { modalOpen } = this.state;
+    const { classes } = this.props;
 
     return (
       <React.Fragment>
@@ -58,20 +67,13 @@ class ChatCreate extends React.Component {
           <AddIcon />
         </Button>
 
-        <Modal
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
-          open={this.state.modalOpen}
-          onClose={this.handleModalClose}
-        >
-          <div className={classes.modalPaper}>
+        <ChatModal modalOpen={modalOpen} handleModalClose={this.handleModalClose}>
           <Typography variant="title" align="center" gutterBottom>
             Create New Chat
           </Typography>
 
-          <ChatCreateForm onSubmit={chatCreate} />
-          </div>
-        </Modal>
+          <ChatCreateForm onSubmit={this.handleSubmit} />
+        </ChatModal>
       </React.Fragment>
     );
   }

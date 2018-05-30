@@ -1,11 +1,14 @@
 import { connect } from 'react-redux';
 import UserNav from '../components/UserNav';
-import { logout } from '../actions/auth';
+import { logout, editProfile } from '../actions/auth';
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  user: state.auth.user,
+});
 
 const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(logout()),
+  editProfile: params => dispatch(editProfile(params)),
 });
 
 export default connect(
