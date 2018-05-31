@@ -11,6 +11,9 @@ import Sidebar from './Sidebar';
 import ChatHeader from './ChatHeader';
 import MessagesSection from './MessagesSection';
 
+// Vendor modules
+import isEmpty from 'lodash.isempty';
+
 const styles = theme => ({
   appFrame: {
     display: 'flex',
@@ -53,7 +56,10 @@ class ChatPage extends React.Component {
   }
 
   render() {
-    const { classes, allChats, myChats, activeChat, setActiveChat, activeId, isChatMember } = this.props;
+    const {
+      classes, allChats, myChats, activeChat, activeId,
+      setActiveChat, isChatMember, joinChat
+    } = this.props;
 
     return (
       <div className={classes.appFrame}>
@@ -62,8 +68,8 @@ class ChatPage extends React.Component {
 
           <main className={classes.content}>
             {
-              activeChat
-                ? <MessagesSection chat={activeChat} isChatMember={isChatMember} />
+              !isEmpty(activeChat)
+                ? <MessagesSection chat={activeChat} isChatMember={isChatMember} joinChat={joinChat} />
                 : <Paper className={classes.introMessage} elevation={4} rounded={20}>
                     <Typography variant="display1" component="h2" align="center">
                       Please select some chat to start messaging...

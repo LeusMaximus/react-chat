@@ -11,6 +11,9 @@ import Typography from '@material-ui/core/Typography';
 import Avatar from './Avatar';
 import UserNav from '../containers/UserNav';
 
+// Vendor modules
+import isEmpty from 'lodash.isempty';
+
 const styles = theme => ({
   appBar: {
     flexShrink: 1,
@@ -32,14 +35,14 @@ const ChatHeader = ({ classes, activeChat }) => (
     className={classes.appBar}
   >
     <Toolbar>
-      {activeChat &&
+      {!isEmpty(activeChat) &&
         <Avatar className={classes.chatAvatar}>
           {activeChat.title}
         </Avatar>
       }
 
       <Typography variant="title" color="inherit" noWrap>
-        {activeChat ? activeChat.title : 'Super Messanger'}
+        {!isEmpty(activeChat) ? activeChat.title : 'Super Messanger'}
       </Typography>
 
       <UserNav className={classes.accountBox} />

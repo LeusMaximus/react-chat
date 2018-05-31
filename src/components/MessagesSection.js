@@ -31,7 +31,8 @@ const styles = theme => ({
   noMessages: {
     position: 'absolute',
     top: '50%',
-    width: 'calc(100% - 40px)',
+    left: 20,
+    right: 20,
     transform: 'translateY(-50%)',
     textAlign: 'center',
   }
@@ -88,7 +89,7 @@ class MessagesSection extends React.Component {
   }
 
   render() {
-    const { classes, chat, isChatMember } = this.props;
+    const { classes, chat, isChatMember, joinChat } = this.props;
 
     return (
       <React.Fragment>
@@ -108,7 +109,7 @@ class MessagesSection extends React.Component {
           </div>
         </div>
 
-        <MessageField isChatMember={isChatMember} />
+        <MessageField isChatMember={isChatMember} joinChat={joinChat} activeId={chat._id} />
       </React.Fragment>
     );
   }

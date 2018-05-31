@@ -1,9 +1,10 @@
 import { combineReducers } from 'redux';
 import * as actTypes from '../constants/chats';
+import isEmpty from 'lodash.isempty';
 
 const initialState = {
   activeId: '',
-  activeChat: null,
+  activeChat: {},
   allIds: [],
   myIds: [],
   byIds: {},
@@ -12,7 +13,6 @@ const initialState = {
 const activeId = (state = initialState.activeId, action) => {
   switch (action.type) {
     case actTypes.SET_ACTIVE_CHAT:
-    case actTypes.JOIN_CHAT_SUCCESS:
       return action.payload.chat._id;
     case actTypes.UNSET_ACTIVE_CHAT:
       return '';
@@ -25,6 +25,14 @@ const activeChat = (state = initialState.activeChat, action) => {
   switch (action.type) {
     case actTypes.SET_ACTIVE_CHAT:
       return action.payload.chat;
+    case actTypes.JOIN_CHAT_SUCCESS:
+      return {
+        ...state,
+        members: [
+          ...state.members,
+          action.payload.message.sender._id
+        ]
+      }
     case actTypes.UNSET_ACTIVE_CHAT:
       return '';
     default:
@@ -73,7 +81,6 @@ const byIds = (state = initialState.byIds, action) => {
         }), {}),
       };
     case actTypes.CREATE_CHAT_SUCCESS:
-    case actTypes.JOIN_CHAT_SUCCESS:
       return {
         ...state,
         [action.payload.chat._id]: {...action.payload.chat}
@@ -99,7 +106,7 @@ export const getChat = (state, id) => state.byIds[id];
 export const isMember = (state, userId) => {
   const { activeChat } = state;
 
-  if (activeChat) {
+  if (!isEmpty(activeChat)) {
     const ids = activeChat.members.map(member => member._id);
     return ids.includes(userId);
   }
@@ -110,7 +117,7 @@ export const isMember = (state, userId) => {
 export const isCreator = (state, userId) => {
   const { activeChat } = state;
 
-  return activeChat ? activeChat.creator._id === userId : false;
+  return !isEmpty(activeChat) ? activeChat.creator._id === userId : false;
 }
 
 export const isChatMember = (state, userId) => isMember(state, userId) || isCreator(state, userId);

@@ -21,7 +21,7 @@ const styles = theme => ({
   },
 });
 
-const MessageField = ({ classes, isChatMember }) => (
+const MessageField = ({ classes, isChatMember, joinChat, activeId }) => (
   <Paper elevation={10} className={classes.messageField}>
     {isChatMember
       ? <FormControl fullWidth>
@@ -32,11 +32,11 @@ const MessageField = ({ classes, isChatMember }) => (
           color="primary"
           fullWidth
           type="button"
+          onClick={() => joinChat(activeId)}
         >
           Join
         </Button>
     }
-
   </Paper>
 );
 

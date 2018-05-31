@@ -24,6 +24,13 @@ const styles = theme => ({
 class ChatListItem extends React.Component {
   handleClick = event => {
     event.preventDefault();
+
+    const { item, activeId } = this.props;
+
+    if (item._id === activeId) {
+      return;
+    }
+
     this.props.setActiveChat(this.props.item._id);
   }
 
