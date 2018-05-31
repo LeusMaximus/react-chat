@@ -58,21 +58,28 @@ class ChatPage extends React.Component {
   render() {
     const {
       classes, allChats, myChats, activeChat, activeId,
-      setActiveChat, isChatMember, joinChat
+      setActiveChat, isMember, isCreator, isChatMember, joinChat, leaveChat
     } = this.props;
 
     return (
       <div className={classes.appFrame}>
         <div className={classes.mainArea}>
-          <ChatHeader activeChat={activeChat} />
+          <ChatHeader
+            activeChat={activeChat}
+            isMember={isMember}
+            isCreator={isCreator}
+            isChatMember={isChatMember}
+            leaveChat={leaveChat}
+            activeId={activeId}
+          />
 
           <main className={classes.content}>
             {
               !isEmpty(activeChat)
                 ? <MessagesSection chat={activeChat} isChatMember={isChatMember} joinChat={joinChat} />
                 : <Paper className={classes.introMessage} elevation={4} rounded={20}>
-                    <Typography variant="display1" component="h2" align="center">
-                      Please select some chat to start messaging...
+                    <Typography variant="headline" component="h2" align="center">
+                      Please select some chat (or create new) to start messaging...
                     </Typography>
                   </Paper>
             }

@@ -160,3 +160,30 @@ export function joinChat(id) {
   };
 }
 
+export function leaveChat(id) {
+  return (dispatch, getState) => {
+    const { token } = getState().auth;
+
+    dispatch({
+      type: actTypes.LEAVE_CHAT_REQUEST,
+    });
+
+    return makeRequest({
+      endpoint: `/chats/${id}/leave`,
+      token,
+    })
+      .then(data => {
+        dispatch({
+          type: actTypes.LEAVE_CHAT_SUCCESS,
+          payload: data,
+        });
+
+        return data;
+      })
+      .catch(error => dispatch({
+        type: actTypes.LEAVE_CHAT_FAILURE,
+        payload: error,
+      }));
+  };
+}
+
