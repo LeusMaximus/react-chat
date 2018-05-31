@@ -53,7 +53,7 @@ class ChatPage extends React.Component {
   }
 
   render() {
-    const { classes, allChats, myChats, activeChat, setActiveChat, activeId } = this.props;
+    const { classes, allChats, myChats, activeChat, setActiveChat, activeId, isChatMember } = this.props;
 
     return (
       <div className={classes.appFrame}>
@@ -63,7 +63,7 @@ class ChatPage extends React.Component {
           <main className={classes.content}>
             {
               activeChat
-                ? <MessagesSection chat={activeChat} />
+                ? <MessagesSection chat={activeChat} isChatMember={isChatMember} />
                 : <Paper className={classes.introMessage} elevation={4} rounded={20}>
                     <Typography variant="display1" component="h2" align="center">
                       Please select some chat to start messaging...

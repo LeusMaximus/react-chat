@@ -38,7 +38,6 @@ class ChatListItem extends React.Component {
       <ListItem
         className={itemClasses}
         button
-        focusVisible
         component="button"
         onClick={this.handleClick}
       >
