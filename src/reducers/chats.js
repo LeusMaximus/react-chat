@@ -26,18 +26,19 @@ const activeChat = (state = initialState.activeChat, action) => {
     case actTypes.SET_ACTIVE_CHAT:
       return action.payload.chat;
     case actTypes.JOIN_CHAT_SUCCESS:
-      var obj = {
+    case actTypes.LEAVE_CHAT_SUCCESS:
+      return {
         ...state,
         members: [
-          ...state.members,
-          action.payload.message.sender
+          ...action.payload.chat.members
+        ],
+        messages: [
+          ...state.messages,
+          action.payload.message
         ]
       }
-      console.log(obj);
-
-      return obj;
     case actTypes.UNSET_ACTIVE_CHAT:
-      return '';
+      return {};
     default:
       return state;
   }
@@ -66,6 +67,10 @@ const myIds = (state = initialState.myIds, action) => {
       return [
         ...state,
         action.payload.chat._id,
+      ];
+    case actTypes.LEAVE_CHAT_SUCCESS:
+      return [
+        ...state.filter(id => id !== action.payload.chat._id),
       ];
     default:
       return state;

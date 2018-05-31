@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 // Own modules
 import Avatar from './Avatar';
 import UserNav from '../containers/UserNav';
+import ChatMenu from '../components/ChatMenu';
 
 // Vendor modules
 import isEmpty from 'lodash.isempty';
@@ -25,16 +26,30 @@ const styles = theme => ({
   },
 
   chatAvatar: {
-    marginRight: '10px',
+    marginRight: 10,
   },
+
+  chatMenu: {
+    marginRight: 10,
+  }
 });
 
-const ChatHeader = ({ classes, activeChat }) => (
+const ChatHeader = ({ classes, activeChat, isMember, isCreator, isChatMember, leaveChat, activeId }) => (
   <AppBar
     position="static"
     className={classes.appBar}
   >
     <Toolbar>
+      {!isEmpty(activeChat) && isChatMember &&
+        <ChatMenu
+          className={classes.chatMenu}
+          isMember={isMember}
+          isCreator={isCreator}
+          leaveChat={leaveChat}
+          activeId={activeId}
+        />
+      }
+
       {!isEmpty(activeChat) &&
         <Avatar className={classes.chatAvatar}>
           {activeChat.title}
@@ -42,7 +57,7 @@ const ChatHeader = ({ classes, activeChat }) => (
       }
 
       <Typography variant="title" color="inherit" noWrap>
-        {!isEmpty(activeChat) ? activeChat.title : 'Super Messanger'}
+        {!isEmpty(activeChat) ? activeChat.title : 'Super Messenger'}
       </Typography>
 
       <UserNav className={classes.accountBox} />

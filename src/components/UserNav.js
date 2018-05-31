@@ -8,6 +8,8 @@ import Typography from '@material-ui/core/Typography';
 
 // MUI icons
 import AccountCircle from '@material-ui/icons/AccountCircle';
+
+// Own modules
 import ChatModal from './ChatModal';
 import EditProfileForm from './EditProfileForm';
 
