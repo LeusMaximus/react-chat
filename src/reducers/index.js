@@ -5,4 +5,4 @@ import chats from './chats';
 export default combineReducers({
   auth,
   chats,
-})
+});

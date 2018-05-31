@@ -26,13 +26,16 @@ const activeChat = (state = initialState.activeChat, action) => {
     case actTypes.SET_ACTIVE_CHAT:
       return action.payload.chat;
     case actTypes.JOIN_CHAT_SUCCESS:
-      return {
+      var obj = {
         ...state,
         members: [
           ...state.members,
-          action.payload.message.sender._id
+          action.payload.message.sender
         ]
       }
+      console.log(obj);
+
+      return obj;
     case actTypes.UNSET_ACTIVE_CHAT:
       return '';
     default:
