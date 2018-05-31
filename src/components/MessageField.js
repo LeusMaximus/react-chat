@@ -6,6 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
 import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
   messageField: {
@@ -20,11 +21,22 @@ const styles = theme => ({
   },
 });
 
-const MessageField = ({ classes }) => (
+const MessageField = ({ classes, isChatMember }) => (
   <Paper elevation={10} className={classes.messageField}>
-    <FormControl fullWidth>
-        <Input placeholder="Type your message..." />
-      </FormControl>
+    {isChatMember
+      ? <FormControl fullWidth>
+          <Input placeholder="Type your message..." />
+        </FormControl>
+      : <Button
+          variant="raised"
+          color="primary"
+          fullWidth
+          type="button"
+        >
+          Join
+        </Button>
+    }
+
   </Paper>
 );
 

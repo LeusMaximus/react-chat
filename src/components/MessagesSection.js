@@ -88,7 +88,7 @@ class MessagesSection extends React.Component {
   }
 
   render() {
-    const { classes, chat } = this.props;
+    const { classes, chat, isChatMember } = this.props;
 
     return (
       <React.Fragment>
@@ -108,7 +108,7 @@ class MessagesSection extends React.Component {
           </div>
         </div>
 
-        <MessageField />
+        <MessageField isChatMember={isChatMember} />
       </React.Fragment>
     );
   }
