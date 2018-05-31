@@ -14,6 +14,7 @@ import ChatMenu from '../components/ChatMenu';
 
 // Vendor modules
 import isEmpty from 'lodash.isempty';
+import _get from 'lodash.get';
 
 const styles = theme => ({
   appBar: {
@@ -57,7 +58,7 @@ const ChatHeader = ({ classes, activeChat, isMember, isCreator, isChatMember, le
       }
 
       <Typography variant="title" color="inherit" noWrap>
-        {!isEmpty(activeChat) ? activeChat.title : 'Super Messenger'}
+        {_get(activeChat, 'title') || 'Super Messenger'}
       </Typography>
 
       <UserNav className={classes.accountBox} />
