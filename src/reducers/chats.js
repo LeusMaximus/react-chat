@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import * as actTypes from '../constants/chats';
 import isEmpty from 'lodash.isempty';
+import _get from 'lodash.get';
 
 const initialState = {
   activeId: '',
@@ -125,7 +126,7 @@ export const isMember = (state, userId) => {
 export const isCreator = (state, userId) => {
   const { activeChat } = state;
 
-  return !isEmpty(activeChat) ? activeChat.creator._id === userId : false;
+  return _get(activeChat, 'creator._id') === userId;
 }
 
 export const isChatMember = (state, userId) => isMember(state, userId) || isCreator(state, userId);

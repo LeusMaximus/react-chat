@@ -57,7 +57,7 @@ class Sidebar extends React.Component {
 
   handleChatsTabChange = (e, value) => {
     this.setState({
-      isMyChatsActive: value === 0 ? true : false,
+      isMyChatsActive: value === 0,
     });
   };
 
