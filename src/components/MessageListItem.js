@@ -22,6 +22,10 @@ const styles = theme => ({
     flexDirection: 'row-reverse',
   },
 
+  statusMessageItem: {
+    justifyContent: 'center',
+  },
+
   messagePaper: theme.mixins.gutters({
     maxWidth: '70%',
     minWidth: '10%',
@@ -40,31 +44,40 @@ const styles = theme => ({
   ownMessagePaper: {
     backgroundColor: deepPurple[50],
     color: theme.palette.common.white,
-  }
+  },
 
+  statusMessagePaper: {
+    backgroundColor: 'transparent',
+  },
 });
 
 const MessageListItem = ({ classes, item }) => {
+  const senderName = item.sender ? item.sender.username : '';
+  const isStatusMessage = item.statusMessage;
+  const elevation = isStatusMessage ? 0 : 4;
+
   const isOwnMessage = item.sender === 'me';
 
   const itemClasses = classnames({
     [classes.ownMessageItem]: isOwnMessage,
+    [classes.statusMessageItem]: isStatusMessage,
   });
 
   const paperClasses = classnames({
     [classes.messagePaper]: true,
-    [classes.ownMessagePaper]: isOwnMessage
+    [classes.ownMessagePaper]: isOwnMessage,
+    [classes.statusMessagePaper]: isStatusMessage,
   });
 
   return (
     <ListItem className={itemClasses}>
-      <Avatar>
-        {item.sender}
-      </Avatar>
+        <Avatar>
+          {senderName}
+        </Avatar>
 
-      <Paper elevation={4} className={paperClasses}>
-        <Typography variant="caption" component="strong" style={{ color: getColorBasedOnString(item.sender) }}>
-          {item.sender}
+      <Paper elevation={elevation} className={paperClasses}>
+        <Typography variant="caption" component="strong" style={{ color: getColorBasedOnString(senderName) }}>
+          {senderName}
         </Typography>
 
         <Typography component="p">
@@ -72,7 +85,7 @@ const MessageListItem = ({ classes, item }) => {
         </Typography>
 
         <Typography variant="caption" component="em">
-          {item.date}
+          {new Date(item.updatedAt).toLocaleDateString()}
         </Typography>
       </Paper>
     </ListItem>

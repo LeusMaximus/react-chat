@@ -144,9 +144,6 @@ export function joinChat(id) {
     return makeRequest({
       endpoint: `/chats/${id}/join`,
       token,
-      requestOptions: {
-        method: 'POST',
-      }
     })
       .then(data => {
         dispatch({
