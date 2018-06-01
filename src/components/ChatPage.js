@@ -58,8 +58,8 @@ class ChatPage extends React.Component {
   render() {
     const {
       classes, allChats, myChats, activeChat, activeId,
-      setActiveChat, joinChat, leaveChat, deleteChat,
-      isMember, isCreator, isChatMember
+      setActiveChat, joinChat, leaveChat, deleteChat, sendMessage,
+      isMember, isCreator, isChatMember, userId
     } = this.props;
 
     return (
@@ -78,7 +78,13 @@ class ChatPage extends React.Component {
           <main className={classes.content}>
             {
               !isEmpty(activeChat)
-                ? <MessagesSection chat={activeChat} isChatMember={isChatMember} joinChat={joinChat} />
+                ? <MessagesSection
+                    chat={activeChat}
+                    isChatMember={isChatMember}
+                    joinChat={joinChat}
+                    sendMessage={sendMessage}
+                    userId={userId}
+                  />
                 : <Paper className={classes.introMessage} elevation={4} rounded={20}>
                     <Typography variant="headline" component="h2" align="center">
                       Please select some chat (or create new) to start messaging...

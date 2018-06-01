@@ -49,6 +49,7 @@ class MessagesSection extends React.Component {
     const area = this.chatAreaRef.current;
 
     this.goToLastMessage();
+    this.setBtnDownStatus(area);
 
     area.addEventListener('scroll', debounce(this.handleChatAreaScroll.bind(this, area)), 500);
   }
@@ -89,14 +90,14 @@ class MessagesSection extends React.Component {
   }
 
   render() {
-    const { classes, chat, isChatMember, joinChat } = this.props;
+    const { classes, chat, isChatMember, joinChat, sendMessage, userId } = this.props;
 
     return (
       <React.Fragment>
         <div className={classes.chatArea} ref={this.chatAreaRef}>
           {
             chat.messages.length
-              ? <MessagesList messages={chat.messages} />
+              ? <MessagesList messages={chat.messages} userId={userId} />
               : <Typography className={classes.noMessages} variant="display2">
                   There is no messages yet...
                 </Typography>
@@ -109,7 +110,12 @@ class MessagesSection extends React.Component {
           </div>
         </div>
 
-        <MessageField isChatMember={isChatMember} joinChat={joinChat} activeId={chat._id} />
+        <MessageField
+          isChatMember={isChatMember}
+          joinChat={joinChat}
+          sendMessage={sendMessage}
+          activeId={chat._id}
+        />
       </React.Fragment>
     );
   }
