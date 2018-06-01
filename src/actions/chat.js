@@ -133,6 +133,36 @@ export function chatCreate(title) {
   };
 }
 
+export function deleteChat(chatId) {
+  return (dispatch, getState) => {
+    const { token } = getState().auth;
+
+    dispatch({
+      type: actTypes.DELETE_CHAT_REQUEST,
+    });
+
+    return makeRequest({
+      endpoint: `/chats/${chatId}`,
+      token,
+      requestOptions: {
+        method: 'DELETE',
+      }
+    })
+      .then(data => {
+        dispatch({
+          type: actTypes.DELETE_CHAT_SUCCESS,
+          payload: data,
+        });
+
+        return data;
+      })
+      .catch(error => dispatch({
+        type: actTypes.DELETE_CHAT_FAILURE,
+        payload: error,
+      }));
+  };
+}
+
 export function joinChat(id) {
   return (dispatch, getState) => {
     const { token } = getState().auth;

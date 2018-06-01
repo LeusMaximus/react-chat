@@ -12,7 +12,7 @@ import ChatHeader from './ChatHeader';
 import MessagesSection from './MessagesSection';
 
 // Vendor modules
-import isEmpty from 'lodash.isempty';
+import isEmpty from 'lodash/isEmpty';
 
 const styles = theme => ({
   appFrame: {
@@ -58,7 +58,8 @@ class ChatPage extends React.Component {
   render() {
     const {
       classes, allChats, myChats, activeChat, activeId,
-      setActiveChat, isMember, isCreator, isChatMember, joinChat, leaveChat
+      setActiveChat, joinChat, leaveChat, deleteChat,
+      isMember, isCreator, isChatMember
     } = this.props;
 
     return (
@@ -70,6 +71,7 @@ class ChatPage extends React.Component {
             isCreator={isCreator}
             isChatMember={isChatMember}
             leaveChat={leaveChat}
+            deleteChat={deleteChat}
             activeId={activeId}
           />
 

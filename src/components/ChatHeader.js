@@ -13,8 +13,8 @@ import UserNav from '../containers/UserNav';
 import ChatMenu from '../components/ChatMenu';
 
 // Vendor modules
-import isEmpty from 'lodash.isempty';
-import _get from 'lodash.get';
+import isEmpty from 'lodash/isEmpty';
+import _get from 'lodash/get';
 
 const styles = theme => ({
   appBar: {
@@ -35,7 +35,11 @@ const styles = theme => ({
   }
 });
 
-const ChatHeader = ({ classes, activeChat, isMember, isCreator, isChatMember, leaveChat, activeId }) => (
+const ChatHeader = ({
+  classes, activeChat, activeId,
+  isMember, isCreator, isChatMember,
+  leaveChat, deleteChat
+}) => (
   <AppBar
     position="static"
     className={classes.appBar}
@@ -47,6 +51,7 @@ const ChatHeader = ({ classes, activeChat, isMember, isCreator, isChatMember, le
           isMember={isMember}
           isCreator={isCreator}
           leaveChat={leaveChat}
+          deleteChat={deleteChat}
           activeId={activeId}
         />
       }
