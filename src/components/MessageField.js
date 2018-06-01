@@ -8,6 +8,9 @@ import Input from '@material-ui/core/Input';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 
+// Own modules
+import isTextFieldValid from '../utils/isTextFieldValid';
+
 const styles = theme => ({
   messageField: {
     flexShrink: 1,
@@ -21,23 +24,83 @@ const styles = theme => ({
   },
 });
 
-const MessageField = ({ classes, isChatMember, joinChat, activeId }) => (
-  <Paper elevation={10} className={classes.messageField}>
-    {isChatMember
-      ? <FormControl fullWidth>
-          <Input placeholder="Type your message..." />
-        </FormControl>
-      : <Button
-          variant="raised"
-          color="primary"
-          fullWidth
-          type="button"
-          onClick={() => joinChat(activeId)}
-        >
-          Join
-        </Button>
+class MessageField extends React.Component {
+  state = {
+    message: {
+      value: '',
+      isValid: true,
+    },
+  };
+
+  validate = () => {
+    const { message } = this.state;
+    const isMessageValid = isTextFieldValid(message.value);
+
+    this.setState({
+      message: {
+        ...message,
+        isValid: isMessageValid,
+      },
+    });
+
+    return isMessageValid;
+  }
+
+  handleChange = event => {
+    const { name, value } = event.target;
+
+    this.setState(prevState => ({
+      [name]: {
+        ...prevState[name],
+        value,
+      }
+    }));
+  }
+
+   handleKeyPress = event => {
+    const { message } = this.state;
+
+    if (event.key === 'Enter' && this.validate()) {
+      this.props.sendMessage(message.value);
+
+      this.setState({
+        message: {
+          value: '',
+          isValid: true,
+        },
+      });
     }
-  </Paper>
-);
+  };
+
+  render() {
+    const { classes, isChatMember, joinChat, activeId } = this.props;
+    const { message } = this.state;
+
+    return (
+      <Paper elevation={10} className={classes.messageField}>
+        {isChatMember
+          ? <FormControl fullWidth>
+              <Input
+                placeholder="Type your message..."
+                name="message"
+                value={message.value}
+                onChange={this.handleChange}
+                onKeyPress={this.handleKeyPress}
+              />
+            </FormControl>
+          : <Button
+              variant="raised"
+              color="primary"
+              fullWidth
+              type="button"
+              onClick={() => joinChat(activeId)}
+            >
+              Join
+            </Button>
+        }
+      </Paper>
+    );
+  }
+};
 
 export default withStyles(styles)(MessageField);

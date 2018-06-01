@@ -51,12 +51,12 @@ const styles = theme => ({
   },
 });
 
-const MessageListItem = ({ classes, item }) => {
+const MessageListItem = ({ classes, item, userId }) => {
   const senderName = item.sender ? item.sender.username : '';
   const isStatusMessage = item.statusMessage;
+  const isOwnMessage = item.sender._id === userId;
   const elevation = isStatusMessage ? 0 : 4;
 
-  const isOwnMessage = item.sender === 'me';
 
   const itemClasses = classnames({
     [classes.ownMessageItem]: isOwnMessage,

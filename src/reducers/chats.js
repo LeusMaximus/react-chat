@@ -40,6 +40,11 @@ const activeChat = (state = initialState.activeChat, action) => {
           action.payload.message
         ]
       }
+    case actTypes.MESSAGES_UPDATED:
+      return {
+        ...state,
+        messages: [...action.payload.chat.messages]
+      }
     case actTypes.UNSET_ACTIVE_CHAT:
     case actTypes.DELETE_CHAT_SUCCESS:
       return {};

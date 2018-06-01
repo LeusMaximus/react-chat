@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import ChatPage from '../components/ChatPage';
-import { getAllChats, getMyChats, setActiveChat, joinChat, leaveChat, deleteChat } from '../actions/chat';
+import { getAllChats, getMyChats, setActiveChat, joinChat, leaveChat, deleteChat, sendMessage } from '../actions/chat';
 import * as fromChats from '../reducers/chats';
 
 const mapStateToProps = state => {
@@ -15,6 +15,7 @@ const mapStateToProps = state => {
     isMember: fromChats.isMember(stateChats, userId),
     isCreator: fromChats.isCreator(stateChats, userId),
     isChatMember: fromChats.isChatMember(stateChats, userId),
+    userId,
   }
 };
 
@@ -25,6 +26,7 @@ const mapDispatchToProps = dispatch => ({
   joinChat: chatId => dispatch(joinChat(chatId)),
   leaveChat: chatId => dispatch(leaveChat(chatId)),
   deleteChat: chatId => dispatch(deleteChat(chatId)),
+  sendMessage: chatId => dispatch(sendMessage(chatId)),
 });
 
 export default connect(
