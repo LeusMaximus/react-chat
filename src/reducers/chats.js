@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
 import * as actTypes from '../constants/chats';
-import isEmpty from 'lodash.isempty';
-import _get from 'lodash.get';
+import isEmpty from 'lodash/isEmpty';
+import _get from 'lodash/get';
+import _omit from 'lodash/omit';
 
 const initialState = {
   activeId: '',
@@ -16,6 +17,7 @@ const activeId = (state = initialState.activeId, action) => {
     case actTypes.SET_ACTIVE_CHAT:
       return action.payload.chat._id;
     case actTypes.UNSET_ACTIVE_CHAT:
+    case actTypes.DELETE_CHAT_SUCCESS:
       return '';
     default:
       return state;
@@ -39,6 +41,7 @@ const activeChat = (state = initialState.activeChat, action) => {
         ]
       }
     case actTypes.UNSET_ACTIVE_CHAT:
+    case actTypes.DELETE_CHAT_SUCCESS:
       return {};
     default:
       return state;
@@ -54,6 +57,8 @@ const allIds = (state = initialState.allIds, action) => {
         ...state,
         action.payload.chat._id,
       ];
+    case actTypes.DELETE_CHAT_SUCCESS:
+      return [...state.filter(id => id !== action.payload.chat._id)];
     default:
       return state;
   }
@@ -70,6 +75,7 @@ const myIds = (state = initialState.myIds, action) => {
         action.payload.chat._id,
       ];
     case actTypes.LEAVE_CHAT_SUCCESS:
+    case actTypes.DELETE_CHAT_SUCCESS:
       return [
         ...state.filter(id => id !== action.payload.chat._id),
       ];
@@ -94,6 +100,8 @@ const byIds = (state = initialState.byIds, action) => {
         ...state,
         [action.payload.chat._id]: {...action.payload.chat}
       };
+    case actTypes.DELETE_CHAT_SUCCESS:
+      return _omit(state, action.payload.chat._id);
     default:
       return state;
   }
