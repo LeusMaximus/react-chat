@@ -12,6 +12,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 // Own modules
 import ChatModal from './ChatModal';
 import EditProfileForm from './EditProfileForm';
+import getUserName from '../utils/getUserName';
 
 class UserNav extends React.Component {
   state = {
@@ -60,6 +61,8 @@ class UserNav extends React.Component {
         >
           <AccountCircle />
         </IconButton>
+
+        <span>{user && getUserName(user)}</span>
 
         <Menu
           id="user-nav"
