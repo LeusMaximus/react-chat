@@ -25,7 +25,7 @@ const App = () => (
         <Switch>
           <Route exact path="/(login)?" component={LoginPage} />
           <Route path="/signup" component={SignupPage} />
-          <PrivateRoute path="/chat" component={ChatPage} />
+          <PrivateRoute path="/chat/:chatId?" component={ChatPage} />
           <Redirect to="/" />
         </Switch>
       </Router>

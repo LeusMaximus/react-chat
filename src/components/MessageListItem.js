@@ -63,7 +63,7 @@ const MessageListItem = ({ classes, item, userId }) => {
 
 
   const itemClasses = classnames({
-    [classes.ownMessageItem]: isOwnMessage,
+    [classes.ownMessageItem]: isOwnMessage && !isStatusMessage,
     [classes.statusMessageItem]: isStatusMessage,
   });
 
