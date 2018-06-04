@@ -18,6 +18,7 @@ import moment from 'moment';
 // Own modules
 import Avatar from './Avatar';
 import getColorBasedOnString from '../utils/getColorBasedOnString';
+import getUserName from '../utils/getUserName';
 
 const styles = theme => ({
   ownMessageItem: {
@@ -54,9 +55,10 @@ const styles = theme => ({
 });
 
 const MessageListItem = ({ classes, item, userId }) => {
-  const senderName = item.sender ? item.sender.username : '';
+  const sender = item.sender || {};
+  const senderName = getUserName(sender);
   const isStatusMessage = item.statusMessage;
-  const isOwnMessage = item.sender._id === userId;
+  const isOwnMessage = sender._id === userId;
   const elevation = isStatusMessage ? 0 : 4;
   const msgDate = moment(item.createdAt).format("MMM Do YY");
   const msgDateFromNow = moment(item.createdAt).fromNow();
