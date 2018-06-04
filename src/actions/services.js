@@ -1,9 +1,9 @@
-import * as actTypes from '../constants';
+import * as actTypes from '../constants/services';
 import history from '../utils/history';
 
 export function redirect(to) {
   return (dispatch) => {
-    history.push(`${process.env.PPBLIC_URL}/${to}`);
+    history.push(to);
 
     dispatch({
       type: actTypes.REDIRECT,

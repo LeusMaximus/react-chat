@@ -31,7 +31,7 @@ class ChatListItem extends React.Component {
       return;
     }
 
-    this.props.setActiveChat(this.props.item._id);
+    this.props.setActiveChat(this.props.item._id, true);
   }
 
   render() {

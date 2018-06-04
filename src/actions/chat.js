@@ -78,11 +78,11 @@ export function getChat(chatId) {
   };
 }
 
-export function setActiveChat (chatId) {
+export function setActiveChat (chatId, isNeedRedirect) {
   return (dispatch) => {
     return dispatch(getChat(chatId))
       .then(data => {
-        if (!data) {
+        if (!data || !data.chat) {
           dispatch(redirect('/chat'));
 
           return dispatch({
@@ -90,10 +90,14 @@ export function setActiveChat (chatId) {
           });
         }
 
-        return dispatch({
+        dispatch({
           type: actTypes.SET_ACTIVE_CHAT,
           payload: data,
         });
+
+        if (isNeedRedirect) {
+          return dispatch(redirect(`/chat/${data.chat._id}`));
+        }
       });
   };
 }
@@ -124,7 +128,7 @@ export function chatCreate(title) {
           payload: data,
         });
 
-        return dispatch(setActiveChat(data.chat._id));
+        return dispatch(setActiveChat(data.chat._id, true));
       })
       .catch(error => dispatch({
         type: actTypes.CREATE_CHAT_FAILURE,
@@ -153,6 +157,8 @@ export function deleteChat(chatId) {
           type: actTypes.DELETE_CHAT_SUCCESS,
           payload: data,
         });
+
+        dispatch(redirect('/chat'));
 
         return data;
       })

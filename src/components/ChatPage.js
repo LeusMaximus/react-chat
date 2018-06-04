@@ -46,13 +46,42 @@ const styles = theme => ({
 });
 
 class ChatPage extends React.Component {
+  constructor (props) {
+    super(props);
+
+    this.state = {
+      activeId: props.activeId,
+    };
+  }
+
+  componentDidUpdate(prevProps, state) {
+    const { setActiveChat, activeId } = this.props;
+    const { chatId: prevChatId } = prevProps.match.params;
+    const { chatId: currChatId } = this.props.match.params;
+
+    if (activeId && prevChatId && !currChatId) {
+      setActiveChat('', true);
+    }
+
+    if (currChatId && currChatId !== prevChatId && activeId === prevChatId) {
+      setActiveChat(currChatId);
+    }
+  }
+
   componentDidMount() {
-    const { getAllChats, getMyChats } = this.props;
+    const { getAllChats, getMyChats, setActiveChat, match } = this.props;
 
     Promise.all([
       getAllChats(),
       getMyChats(),
-    ]);
+    ])
+      .then(()=>{
+        const { chatId } = match.params;
+
+        if (chatId && chatId !== this.state.activeId) {
+          setActiveChat(chatId, true);
+        }
+      })
   }
 
   render() {
