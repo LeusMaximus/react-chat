@@ -20,13 +20,15 @@ const styles = theme => ({
   },
 });
 
-const SearchChat = ({ classes }) => (
+const SearchChat = ({ classes, onChange, term }) => (
   <div className={classes.searchChat}>
     <FormControl fullWidth>
       <InputLabel htmlFor="search_chat">Search chats...</InputLabel>
 
       <Input
         id="search_chat"
+        onChange={onChange}
+        value={term}
         endAdornment={
           <InputAdornment position="end">
             <Search />

@@ -53,11 +53,20 @@ const styles = theme => ({
 class Sidebar extends React.Component {
   state = {
     isMyChatsActive: true,
+    chatsFilterTerm: '',
   };
 
   handleChatsTabChange = (e, value) => {
     this.setState({
       isMyChatsActive: value === 0,
+    });
+  };
+
+  handleSearchChats = event => {
+    const { value } = event.target;
+
+    this.setState({
+      chatsFilterTerm: value,
     });
   };
 
@@ -74,21 +83,26 @@ class Sidebar extends React.Component {
         }}
       >
         <div className={classes.drawerTopToolbar}>
-          <SearchChat />
+          <SearchChat onChange={this.handleSearchChats} term={this.state.chatsFilterTerm} />
         </div>
         <Divider />
 
         <div className={classes.chatsListHolder}>
           {
             chats.length
-              ? <ChatList chats={isMyChatsActive ? myChats : allChats} setActiveChat={setActiveChat} activeId={activeId} />
+              ? <ChatList
+                  chats={isMyChatsActive ? myChats : allChats}
+                  setActiveChat={setActiveChat}
+                  activeId={activeId}
+                  searchTerm={this.state.chatsFilterTerm}
+                />
               : <Paper elevation={4} className={classes.notChatsMessage}>
                   <Typography variant="body1" align="center">
                     There is not chats yet...
                   </Typography>
 
                   <SentimentVeryDissatisfied style={{ marginLeft: 10 }} />
-              </Paper>
+                </Paper>
           }
         </div>
 
