@@ -6,19 +6,18 @@ import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import ListItem from '@material-ui/core/ListItem';
 import Paper from '@material-ui/core/Paper';
-import Tooltip from '@material-ui/core/Tooltip';
 
 // MUI Colors
 import deepPurple from '@material-ui/core/colors//deepPurple';
 
 // Vendor modules
 import classnames from 'classnames';
-import moment from 'moment';
 
 // Own modules
 import Avatar from './Avatar';
 import getColorBasedOnString from '../utils/getColorBasedOnString';
 import getUserName from '../utils/getUserName';
+import DateView from './DateView';
 
 const styles = theme => ({
   ownMessageItem: {
@@ -60,9 +59,6 @@ const MessageListItem = ({ classes, item, userId }) => {
   const isStatusMessage = item.statusMessage;
   const isOwnMessage = sender._id === userId;
   const elevation = isStatusMessage ? 0 : 4;
-  const msgDate = moment(item.createdAt).format("MMM Do YY");
-  const msgDateFromNow = moment(item.createdAt).fromNow();
-
 
   const itemClasses = classnames({
     [classes.ownMessageItem]: isOwnMessage && !isStatusMessage,
@@ -90,11 +86,7 @@ const MessageListItem = ({ classes, item, userId }) => {
           {item.content}
         </Typography>
 
-        <Tooltip title={msgDateFromNow} placement="right">
-          <Typography variant="caption" component="em" style={{display: 'inline-block'}}>
-            {msgDate}
-          </Typography>
-        </Tooltip>
+        {DateView(item.createdAt)}
       </Paper>
     </ListItem>
   );
