@@ -96,8 +96,10 @@ export function setActiveChat (chatId, isNeedRedirect) {
         });
 
         if (isNeedRedirect) {
-          return dispatch(redirect(`/chat/${data.chat._id}`));
+          dispatch(redirect(`/chat/${data.chat._id}`));
         }
+
+        return data;
       });
   };
 }
@@ -128,7 +130,9 @@ export function chatCreate(title) {
           payload: data,
         });
 
-        return dispatch(setActiveChat(data.chat._id, true));
+        dispatch(setActiveChat(data.chat._id, true));
+
+        return data;
       })
       .catch(error => dispatch({
         type: actTypes.CREATE_CHAT_FAILURE,

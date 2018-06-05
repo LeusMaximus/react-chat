@@ -14,6 +14,7 @@ import classnames from 'classnames';
 
 // Own modules
 import Avatar from './Avatar';
+import DateView from './DateView';
 
 const styles = theme => ({
   selected: {
@@ -51,7 +52,7 @@ class ChatListItem extends React.Component {
         <Avatar>
           {item.title}
         </Avatar>
-        <ListItemText primary={item.title} secondary={item.date} />
+        <ListItemText primary={item.title} secondary={DateView(item.createdAt)} />
       </ListItem>
     );
   }
