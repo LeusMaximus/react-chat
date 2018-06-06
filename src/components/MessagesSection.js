@@ -90,14 +90,14 @@ class MessagesSection extends React.Component {
   }
 
   render() {
-    const { classes, chat, isChatMember, joinChat, sendMessage, userId } = this.props;
+    const { classes, chat, isChatMember, joinChat, sendMessage, userId, messages } = this.props;
 
     return (
       <React.Fragment>
         <div className={classes.chatArea} ref={this.chatAreaRef}>
           {
-            chat.messages.length
-              ? <MessagesList messages={chat.messages} userId={userId} />
+            messages.length
+              ? <MessagesList messages={messages} userId={userId} />
               : <Typography className={classes.noMessages} variant="display2">
                   There is no messages yet...
                 </Typography>

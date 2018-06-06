@@ -55,31 +55,42 @@ class ChatPage extends React.Component {
   }
 
   componentDidUpdate(prevProps, state) {
-    const { setActiveChat, activeId } = this.props;
+    const { setActiveChat, activeId, mountChat, unmountChat } = this.props;
     const { chatId: prevChatId } = prevProps.match.params;
     const { chatId: currChatId } = this.props.match.params;
 
     if (activeId && prevChatId && !currChatId) {
       setActiveChat('', true);
+      unmountChat(prevChatId);
+      mountChat(currChatId);
     }
 
-    if (currChatId && currChatId !== prevChatId && activeId === prevChatId) {
+    if (currChatId && currChatId !== prevChatId) {
       setActiveChat(currChatId);
+      if (prevChatId) {
+        unmountChat(prevChatId);
+      }
+
+      mountChat(currChatId);
     }
   }
 
   componentDidMount() {
-    const { getAllChats, getMyChats, setActiveChat, match } = this.props;
+    const { getAllChats, getMyChats, setActiveChat, match, socketsConnect, mountChat } = this.props;
 
     Promise.all([
       getAllChats(),
       getMyChats(),
     ])
+      .then(() => {
+        socketsConnect();
+      })
       .then(()=>{
         const { chatId } = match.params;
 
         if (chatId && chatId !== this.state.activeId) {
           setActiveChat(chatId, true);
+          mountChat(chatId);
         }
       })
   }
@@ -88,7 +99,7 @@ class ChatPage extends React.Component {
     const {
       classes, allChats, myChats, activeChat, activeId,
       setActiveChat, joinChat, leaveChat, deleteChat, sendMessage,
-      isMember, isCreator, isChatMember, userId
+      isMember, isCreator, isChatMember, userId, messages
     } = this.props;
 
     return (
@@ -108,6 +119,7 @@ class ChatPage extends React.Component {
             {
               !isEmpty(activeChat)
                 ? <MessagesSection
+                    messages={messages}
                     chat={activeChat}
                     isChatMember={isChatMember}
                     joinChat={joinChat}
