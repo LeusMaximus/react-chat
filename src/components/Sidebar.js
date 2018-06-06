@@ -71,7 +71,7 @@ class Sidebar extends React.Component {
   };
 
   render() {
-    const { classes, allChats, myChats, setActiveChat, activeId } = this.props;
+    const { classes, allChats, myChats, setActiveChat, activeId, isConnected } = this.props;
     const { isMyChatsActive } = this.state;
     const chats = isMyChatsActive ? myChats : allChats;
 
@@ -91,6 +91,7 @@ class Sidebar extends React.Component {
           {
             chats.length
               ? <ChatList
+                  disabled={!isConnected}
                   chats={isMyChatsActive ? myChats : allChats}
                   setActiveChat={setActiveChat}
                   activeId={activeId}
@@ -109,7 +110,7 @@ class Sidebar extends React.Component {
         <div className={classes.chatNavHolder}>
           <Divider />
 
-          <ChatCreate />
+          <ChatCreate disabled={!isConnected} />
 
           <ChatNav tabsChange={this.handleChatsTabChange} tabNumber={isMyChatsActive ? 0 : 1} />
         </div>

@@ -90,7 +90,7 @@ class MessagesSection extends React.Component {
   }
 
   render() {
-    const { classes, chat, isChatMember, joinChat, sendMessage, userId, messages } = this.props;
+    const { classes, chat, isChatMember, joinChat, sendMessage, userId, messages, isConnected } = this.props;
 
     return (
       <React.Fragment>
@@ -111,6 +111,7 @@ class MessagesSection extends React.Component {
         </div>
 
         <MessageField
+          disabled={!isConnected}
           isChatMember={isChatMember}
           joinChat={joinChat}
           sendMessage={sendMessage}

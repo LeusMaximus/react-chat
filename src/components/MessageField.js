@@ -73,7 +73,7 @@ class MessageField extends React.Component {
   };
 
   render() {
-    const { classes, isChatMember, joinChat, activeId } = this.props;
+    const { classes, isChatMember, joinChat, activeId, disabled } = this.props;
     const { message } = this.state;
 
     return (
@@ -81,6 +81,7 @@ class MessageField extends React.Component {
         {isChatMember
           ? <FormControl fullWidth>
               <Input
+                disabled={disabled}
                 placeholder="Type your message..."
                 name="message"
                 value={message.value}
@@ -89,6 +90,7 @@ class MessageField extends React.Component {
               />
             </FormControl>
           : <Button
+              disabled={disabled}
               variant="raised"
               color="primary"
               fullWidth

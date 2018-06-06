@@ -38,7 +38,7 @@ const styles = theme => ({
 const ChatHeader = ({
   classes, activeChat, activeId,
   isMember, isCreator, isChatMember,
-  leaveChat, deleteChat
+  leaveChat, deleteChat, isConnected
 }) => (
   <AppBar
     position="static"
@@ -47,6 +47,7 @@ const ChatHeader = ({
     <Toolbar>
       {!isEmpty(activeChat) && isChatMember &&
         <ChatMenu
+          disabled={!isConnected}
           className={classes.chatMenu}
           isMember={isMember}
           isCreator={isCreator}
@@ -66,7 +67,7 @@ const ChatHeader = ({
         {_get(activeChat, 'title') || 'Super Messenger'}
       </Typography>
 
-      <UserNav className={classes.accountBox} />
+      <UserNav className={classes.accountBox} disabled={!isConnected} />
     </Toolbar>
   </AppBar>
 );

@@ -12,6 +12,7 @@ let socket = null;
 export function missingSocketConnection() {
   return {
     type: actTypes.SOCKETS_MISSING_CONNECTION,
+    payload: new Error('Missing connection.'),
   }
 }
 
@@ -42,13 +43,14 @@ export function socketsConnect() {
     socket.on('error', (error) => {
       dispatch({
         type: actTypes.SOCKETS_CONNECTION_FAILURE,
-        payload: error,
+        payload: new Error(`Connection ${error}`),
       });
     });
 
     socket.on('connect_error', () => {
       dispatch({
         type: actTypes.SOCKETS_CONNECTION_FAILURE,
+        payload: new Error('We have lost a connection, Trying to connect...'),
       });
     });
 

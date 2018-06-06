@@ -23,11 +23,12 @@ class ChatMenu extends React.Component {
 
   render() {
     const { anchorEl } = this.state;
-    const { className, isMember, isCreator, leaveChat, deleteChat, activeId } = this.props;
+    const { className, isMember, isCreator, leaveChat, deleteChat, activeId, disabled } = this.props;
 
     return (
       <div className={className}>
         <IconButton
+          disabled={disabled}
           aria-owns={anchorEl ? 'chat-menu' : null}
           aria-haspopup="true"
           onClick={this.handleClick}
