@@ -35,6 +35,8 @@ const styles = theme => ({
     flexDirection: 'column',
     flexShrink: 1,
     flexGrow: 1,
+    height: '100%',
+    overflow: 'hidden',
   },
 
   introMessage: theme.mixins.gutters({
