@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 // Own modules
 import PageHeader from './PageHeader';
 import SignupForm from './SignupForm';
+import PopupMessage from './PopupMessage';
 
 const styles = theme => ({
   contentWrapper: {
@@ -30,7 +31,7 @@ const styles = theme => ({
 
 class SignupPage extends React.Component {
   render() {
-    const { classes, signup, isAuthenticated } = this.props;
+    const { classes, signup, isAuthenticated, error } = this.props;
 
     if (isAuthenticated) {
       return (
@@ -51,6 +52,8 @@ class SignupPage extends React.Component {
             <SignupForm onSubmit={signup} />
           </Paper>
         </div>
+
+        {error && <PopupMessage variant="error" message={error.message} />}
       </div>
     );
   }

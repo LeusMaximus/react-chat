@@ -4,6 +4,7 @@ import { signup } from '../actions';
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
+  error: state.services.errors.auth,
 });
 
 const mapDispatchToProps = dispatch => ({
