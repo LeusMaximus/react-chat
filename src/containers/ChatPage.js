@@ -19,6 +19,7 @@ const mapStateToProps = state => {
     isChatMember: fromChats.isChatMember(state, activeChat),
     userId,
     messages: state.messages,
+    error: state.services.errors.chat,
   }
 };
 

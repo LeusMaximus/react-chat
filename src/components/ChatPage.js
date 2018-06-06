@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import Sidebar from './Sidebar';
 import ChatHeader from './ChatHeader';
 import MessagesSection from './MessagesSection';
+import PopupMessage from './PopupMessage';
 
 // Vendor modules
 import isEmpty from 'lodash/isEmpty';
@@ -101,7 +102,7 @@ class ChatPage extends React.Component {
     const {
       classes, allChats, myChats, activeChat, activeId,
       setActiveChat, joinChat, leaveChat, deleteChat, sendMessage,
-      isMember, isCreator, isChatMember, userId, messages
+      isMember, isCreator, isChatMember, userId, messages, error
     } = this.props;
 
     return (
@@ -138,6 +139,8 @@ class ChatPage extends React.Component {
         </div>
 
         <Sidebar allChats={allChats} myChats={myChats} setActiveChat={setActiveChat} activeId={activeId} />
+
+        {error && <PopupMessage variant="error" message={error.message} />}
       </div>
     );
   }

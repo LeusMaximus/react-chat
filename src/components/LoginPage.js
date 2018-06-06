@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 // Own modules
 import PageHeader from './PageHeader';
 import LoginForm from './LoginForm';
+import PopupMessage from './PopupMessage';
 
 const styles = theme => ({
   contentWrapper: {
@@ -31,7 +32,7 @@ const styles = theme => ({
 
 class LoginPage extends React.Component {
   render() {
-    const { classes, login, isAuthenticated } = this.props;
+    const { classes, login, isAuthenticated, error } = this.props;
 
     if (isAuthenticated) {
       return (
@@ -56,6 +57,8 @@ class LoginPage extends React.Component {
             New to Chat? <Link to="/signup">Create an account</Link>
           </Typography>
         </div>
+
+        {error && <PopupMessage variant="error" message={error.message} />}
       </div>
     );
   }
