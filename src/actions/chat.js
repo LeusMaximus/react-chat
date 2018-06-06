@@ -7,6 +7,12 @@ import * as actTypes from '../constants/chats';
 
 export function getMyChats () {
   return (dispatch, getState) => {
+    const { isFetching } = getState().services;
+
+    if (isFetching.getMyChats) {
+      return Promise.resolve();
+    }
+
     const { token } = getState().auth;
 
     dispatch({
@@ -30,6 +36,12 @@ export function getMyChats () {
 
 export function getAllChats () {
   return (dispatch, getState) => {
+    const { isFetching } = getState().services;
+
+    if (isFetching.allChats) {
+      return Promise.resolve();
+    }
+
     const { token } = getState().auth;
 
     dispatch({
@@ -53,6 +65,12 @@ export function getAllChats () {
 
 export function getChat(chatId) {
   return (dispatch, getState) => {
+    const { isFetching } = getState().services;
+
+    if (isFetching.chat) {
+      return Promise.resolve();
+    }
+
     const { token } = getState().auth;
 
     dispatch({
@@ -78,7 +96,7 @@ export function getChat(chatId) {
   };
 }
 
-export function setActiveChat (chatId, isNeedRedirect) {
+export function setActiveChat (chatId, notNeedRedirect) {
   return (dispatch) => {
     return dispatch(getChat(chatId))
       .then(data => {
@@ -95,7 +113,7 @@ export function setActiveChat (chatId, isNeedRedirect) {
           payload: data,
         });
 
-        if (isNeedRedirect) {
+        if (!notNeedRedirect) {
           dispatch(redirect(`/chat/${data.chat._id}`));
         }
 
@@ -104,8 +122,14 @@ export function setActiveChat (chatId, isNeedRedirect) {
   };
 }
 
-export function chatCreate(title) {
+export function createChat(title) {
   return (dispatch, getState) => {
+    const { isFetching } = getState().services;
+
+    if (isFetching.createChat) {
+      return Promise.resolve();
+    }
+
     const { token } = getState().auth;
 
     dispatch({
@@ -130,7 +154,7 @@ export function chatCreate(title) {
           payload: data,
         });
 
-        dispatch(setActiveChat(data.chat._id, true));
+        dispatch(setActiveChat(data.chat._id));
 
         return data;
       })
@@ -143,6 +167,12 @@ export function chatCreate(title) {
 
 export function deleteChat(chatId) {
   return (dispatch, getState) => {
+    const { isFetching } = getState().services;
+
+    if (isFetching.deleteChat) {
+      return Promise.resolve();
+    }
+
     const { token } = getState().auth;
 
     dispatch({
@@ -175,6 +205,12 @@ export function deleteChat(chatId) {
 
 export function joinChat(id) {
   return (dispatch, getState) => {
+    const { isFetching } = getState().services;
+
+    if (isFetching.joinChat) {
+      return Promise.resolve();
+    }
+
     const { token } = getState().auth;
 
     dispatch({
@@ -202,6 +238,12 @@ export function joinChat(id) {
 
 export function leaveChat(id) {
   return (dispatch, getState) => {
+    const { isFetching } = getState().services;
+
+    if (isFetching.leaveChat) {
+      return Promise.resolve();
+    }
+
     const { token } = getState().auth;
 
     dispatch({

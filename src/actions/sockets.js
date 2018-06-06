@@ -17,6 +17,12 @@ export function missingSocketConnection() {
 
 export function socketsConnect() {
   return (dispatch, getState) => {
+    const { isFetching } = getState().services;
+
+    if (isFetching.socketsConnect) {
+      return Promise.resolve();
+    }
+
     const { token } = getState().auth;
 
     dispatch({

@@ -62,13 +62,13 @@ class ChatPage extends React.Component {
     const { chatId: currChatId } = this.props.match.params;
 
     if (activeId && prevChatId && !currChatId) {
-      setActiveChat('', true);
+      setActiveChat('');
       unmountChat(prevChatId);
       mountChat(currChatId);
     }
 
     if (currChatId && currChatId !== prevChatId) {
-      setActiveChat(currChatId);
+      setActiveChat(currChatId, true);
       if (prevChatId) {
         unmountChat(prevChatId);
       }
@@ -91,7 +91,7 @@ class ChatPage extends React.Component {
         const { chatId } = match.params;
 
         if (chatId && chatId !== this.state.activeId) {
-          setActiveChat(chatId, true);
+          setActiveChat(chatId);
           mountChat(chatId);
         }
       })
