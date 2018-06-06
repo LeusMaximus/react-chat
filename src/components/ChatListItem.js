@@ -1,5 +1,6 @@
 // React
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 // MUI components
 import { withStyles } from '@material-ui/core/styles';
@@ -23,18 +24,6 @@ const styles = theme => ({
 })
 
 class ChatListItem extends React.Component {
-  handleClick = event => {
-    event.preventDefault();
-
-    const { item, activeId } = this.props;
-
-    if (item._id === activeId) {
-      return;
-    }
-
-    this.props.setActiveChat(this.props.item._id, true);
-  }
-
   render() {
     const { classes, item, activeId } = this.props;
 
@@ -46,8 +35,8 @@ class ChatListItem extends React.Component {
       <ListItem
         className={itemClasses}
         button
-        component="button"
-        onClick={this.handleClick}
+        component={Link}
+        to={`/chat/${item._id}`}
       >
         <Avatar>
           {item.title}

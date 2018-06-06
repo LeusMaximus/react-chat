@@ -1,12 +1,11 @@
 import { combineReducers } from 'redux';
-import * as actTypes from '../constants/chats';
+import * as actTypes from '../constants';
 import isEmpty from 'lodash/isEmpty';
 import _get from 'lodash/get';
 import _omit from 'lodash/omit';
 
 const initialState = {
   activeId: '',
-  activeChat: {},
   allIds: [],
   myIds: [],
   byIds: {},
@@ -19,51 +18,28 @@ const activeId = (state = initialState.activeId, action) => {
     case actTypes.UNSET_ACTIVE_CHAT:
     case actTypes.DELETE_CHAT_SUCCESS:
       return '';
+    case actTypes.RECIEVE_DELETE_CHAT:
+      return state === getChatId(action.payload) ? '' : state;
     default:
       return state;
   }
 };
 
-const activeChat = (state = initialState.activeChat, action) => {
-  switch (action.type) {
-    case actTypes.SET_ACTIVE_CHAT:
-      return action.payload.chat;
-    case actTypes.JOIN_CHAT_SUCCESS:
-    case actTypes.LEAVE_CHAT_SUCCESS:
-      return {
-        ...state,
-        members: [
-          ...action.payload.chat.members
-        ],
-        messages: [
-          ...state.messages,
-          action.payload.message
-        ]
-      }
-    case actTypes.MESSAGES_UPDATED:
-      return {
-        ...state,
-        messages: [...action.payload.chat.messages]
-      }
-    case actTypes.UNSET_ACTIVE_CHAT:
-    case actTypes.DELETE_CHAT_SUCCESS:
-      return {};
-    default:
-      return state;
-  }
-};
 
 const allIds = (state = initialState.allIds, action) => {
   switch (action.type) {
     case actTypes.GET_ALL_CHATS_SUCCESS:
       return action.payload.chats.map(getChatId);
-    case actTypes.CREATE_CHAT_SUCCESS:
+    case actTypes.RECIEVE_NEW_CHAT:
       return [
         ...state,
         action.payload.chat._id,
       ];
     case actTypes.DELETE_CHAT_SUCCESS:
-      return [...state.filter(id => id !== action.payload.chat._id)];
+    case actTypes.RECIEVE_DELETE_CHAT:
+      const filteredChats = state.filter(id => id !== action.payload.chat._id);
+
+      return filteredChats.length !== state.length ? [...filteredChats] : state;
     default:
       return state;
   }
@@ -79,11 +55,12 @@ const myIds = (state = initialState.myIds, action) => {
         ...state,
         action.payload.chat._id,
       ];
-    case actTypes.LEAVE_CHAT_SUCCESS:
     case actTypes.DELETE_CHAT_SUCCESS:
-      return [
-        ...state.filter(id => id !== action.payload.chat._id),
-      ];
+    case actTypes.LEAVE_CHAT_SUCCESS:
+    case actTypes.RECIEVE_DELETE_CHAT:
+      const filteredChats = state.filter(id => id !== action.payload.chat._id);
+
+      return filteredChats.length !== state.length ? [...filteredChats] : state;
     default:
       return state;
   }
@@ -100,12 +77,15 @@ const byIds = (state = initialState.byIds, action) => {
           [chat._id]: {...chat},
         }), {}),
       };
-    case actTypes.CREATE_CHAT_SUCCESS:
+    case actTypes.JOIN_CHAT_SUCCESS:
+    case actTypes.LEAVE_CHAT_SUCCESS:
+    case actTypes.RECIEVE_NEW_CHAT:
       return {
         ...state,
         [action.payload.chat._id]: {...action.payload.chat}
       };
     case actTypes.DELETE_CHAT_SUCCESS:
+    case actTypes.RECIEVE_DELETE_CHAT:
       return _omit(state, action.payload.chat._id);
     default:
       return state;
@@ -114,7 +94,6 @@ const byIds = (state = initialState.byIds, action) => {
 
 export default combineReducers({
   activeId,
-  activeChat,
   allIds,
   myIds,
   byIds,
@@ -123,23 +102,18 @@ export default combineReducers({
 // Selectors
 export const getChatId = chat => chat._id;
 export const getByIds = (state, ids) => ids.map(id => state.byIds[id]);
-export const getChat = (state, id) => state.byIds[id];
+export const getById = (state, id) => state.byIds[id];
 
-export const isMember = (state, userId) => {
-  const { activeChat } = state;
-
-  if (!isEmpty(activeChat)) {
-    const ids = activeChat.members.map(member => member._id);
-    return ids.includes(userId);
+export const isMember = (state, chat) => {
+  if (!isEmpty(chat)) {
+    return chat.members.some(member => member._id === _get(state, 'auth.user._id'));
   }
 
   return false;
 }
 
-export const isCreator = (state, userId) => {
-  const { activeChat } = state;
-
-  return _get(activeChat, 'creator._id') === userId;
+export const isCreator = (state, chat) => {
+  return _get(chat, 'creator._id') === _get(state, 'auth.user._id');
 }
 
-export const isChatMember = (state, userId) => isMember(state, userId) || isCreator(state, userId);
+export const isChatMember = (state, chat) => isMember(state, chat) || isCreator(state, chat);
