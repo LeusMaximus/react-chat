@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 import ChatCreate from '../components/ChatCreate';
-import { chatCreate } from '../actions/chat';
+import { createChat } from '../actions/chat';
 
 const mapStateToProps = state => ({});
 
 const mapDispatchToProps = dispatch => ({
-  chatCreate: title => dispatch(chatCreate(title))
+  createChat: title => dispatch(createChat(title))
 });
 
 export default connect(
