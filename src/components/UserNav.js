@@ -49,11 +49,14 @@ class UserNav extends React.Component {
 
   render() {
     const { anchorEl, modalOpen } = this.state;
-    const { logout, className, user } = this.props;
+    const { logout, className, user, disabled } = this.props;
 
     return (
       <div className={className}>
+        <span>{user && getUserName(user)}</span>
+
         <IconButton
+          disabled={disabled}
           aria-owns={anchorEl ? 'user-nav' : null}
           aria-haspopup="true"
           onClick={this.handleClick}
@@ -62,7 +65,6 @@ class UserNav extends React.Component {
           <AccountCircle />
         </IconButton>
 
-        <span>{user && getUserName(user)}</span>
 
         <Menu
           id="user-nav"

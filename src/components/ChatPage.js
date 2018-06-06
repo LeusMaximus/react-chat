@@ -102,13 +102,14 @@ class ChatPage extends React.Component {
     const {
       classes, allChats, myChats, activeChat, activeId,
       setActiveChat, joinChat, leaveChat, deleteChat, sendMessage,
-      isMember, isCreator, isChatMember, userId, messages, error
+      isMember, isCreator, isChatMember, userId, messages, error, isConnected,
     } = this.props;
 
     return (
       <div className={classes.appFrame}>
         <div className={classes.mainArea}>
           <ChatHeader
+            isConnected={isConnected}
             activeChat={activeChat}
             isMember={isMember}
             isCreator={isCreator}
@@ -122,6 +123,7 @@ class ChatPage extends React.Component {
             {
               !isEmpty(activeChat)
                 ? <MessagesSection
+                    isConnected={isConnected}
                     messages={messages}
                     chat={activeChat}
                     isChatMember={isChatMember}
@@ -138,7 +140,13 @@ class ChatPage extends React.Component {
           </main>
         </div>
 
-        <Sidebar allChats={allChats} myChats={myChats} setActiveChat={setActiveChat} activeId={activeId} />
+        <Sidebar
+          isConnected={isConnected}
+          allChats={allChats}
+          myChats={myChats}
+          setActiveChat={setActiveChat}
+          activeId={activeId}
+        />
 
         {error && <PopupMessage variant="error" message={error.message} />}
       </div>

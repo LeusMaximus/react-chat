@@ -20,6 +20,7 @@ const mapStateToProps = state => {
     userId,
     messages: state.messages,
     error: state.services.errors.chat,
+    isConnected: state.services.isConnected,
   }
 };
 

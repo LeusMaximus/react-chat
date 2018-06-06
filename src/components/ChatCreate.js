@@ -53,11 +53,12 @@ class ChatCreate extends React.Component {
 
   render() {
     const { modalOpen } = this.state;
-    const { classes } = this.props;
+    const { classes, disabled } = this.props;
 
     return (
       <React.Fragment>
         <Button
+          disabled={disabled}
           variant="fab"
           color="secondary"
           aria-label="add"

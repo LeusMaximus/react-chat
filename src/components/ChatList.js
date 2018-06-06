@@ -12,7 +12,7 @@ import nanoid from 'nanoid';
 // Own modules
 import ChatListItem from './ChatListItem';
 
-const ChatList = ({ chats, setActiveChat, activeId, searchTerm }) => {
+const ChatList = ({ chats, setActiveChat, activeId, searchTerm, disabled }) => {
   const filteredChats = chats
     .filter(item => item.title
       .toLowerCase()
@@ -26,7 +26,7 @@ const ChatList = ({ chats, setActiveChat, activeId, searchTerm }) => {
     <List component="div">
       {
         filteredChats.length
-          ? filteredChats.map(item => <ChatListItem key={nanoid()} item={item} setActiveChat={setActiveChat} activeId={activeId} />)
+          ? filteredChats.map(item => <ChatListItem key={nanoid()} item={item} setActiveChat={setActiveChat} activeId={activeId} disabled={disabled} />)
           : <ListItem component="div">
               <ListItemText primary={'No chats found...'} />
             </ListItem>

@@ -25,7 +25,7 @@ const styles = theme => ({
 
 class ChatListItem extends React.Component {
   render() {
-    const { classes, item, activeId } = this.props;
+    const { classes, item, activeId, disabled } = this.props;
 
     const itemClasses = classnames({
       [classes.selected]: item._id === activeId,
@@ -33,6 +33,7 @@ class ChatListItem extends React.Component {
 
     return (
       <ListItem
+        disabled={disabled}
         className={itemClasses}
         button
         component={Link}
