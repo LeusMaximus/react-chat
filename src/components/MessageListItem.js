@@ -86,7 +86,7 @@ const MessageListItem = ({ classes, item, userId }) => {
           {item.content}
         </Typography>
 
-        {DateView(item.createdAt)}
+        <DateView date={item.createdAt} />
       </Paper>
     </ListItem>
   );

@@ -42,7 +42,7 @@ class ChatListItem extends React.Component {
         <Avatar>
           {item.title}
         </Avatar>
-        <ListItemText primary={item.title} secondary={DateView(item.createdAt)} />
+        <ListItemText primary={item.title} secondary={<DateView date={item.createdAt} />} />
       </ListItem>
     );
   }
