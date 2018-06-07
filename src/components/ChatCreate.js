@@ -44,11 +44,10 @@ class ChatCreate extends React.Component {
   };
 
   handleSubmit = (chatName) => {
-    this.props.createChat(chatName)
-      .then((data) => {
-        this.handleModalClose();
-        return data;
-      });
+    this.props.createChat(chatName).then((data) => {
+      this.handleModalClose();
+      return data;
+    });
   };
 
   render() {

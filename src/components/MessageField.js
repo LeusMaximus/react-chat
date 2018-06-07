@@ -44,7 +44,7 @@ class MessageField extends React.Component {
     });
 
     return isMessageValid;
-  }
+  };
 
   handleChange = (event) => {
     const { name, value } = event.target;
@@ -55,7 +55,7 @@ class MessageField extends React.Component {
         value,
       },
     }));
-  }
+  };
 
   handleKeyPress = (event) => {
     const { message } = this.state;

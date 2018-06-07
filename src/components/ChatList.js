@@ -16,11 +16,8 @@ const ChatList = ({
   chats, setActiveChat, activeId, searchTerm, disabled,
 }) => {
   const filteredChats = chats
-    .filter(item => item.title
-      .toLowerCase()
-      .includes(searchTerm.toLowerCase()))
-    .sort((one, two) =>
-      (one.title.toLowerCase() <= two.title.toLowerCase() ? -1 : 1));
+    .filter(item => item.title.toLowerCase().includes(searchTerm.toLowerCase()))
+    .sort((one, two) => (one.title.toLowerCase() <= two.title.toLowerCase() ? -1 : 1));
 
   return (
     <List component="div">
@@ -32,7 +29,8 @@ const ChatList = ({
             setActiveChat={setActiveChat}
             activeId={activeId}
             disabled={disabled}
-          />))
+          />
+        ))
       ) : (
         <ListItem component="div">
           <ListItemText primary="No chats found..." />

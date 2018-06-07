@@ -88,7 +88,8 @@ function MySnackbarContent(props) {
 const MySnackbarContentWrapper = withStyles(styles1)(MySnackbarContent);
 
 class PopupMessage extends React.Component {
-  state = { // eslint-disable-line
+  state = {
+    // eslint-disable-line
     open: false,
   };
 
@@ -119,11 +120,7 @@ class PopupMessage extends React.Component {
         autoHideDuration={6000}
         onClose={this.handleClose}
       >
-        <MySnackbarContentWrapper
-          onClose={this.handleClose}
-          variant={variant}
-          message={message}
-        />
+        <MySnackbarContentWrapper onClose={this.handleClose} variant={variant} message={message} />
       </Snackbar>
     );
   }

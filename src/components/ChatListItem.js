@@ -38,9 +38,7 @@ const ChatListItem = ({
       component={Link}
       to={`/chat/${item._id}`}
     >
-      <Avatar>
-        {item.title}
-      </Avatar>
+      <Avatar>{item.title}</Avatar>
       <ListItemText primary={item.title} secondary={DateView(item.createdAt)} />
     </ListItem>
   );

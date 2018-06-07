@@ -41,10 +41,7 @@ const ChatCreate = ({
       <div className={classes.modalPaper}>
         {children}
 
-        <IconButton
-          className={classes.btnClose}
-          onClick={handleModalClose}
-        >
+        <IconButton className={classes.btnClose} onClick={handleModalClose}>
           <Close />
         </IconButton>
       </div>

@@ -7,10 +7,7 @@ export default (state = initialState, action) => {
     case actTypes.SET_ACTIVE_CHAT:
       return action.payload.chat.messages;
     case actTypes.RECIEVE_MESSAGE:
-      return [
-        ...state,
-        action.payload.message,
-      ];
+      return [...state, action.payload.message];
     default:
       return state;
   }

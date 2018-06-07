@@ -10,7 +10,8 @@ import ChildCare from '@material-ui/icons/ChildCare';
 import Rowing from '@material-ui/icons/Rowing';
 
 class ChatNav extends React.Component {
-  state = { // eslint-disable-line
+  state = {
+    // eslint-disable-line
     value: 0,
   };
 
@@ -25,11 +26,7 @@ class ChatNav extends React.Component {
     const { tabsChange } = this.props;
 
     return (
-      <BottomNavigation
-        value={value}
-        onChange={tabsChange}
-        showLabels
-      >
+      <BottomNavigation value={value} onChange={tabsChange} showLabels>
         <BottomNavigationAction label="My Chats" icon={<ChildCare />} />
         <BottomNavigationAction label="All Chats" icon={<Rowing />} />
       </BottomNavigation>

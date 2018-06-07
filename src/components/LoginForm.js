@@ -25,7 +25,7 @@ class LoginForm extends React.Component {
       value: '',
       isValid: true,
     },
-  }
+  };
 
   validate = () => {
     const { username, password } = this.state;
@@ -44,7 +44,7 @@ class LoginForm extends React.Component {
     });
 
     return isUserNameValid && isPasswordValid;
-  }
+  };
 
   handleChange = (event) => {
     const { name, value } = event.target;
@@ -55,7 +55,7 @@ class LoginForm extends React.Component {
         value,
       },
     }));
-  }
+  };
 
   handleSubmit = (event) => {
     event.preventDefault();
@@ -67,7 +67,7 @@ class LoginForm extends React.Component {
     const { username, password } = this.state;
 
     this.props.onSubmit(username.value, password.value);
-  }
+  };
 
   render() {
     const { classes } = this.props;
@@ -98,13 +98,7 @@ class LoginForm extends React.Component {
           error={!password.isValid}
         />
 
-        <Button
-          variant="raised"
-          color="primary"
-          fullWidth
-          className={classes.button}
-          type="submit"
-        >
+        <Button variant="raised" color="primary" fullWidth className={classes.button} type="submit">
           Login
         </Button>
       </form>

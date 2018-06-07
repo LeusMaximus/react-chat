@@ -102,7 +102,7 @@ class Sidebar extends React.Component {
           ) : (
             <Paper elevation={4} className={classes.notChatsMessage}>
               <Typography variant="body1" align="center">
-                  There is not chats yet...
+                There is not chats yet...
               </Typography>
 
               <SentimentVeryDissatisfied style={{ marginLeft: 10 }} />

@@ -27,16 +27,12 @@ const activeId = (state = initialState.activeId, action) => {
   }
 };
 
-
 const allIds = (state = initialState.allIds, action) => {
   switch (action.type) {
     case actTypes.GET_ALL_CHATS_SUCCESS:
       return action.payload.chats.map(getChatId);
     case actTypes.RECIEVE_NEW_CHAT:
-      return [
-        ...state,
-        action.payload.chat._id,
-      ];
+      return [...state, action.payload.chat._id];
     case actTypes.DELETE_CHAT_SUCCESS:
     case actTypes.RECIEVE_DELETE_CHAT: {
       const filteredChats = state.filter(id => id !== action.payload.chat._id);
@@ -54,10 +50,7 @@ const myIds = (state = initialState.myIds, action) => {
       return action.payload.chats.map(getChatId);
     case actTypes.CREATE_CHAT_SUCCESS:
     case actTypes.JOIN_CHAT_SUCCESS:
-      return [
-        ...state,
-        action.payload.chat._id,
-      ];
+      return [...state, action.payload.chat._id];
     case actTypes.DELETE_CHAT_SUCCESS:
     case actTypes.LEAVE_CHAT_SUCCESS:
     case actTypes.RECIEVE_DELETE_CHAT: {
@@ -76,10 +69,13 @@ const byIds = (state = initialState.byIds, action) => {
     case actTypes.GET_MY_CHATS_SUCCESS:
       return {
         ...state,
-        ...action.payload.chats.reduce((chatsByIds, chat) => ({
-          ...chatsByIds,
-          [chat._id]: { ...chat },
-        }), {}),
+        ...action.payload.chats.reduce(
+          (chatsByIds, chat) => ({
+            ...chatsByIds,
+            [chat._id]: { ...chat },
+          }),
+          {},
+        ),
       };
     case actTypes.JOIN_CHAT_SUCCESS:
     case actTypes.LEAVE_CHAT_SUCCESS:
@@ -116,6 +112,7 @@ export const isMember = (state, chat) => {
   return false;
 };
 
-export const isCreator = (state, chat) => _get(chat, 'creator._id') === _get(state, 'auth.user._id');
+export const isCreator = (state, chat) =>
+  _get(chat, 'creator._id') === _get(state, 'auth.user._id');
 
 export const isChatMember = (state, chat) => isMember(state, chat) || isCreator(state, chat);

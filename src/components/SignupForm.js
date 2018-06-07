@@ -30,7 +30,7 @@ class SignupForm extends React.Component {
       value: '',
       isValid: true,
     },
-  }
+  };
 
   validate = () => {
     const { username, password, repeatPassword } = this.state;
@@ -54,7 +54,7 @@ class SignupForm extends React.Component {
     });
 
     return isUserNameValid && isPasswordValid && isRepeatPasswordValid;
-  }
+  };
 
   handleChange = (event) => {
     const { name, value } = event.target;
@@ -65,7 +65,7 @@ class SignupForm extends React.Component {
         value,
       },
     }));
-  }
+  };
 
   handleSubmit = (event) => {
     event.preventDefault();
@@ -77,7 +77,7 @@ class SignupForm extends React.Component {
     const { username, password } = this.state;
 
     this.props.onSubmit(username.value, password.value);
-  }
+  };
 
   render() {
     const { classes } = this.props;
@@ -120,13 +120,7 @@ class SignupForm extends React.Component {
           error={!repeatPassword.isValid}
         />
 
-        <Button
-          variant="raised"
-          color="primary"
-          fullWidth
-          className={classes.button}
-          type="submit"
-        >
+        <Button variant="raised" color="primary" fullWidth className={classes.button} type="submit">
           Create an account
         </Button>
       </form>

@@ -24,7 +24,13 @@ class ChatMenu extends React.Component {
   render() {
     const { anchorEl } = this.state;
     const {
-      className, isMember, isCreator, leaveChat, deleteChat, activeId, disabled,
+      className,
+      isMember,
+      isCreator,
+      leaveChat,
+      deleteChat,
+      activeId,
+      disabled,
     } = this.props;
 
     return (
@@ -45,8 +51,8 @@ class ChatMenu extends React.Component {
           open={Boolean(anchorEl)}
           onClose={this.handleClose}
         >
-          { isMember && <MenuItem onClick={() => leaveChat(activeId)}>Leave Chat</MenuItem> }
-          { isCreator && <MenuItem onClick={() => deleteChat(activeId)}>Delete Chat</MenuItem> }
+          {isMember && <MenuItem onClick={() => leaveChat(activeId)}>Leave Chat</MenuItem>}
+          {isCreator && <MenuItem onClick={() => deleteChat(activeId)}>Delete Chat</MenuItem>}
         </Menu>
       </div>
     );

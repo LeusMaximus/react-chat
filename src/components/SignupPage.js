@@ -33,9 +33,7 @@ const SignupPage = ({
   classes, signup, isAuthenticated, error,
 }) => {
   if (isAuthenticated) {
-    return (
-      <Redirect to="/chat" />
-    );
+    return <Redirect to="/chat" />;
   }
 
   return (

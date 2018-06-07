@@ -35,7 +35,7 @@ class ChatCreateForm extends React.Component {
     });
 
     return isChatNameValid;
-  }
+  };
 
   handleChange = (event) => {
     const { name, value } = event.target;
@@ -46,7 +46,7 @@ class ChatCreateForm extends React.Component {
         value,
       },
     }));
-  }
+  };
 
   handleSubmit = (event) => {
     event.preventDefault();
@@ -58,7 +58,7 @@ class ChatCreateForm extends React.Component {
     const { chatName } = this.state;
 
     this.props.onSubmit(chatName.value);
-  }
+  };
 
   render() {
     const { classes } = this.props;
@@ -78,13 +78,7 @@ class ChatCreateForm extends React.Component {
           error={!chatName.isValid}
         />
 
-        <Button
-          variant="raised"
-          color="primary"
-          fullWidth
-          className={classes.button}
-          type="submit"
-        >
+        <Button variant="raised" color="primary" fullWidth className={classes.button} type="submit">
           Create
         </Button>
       </form>

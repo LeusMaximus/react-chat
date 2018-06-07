@@ -40,11 +40,10 @@ class UserNav extends React.Component {
   };
 
   handleSubmit = (params) => {
-    this.props.editProfile(params)
-      .then((data) => {
-        this.handleModalClose();
-        return data;
-      });
+    this.props.editProfile(params).then((data) => {
+      this.handleModalClose();
+      return data;
+    });
   };
 
   render() {
@@ -67,13 +66,7 @@ class UserNav extends React.Component {
           <AccountCircle />
         </IconButton>
 
-
-        <Menu
-          id="user-nav"
-          anchorEl={anchorEl}
-          open={Boolean(anchorEl)}
-          onClose={this.handleClose}
-        >
+        <Menu id="user-nav" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={this.handleClose}>
           <MenuItem onClick={this.handleModalOpen}>Edit Profile</MenuItem>
           <MenuItem onClick={logout}>Logout</MenuItem>
         </Menu>

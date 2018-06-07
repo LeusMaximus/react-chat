@@ -36,32 +36,32 @@ const styles = () => ({
 });
 
 const ChatHeader = ({
-  classes, activeChat, activeId,
-  isMember, isCreator, isChatMember,
-  leaveChat, deleteChat, isConnected,
+  classes,
+  activeChat,
+  activeId,
+  isMember,
+  isCreator,
+  isChatMember,
+  leaveChat,
+  deleteChat,
+  isConnected,
 }) => (
-  <AppBar
-    position="static"
-    className={classes.appBar}
-  >
+  <AppBar position="static" className={classes.appBar}>
     <Toolbar>
-      {!isEmpty(activeChat) && isChatMember &&
-        <ChatMenu
-          disabled={!isConnected}
-          className={classes.chatMenu}
-          isMember={isMember}
-          isCreator={isCreator}
-          leaveChat={leaveChat}
-          deleteChat={deleteChat}
-          activeId={activeId}
-        />
-      }
-
       {!isEmpty(activeChat) &&
-        <Avatar className={classes.chatAvatar}>
-          {activeChat.title}
-        </Avatar>
-      }
+        isChatMember && (
+          <ChatMenu
+            disabled={!isConnected}
+            className={classes.chatMenu}
+            isMember={isMember}
+            isCreator={isCreator}
+            leaveChat={leaveChat}
+            deleteChat={deleteChat}
+            activeId={activeId}
+          />
+        )}
+
+      {!isEmpty(activeChat) && <Avatar className={classes.chatAvatar}>{activeChat.title}</Avatar>}
 
       <Typography variant="title" color="inherit" noWrap>
         {_get(activeChat, 'title') || 'Super Messenger'}

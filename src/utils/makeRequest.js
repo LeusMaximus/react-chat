@@ -5,10 +5,7 @@ import fetch from 'isomorphic-fetch';
 import config from '../config';
 
 export default function makeRequest({
-  endpoint = '',
-  token = '',
-  body,
-  requestOptions = {},
+  endpoint = '', token = '', body, requestOptions = {},
 }) {
   const authHeaders = token
     ? {

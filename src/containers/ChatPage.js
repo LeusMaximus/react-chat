@@ -1,6 +1,13 @@
 import { connect } from 'react-redux';
 import ChatPage from '../components/ChatPage';
-import { getAllChats, getMyChats, setActiveChat, joinChat, leaveChat, deleteChat } from '../actions/chat';
+import {
+  getAllChats,
+  getMyChats,
+  setActiveChat,
+  joinChat,
+  leaveChat,
+  deleteChat,
+} from '../actions/chat';
 import { sendMessage, mountChat, unmountChat, socketsConnect } from '../actions/sockets';
 import * as fromChats from '../reducers/chats';
 

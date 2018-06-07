@@ -23,14 +23,16 @@ export function getMyChats() {
       endpoint: '/chats/my',
       token,
     })
-      .then(data => dispatch({
-        type: actTypes.GET_MY_CHATS_SUCCESS,
-        payload: data,
-      }))
-      .catch(error => dispatch({
-        type: actTypes.GET_MY_CHATS_FAILURE,
-        payload: error,
-      }));
+      .then(data =>
+        dispatch({
+          type: actTypes.GET_MY_CHATS_SUCCESS,
+          payload: data,
+        }))
+      .catch(error =>
+        dispatch({
+          type: actTypes.GET_MY_CHATS_FAILURE,
+          payload: error,
+        }));
   };
 }
 
@@ -52,14 +54,16 @@ export function getAllChats() {
       endpoint: '/chats',
       token,
     })
-      .then(data => dispatch({
-        type: actTypes.GET_ALL_CHATS_SUCCESS,
-        payload: data,
-      }))
-      .catch(error => dispatch({
-        type: actTypes.GET_ALL_CHATS_FAILURE,
-        payload: error,
-      }));
+      .then(data =>
+        dispatch({
+          type: actTypes.GET_ALL_CHATS_SUCCESS,
+          payload: data,
+        }))
+      .catch(error =>
+        dispatch({
+          type: actTypes.GET_ALL_CHATS_FAILURE,
+          payload: error,
+        }));
   };
 }
 
@@ -89,16 +93,17 @@ export function getChat(chatId) {
 
         return data;
       })
-      .catch(error => dispatch({
-        type: actTypes.GET_CHAT_FAILURE,
-        payload: error,
-      }));
+      .catch(error =>
+        dispatch({
+          type: actTypes.GET_CHAT_FAILURE,
+          payload: error,
+        }));
   };
 }
 
 export function setActiveChat(chatId, notNeedRedirect) {
-  return dispatch => dispatch(getChat(chatId))
-    .then((data) => {
+  return dispatch =>
+    dispatch(getChat(chatId)).then((data) => {
       if (!data || !data.chat) {
         dispatch(redirect('/chat'));
 
@@ -156,10 +161,11 @@ export function createChat(title) {
 
         return data;
       })
-      .catch(error => dispatch({
-        type: actTypes.CREATE_CHAT_FAILURE,
-        payload: error,
-      }));
+      .catch(error =>
+        dispatch({
+          type: actTypes.CREATE_CHAT_FAILURE,
+          payload: error,
+        }));
   };
 }
 
@@ -194,10 +200,11 @@ export function deleteChat(chatId) {
 
         return data;
       })
-      .catch(error => dispatch({
-        type: actTypes.DELETE_CHAT_FAILURE,
-        payload: error,
-      }));
+      .catch(error =>
+        dispatch({
+          type: actTypes.DELETE_CHAT_FAILURE,
+          payload: error,
+        }));
   };
 }
 
@@ -227,10 +234,11 @@ export function joinChat(id) {
 
         return data;
       })
-      .catch(error => dispatch({
-        type: actTypes.JOIN_CHAT_FAILURE,
-        payload: error,
-      }));
+      .catch(error =>
+        dispatch({
+          type: actTypes.JOIN_CHAT_FAILURE,
+          payload: error,
+        }));
   };
 }
 
@@ -260,9 +268,10 @@ export function leaveChat(id) {
 
         return data;
       })
-      .catch(error => dispatch({
-        type: actTypes.LEAVE_CHAT_FAILURE,
-        payload: error,
-      }));
+      .catch(error =>
+        dispatch({
+          type: actTypes.LEAVE_CHAT_FAILURE,
+          payload: error,
+        }));
   };
 }

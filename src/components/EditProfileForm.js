@@ -48,7 +48,7 @@ class EditProfileForm extends React.Component {
     });
 
     return isUserNameValid;
-  }
+  };
 
   handleChange = (event) => {
     const { name, value } = event.target;
@@ -59,7 +59,7 @@ class EditProfileForm extends React.Component {
         value,
       },
     }));
-  }
+  };
 
   handleSubmit = (event) => {
     event.preventDefault();
@@ -75,7 +75,7 @@ class EditProfileForm extends React.Component {
       firstName: firstName.value,
       lastName: lastName.value,
     });
-  }
+  };
 
   render() {
     const { classes } = this.props;
@@ -113,13 +113,7 @@ class EditProfileForm extends React.Component {
           onChange={this.handleChange}
         />
 
-        <Button
-          variant="raised"
-          color="primary"
-          fullWidth
-          className={classes.button}
-          type="submit"
-        >
+        <Button variant="raised" color="primary" fullWidth className={classes.button} type="submit">
           Save
         </Button>
       </form>

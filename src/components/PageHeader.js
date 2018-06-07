@@ -11,7 +11,9 @@ const ChatHeader = () => (
   <AppBar position="static">
     <Toolbar>
       <Typography variant="title" color="inherit" noWrap>
-        <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }}>React Chat</Link>
+        <Link to="/" style={{ color: 'inherit', textDecoration: 'none' }}>
+          React Chat
+        </Link>
       </Typography>
     </Toolbar>
   </AppBar>

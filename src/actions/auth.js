@@ -5,7 +5,6 @@ import makeRequest from '../utils/makeRequest';
 // Constants
 import * as actTypes from '../constants/auth';
 
-
 export function signup(username, password) {
   return (dispatch, getState) => {
     const { isFetching } = getState().services;
@@ -30,7 +29,7 @@ export function signup(username, password) {
     })
       .then((data) => {
         if (!data.token) {
-          throw new Error('Token hasn\'t provided');
+          throw new Error("Token hasn't provided");
         }
 
         return data;
@@ -44,10 +43,11 @@ export function signup(username, password) {
           payload: data,
         });
       })
-      .catch(error => dispatch({
-        type: actTypes.SIGNUP_FAILURE,
-        payload: error,
-      }));
+      .catch(error =>
+        dispatch({
+          type: actTypes.SIGNUP_FAILURE,
+          payload: error,
+        }));
   };
 }
 
@@ -75,7 +75,7 @@ export function login(username, password) {
     })
       .then((data) => {
         if (!data.token) {
-          throw new Error('Token hasn\'t provided');
+          throw new Error("Token hasn't provided");
         }
 
         return data;
@@ -89,10 +89,11 @@ export function login(username, password) {
           payload: data,
         });
       })
-      .catch(error => dispatch({
-        type: actTypes.LOGIN_FAILURE,
-        payload: error,
-      }));
+      .catch(error =>
+        dispatch({
+          type: actTypes.LOGIN_FAILURE,
+          payload: error,
+        }));
   };
 }
 
@@ -120,10 +121,11 @@ export function logout() {
           payload: data,
         });
       })
-      .catch(error => dispatch({
-        type: actTypes.LOGOUT_FAILURE,
-        payload: error,
-      }));
+      .catch(error =>
+        dispatch({
+          type: actTypes.LOGOUT_FAILURE,
+          payload: error,
+        }));
   };
 }
 
@@ -153,10 +155,11 @@ export function verifyAuth() {
           payload: data,
         });
       })
-      .catch(error => dispatch({
-        type: actTypes.VERIFY_AUTH_FAILURE,
-        payload: error,
-      }));
+      .catch(error =>
+        dispatch({
+          type: actTypes.VERIFY_AUTH_FAILURE,
+          payload: error,
+        }));
   };
 }
 
@@ -200,9 +203,10 @@ export function editProfile({ username, firstName = '', lastName = '' }) {
           payload: data,
         });
       })
-      .catch(error => dispatch({
-        type: actTypes.EDIT_PROFILE_FAILURE,
-        payload: error,
-      }));
+      .catch(error =>
+        dispatch({
+          type: actTypes.EDIT_PROFILE_FAILURE,
+          payload: error,
+        }));
   };
 }

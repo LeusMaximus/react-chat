@@ -15,7 +15,6 @@ import history from '../utils/history';
 
 const store = configureStore();
 
-
 const App = () => (
   <Provider store={store}>
     <React.Fragment>

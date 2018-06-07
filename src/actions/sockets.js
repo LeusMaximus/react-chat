@@ -99,18 +99,22 @@ export function sendMessage(content) {
 
     const { activeId } = getState().chats;
 
-    socket.emit('send-message', {
-      chatId: activeId,
-      content,
-    }, () => {
-      dispatch({
-        type: actTypes.SEND_MESSAGE,
-        payload: {
-          chatId: activeId,
-          content,
-        },
-      });
-    });
+    socket.emit(
+      'send-message',
+      {
+        chatId: activeId,
+        content,
+      },
+      () => {
+        dispatch({
+          type: actTypes.SEND_MESSAGE,
+          payload: {
+            chatId: activeId,
+            content,
+          },
+        });
+      },
+    );
   };
 }
 
@@ -143,4 +147,3 @@ export function unmountChat(chatId) {
     });
   };
 }
-

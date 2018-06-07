@@ -70,11 +70,11 @@ class MessagesSection extends React.Component {
         btn.style.visibility = 'visible';
       }
     }
-  }
+  };
 
   handleChatAreaScroll = (area) => {
     this.setBtnDownStatus(area);
-  }
+  };
 
   goToLastMessage = () => {
     const el = this.chatAreaRef.current;
@@ -82,30 +82,35 @@ class MessagesSection extends React.Component {
     if (el) {
       el.scrollTop = el.scrollHeight;
     }
-  }
+  };
 
   handleGoBottom = (e) => {
     e.preventDefault();
     this.goToLastMessage();
-  }
+  };
 
   render() {
     const {
-      classes, chat, isChatMember, joinChat, sendMessage, userId, messages, isConnected,
+      classes,
+      chat,
+      isChatMember,
+      joinChat,
+      sendMessage,
+      userId,
+      messages,
+      isConnected,
     } = this.props;
 
     return (
       <React.Fragment>
         <div className={classes.chatArea} ref={this.chatAreaRef}>
-          {
-            messages.length ? (
-              <MessagesList messages={messages} userId={userId} />
-            ) : (
-              <Typography className={classes.noMessages} variant="display2">
-                There is no messages yet...
-              </Typography>
-            )
-          }
+          {messages.length ? (
+            <MessagesList messages={messages} userId={userId} />
+          ) : (
+            <Typography className={classes.noMessages} variant="display2">
+              There is no messages yet...
+            </Typography>
+          )}
 
           <div className={classes.btnDownHolder} ref={this.btnDownHolderRef}>
             <Button variant="fab" color="primary" onClick={this.handleGoBottom}>
