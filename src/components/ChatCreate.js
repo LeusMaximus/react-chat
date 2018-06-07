@@ -43,9 +43,9 @@ class ChatCreate extends React.Component {
     this.setState({ modalOpen: false });
   };
 
-  handleSubmit = chatName => {
+  handleSubmit = (chatName) => {
     this.props.createChat(chatName)
-      .then(data => {
+      .then((data) => {
         this.handleModalClose();
         return data;
       });
@@ -78,6 +78,6 @@ class ChatCreate extends React.Component {
       </React.Fragment>
     );
   }
-};
+}
 
 export default withStyles(styles)(ChatCreate);

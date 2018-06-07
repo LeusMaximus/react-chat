@@ -1,7 +1,6 @@
 // React
 import React from 'react';
-import { Link } from "react-router-dom";
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 // MUI components
 import { withStyles } from '@material-ui/core';
@@ -21,7 +20,7 @@ const styles = theme => ({
   formHolder: {
     ...theme.mixins.gutters({
       paddingTop: theme.spacing.unit * 3,
-      paddingBottom:theme.spacing.unit * 3,
+      paddingBottom: theme.spacing.unit * 3,
       marginBottom: theme.spacing.unit * 2,
       marginLeft: 'auto',
       marginRight: 'auto',
@@ -30,38 +29,36 @@ const styles = theme => ({
   },
 });
 
-class LoginPage extends React.Component {
-  render() {
-    const { classes, login, isAuthenticated, error } = this.props;
-
-    if (isAuthenticated) {
-      return (
-        <Redirect to="/chat" />
-      );
-    }
-
+const LoginPage = ({
+  classes, login, isAuthenticated, error,
+}) => {
+  if (isAuthenticated) {
     return (
-      <div>
-        <PageHeader />
-
-        <div className={classes.contentWrapper}>
-          <Typography variant="headline" component="h1" align="center" gutterBottom>
-            Sign in to Chat
-          </Typography>
-
-          <Paper elevation={10} className={classes.formHolder}>
-            <LoginForm onSubmit={login} />
-          </Paper>
-
-          <Typography component="p" align="center">
-            New to Chat? <Link to="/signup">Create an account</Link>
-          </Typography>
-        </div>
-
-        {error && <PopupMessage variant="error" message={error.message} />}
-      </div>
+      <Redirect to="/chat" />
     );
   }
+
+  return (
+    <div>
+      <PageHeader />
+
+      <div className={classes.contentWrapper}>
+        <Typography variant="headline" component="h1" align="center" gutterBottom>
+          Sign in to Chat
+        </Typography>
+
+        <Paper elevation={10} className={classes.formHolder}>
+          <LoginForm onSubmit={login} />
+        </Paper>
+
+        <Typography component="p" align="center">
+          New to Chat? <Link to="/signup">Create an account</Link>
+        </Typography>
+      </div>
+
+      {error && <PopupMessage variant="error" message={error.message} />}
+    </div>
+  );
 };
 
 export default withStyles(styles)(LoginPage);

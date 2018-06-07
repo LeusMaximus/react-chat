@@ -20,7 +20,7 @@ const styles = theme => ({
   formHolder: {
     ...theme.mixins.gutters({
       paddingTop: theme.spacing.unit * 3,
-      paddingBottom:theme.spacing.unit * 3,
+      paddingBottom: theme.spacing.unit * 3,
       marginBottom: theme.spacing.unit * 2,
       marginLeft: 'auto',
       marginRight: 'auto',
@@ -29,34 +29,32 @@ const styles = theme => ({
   },
 });
 
-class SignupPage extends React.Component {
-  render() {
-    const { classes, signup, isAuthenticated, error } = this.props;
-
-    if (isAuthenticated) {
-      return (
-        <Redirect to="/chat" />
-      );
-    }
-
+const SignupPage = ({
+  classes, signup, isAuthenticated, error,
+}) => {
+  if (isAuthenticated) {
     return (
-      <div>
-        <PageHeader />
-
-        <div className={classes.contentWrapper}>
-          <Typography variant="headline" component="h1" align="center" gutterBottom>
-            Join Chat
-          </Typography>
-
-          <Paper elevation={10} className={classes.formHolder}>
-            <SignupForm onSubmit={signup} />
-          </Paper>
-        </div>
-
-        {error && <PopupMessage variant="error" message={error.message} />}
-      </div>
+      <Redirect to="/chat" />
     );
   }
+
+  return (
+    <div>
+      <PageHeader />
+
+      <div className={classes.contentWrapper}>
+        <Typography variant="headline" component="h1" align="center" gutterBottom>
+          Join Chat
+        </Typography>
+
+        <Paper elevation={10} className={classes.formHolder}>
+          <SignupForm onSubmit={signup} />
+        </Paper>
+      </div>
+
+      {error && <PopupMessage variant="error" message={error.message} />}
+    </div>
+  );
 };
 
 export default withStyles(styles)(SignupPage);

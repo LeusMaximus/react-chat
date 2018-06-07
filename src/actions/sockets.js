@@ -13,7 +13,7 @@ export function missingSocketConnection() {
   return {
     type: actTypes.SOCKETS_MISSING_CONNECTION,
     payload: new Error('Missing connection.'),
-  }
+  };
 }
 
 export function socketsConnect() {
@@ -60,7 +60,7 @@ export function socketsConnect() {
       });
     });
 
-    socket.on('new-message', (message, ...rest) => {
+    socket.on('new-message', (message) => {
       dispatch({
         type: actTypes.RECIEVE_MESSAGE,
         payload: message,
@@ -86,7 +86,9 @@ export function socketsConnect() {
         dispatch(redirect('/chat'));
       }
     });
-  }
+
+    return true;
+  };
 }
 
 export function sendMessage(content) {
@@ -106,14 +108,14 @@ export function sendMessage(content) {
         payload: {
           chatId: activeId,
           content,
-        }
+        },
       });
     });
   };
 }
 
 export function mountChat(chatId) {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     if (!socket) {
       return dispatch(missingSocketConnection());
     }
@@ -122,13 +124,13 @@ export function mountChat(chatId) {
 
     dispatch({
       type: actTypes.MOUNT_CHAT,
-      payload: { chatId }
-    })
+      payload: { chatId },
+    });
   };
 }
 
 export function unmountChat(chatId) {
-  return (dispatch, getState) => {
+  return (dispatch) => {
     if (!socket) {
       return dispatch(missingSocketConnection());
     }
@@ -137,8 +139,8 @@ export function unmountChat(chatId) {
 
     dispatch({
       type: actTypes.UNMOUNT_CHAT,
-      payload: { chatId }
-    })
+      payload: { chatId },
+    });
   };
 }
 

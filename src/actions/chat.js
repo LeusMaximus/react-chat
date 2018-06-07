@@ -5,7 +5,7 @@ import { redirect } from './services';
 // Constants
 import * as actTypes from '../constants/chats';
 
-export function getMyChats () {
+export function getMyChats() {
   return (dispatch, getState) => {
     const { isFetching } = getState().services;
 
@@ -16,7 +16,7 @@ export function getMyChats () {
     const { token } = getState().auth;
 
     dispatch({
-      type: actTypes.GET_MY_CHATS_REQUEST
+      type: actTypes.GET_MY_CHATS_REQUEST,
     });
 
     return makeRequest({
@@ -34,7 +34,7 @@ export function getMyChats () {
   };
 }
 
-export function getAllChats () {
+export function getAllChats() {
   return (dispatch, getState) => {
     const { isFetching } = getState().services;
 
@@ -45,7 +45,7 @@ export function getAllChats () {
     const { token } = getState().auth;
 
     dispatch({
-      type: actTypes.GET_ALL_CHATS_REQUEST
+      type: actTypes.GET_ALL_CHATS_REQUEST,
     });
 
     return makeRequest({
@@ -81,7 +81,7 @@ export function getChat(chatId) {
       endpoint: `/chats/${chatId}`,
       token,
     })
-      .then(data => {
+      .then((data) => {
         dispatch({
           type: actTypes.GET_CHAT_SUCCESS,
           payload: data,
@@ -96,30 +96,28 @@ export function getChat(chatId) {
   };
 }
 
-export function setActiveChat (chatId, notNeedRedirect) {
-  return (dispatch) => {
-    return dispatch(getChat(chatId))
-      .then(data => {
-        if (!data || !data.chat) {
-          dispatch(redirect('/chat'));
+export function setActiveChat(chatId, notNeedRedirect) {
+  return dispatch => dispatch(getChat(chatId))
+    .then((data) => {
+      if (!data || !data.chat) {
+        dispatch(redirect('/chat'));
 
-          return dispatch({
-            type: actTypes.UNSET_ACTIVE_CHAT,
-          });
-        }
-
-        dispatch({
-          type: actTypes.SET_ACTIVE_CHAT,
-          payload: data,
+        return dispatch({
+          type: actTypes.UNSET_ACTIVE_CHAT,
         });
+      }
 
-        if (!notNeedRedirect) {
-          dispatch(redirect(`/chat/${data.chat._id}`));
-        }
-
-        return data;
+      dispatch({
+        type: actTypes.SET_ACTIVE_CHAT,
+        payload: data,
       });
-  };
+
+      if (!notNeedRedirect) {
+        dispatch(redirect(`/chat/${data.chat._id}`));
+      }
+
+      return data;
+    });
 }
 
 export function createChat(title) {
@@ -137,18 +135,18 @@ export function createChat(title) {
     });
 
     return makeRequest({
-      endpoint: `/chats`,
+      endpoint: '/chats',
       token,
       body: {
         data: {
           title,
-        }
+        },
       },
       requestOptions: {
         method: 'POST',
-      }
+      },
     })
-      .then(data => {
+      .then((data) => {
         dispatch({
           type: actTypes.CREATE_CHAT_SUCCESS,
           payload: data,
@@ -184,9 +182,9 @@ export function deleteChat(chatId) {
       token,
       requestOptions: {
         method: 'DELETE',
-      }
+      },
     })
-      .then(data => {
+      .then((data) => {
         dispatch({
           type: actTypes.DELETE_CHAT_SUCCESS,
           payload: data,
@@ -221,7 +219,7 @@ export function joinChat(id) {
       endpoint: `/chats/${id}/join`,
       token,
     })
-      .then(data => {
+      .then((data) => {
         dispatch({
           type: actTypes.JOIN_CHAT_SUCCESS,
           payload: data,
@@ -254,7 +252,7 @@ export function leaveChat(id) {
       endpoint: `/chats/${id}/leave`,
       token,
     })
-      .then(data => {
+      .then((data) => {
         dispatch({
           type: actTypes.LEAVE_CHAT_SUCCESS,
           payload: data,

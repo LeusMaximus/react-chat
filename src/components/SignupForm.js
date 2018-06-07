@@ -12,8 +12,8 @@ import isEqualStrings from '../utils/isEqualStrings';
 
 const styles = theme => ({
   button: {
-    marginTop: theme.spacing.unit * 4
-  }
+    marginTop: theme.spacing.unit * 4,
+  },
 });
 
 class SignupForm extends React.Component {
@@ -50,24 +50,24 @@ class SignupForm extends React.Component {
       repeatPassword: {
         ...repeatPassword,
         isValid: isRepeatPasswordValid,
-      }
+      },
     });
 
     return isUserNameValid && isPasswordValid && isRepeatPasswordValid;
   }
 
-  handleChange = event => {
+  handleChange = (event) => {
     const { name, value } = event.target;
 
     this.setState(prevState => ({
       [name]: {
         ...prevState[name],
         value,
-      }
+      },
     }));
   }
 
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     event.preventDefault();
 
     const isValid = this.validate();

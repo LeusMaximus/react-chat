@@ -13,7 +13,7 @@ class ChatMenu extends React.Component {
     anchorEl: null,
   };
 
-  handleClick = event => {
+  handleClick = (event) => {
     this.setState({ anchorEl: event.currentTarget });
   };
 
@@ -23,7 +23,9 @@ class ChatMenu extends React.Component {
 
   render() {
     const { anchorEl } = this.state;
-    const { className, isMember, isCreator, leaveChat, deleteChat, activeId, disabled } = this.props;
+    const {
+      className, isMember, isCreator, leaveChat, deleteChat, activeId, disabled,
+    } = this.props;
 
     return (
       <div className={className}>

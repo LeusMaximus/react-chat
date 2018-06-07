@@ -10,14 +10,14 @@ import ChildCare from '@material-ui/icons/ChildCare';
 import Rowing from '@material-ui/icons/Rowing';
 
 class ChatNav extends React.Component {
-  state = {
+  state = { // eslint-disable-line
     value: 0,
   };
 
-  static getDerivedStateFromProps(nextProps, prevState) {
+  static getDerivedStateFromProps(nextProps) {
     return {
-      value: nextProps.tabNumber
-    }
+      value: nextProps.tabNumber,
+    };
   }
 
   render() {
@@ -35,6 +35,6 @@ class ChatNav extends React.Component {
       </BottomNavigation>
     );
   }
-};
+}
 
 export default ChatNav;

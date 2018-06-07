@@ -6,14 +6,15 @@ import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
+// Vendor modules
+import isEmpty from 'lodash/isEmpty';
+
 // Own modules
 import Sidebar from './Sidebar';
 import ChatHeader from './ChatHeader';
 import MessagesSection from './MessagesSection';
 import PopupMessage from './PopupMessage';
 
-// Vendor modules
-import isEmpty from 'lodash/isEmpty';
 
 const styles = theme => ({
   appFrame: {
@@ -28,7 +29,7 @@ const styles = theme => ({
     position: 'relative',
     width: '100%',
     height: '100%',
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
 
   content: {
@@ -49,7 +50,7 @@ const styles = theme => ({
 });
 
 class ChatPage extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -57,8 +58,32 @@ class ChatPage extends React.Component {
     };
   }
 
-  componentDidUpdate(prevProps, state) {
-    const { setActiveChat, activeId, mountChat, unmountChat } = this.props;
+  componentDidMount() {
+    const {
+      getAllChats, getMyChats, setActiveChat, match, socketsConnect, mountChat,
+    } = this.props;
+
+    Promise.all([
+      getAllChats(),
+      getMyChats(),
+    ])
+      .then(() => {
+        socketsConnect();
+      })
+      .then(() => {
+        const { chatId } = match.params;
+
+        if (chatId) {
+          setActiveChat(chatId);
+          mountChat(chatId);
+        }
+      });
+  }
+
+  componentDidUpdate(prevProps) {
+    const {
+      setActiveChat, activeId, mountChat, unmountChat,
+    } = this.props;
     const { chatId: prevChatId } = prevProps.match.params;
     const { chatId: currChatId } = this.props.match.params;
 
@@ -76,26 +101,6 @@ class ChatPage extends React.Component {
 
       mountChat(currChatId);
     }
-  }
-
-  componentDidMount() {
-    const { getAllChats, getMyChats, setActiveChat, match, socketsConnect, mountChat } = this.props;
-
-    Promise.all([
-      getAllChats(),
-      getMyChats(),
-    ])
-      .then(() => {
-        socketsConnect();
-      })
-      .then(()=>{
-        const { chatId } = match.params;
-
-        if (chatId) {
-          setActiveChat(chatId);
-          mountChat(chatId);
-        }
-      })
   }
 
   render() {
@@ -120,22 +125,21 @@ class ChatPage extends React.Component {
           />
 
           <main className={classes.content}>
-            {
-              !isEmpty(activeChat)
-                ? <MessagesSection
-                    isConnected={isConnected}
-                    messages={messages}
-                    chat={activeChat}
-                    isChatMember={isChatMember}
-                    joinChat={joinChat}
-                    sendMessage={sendMessage}
-                    userId={userId}
-                  />
-                : <Paper className={classes.introMessage} elevation={4} rounded={20}>
-                    <Typography variant="headline" component="h2" align="center">
-                      Please select some chat (or create new) to start messaging...
-                    </Typography>
-                  </Paper>
+            {!isEmpty(activeChat) ?
+              <MessagesSection
+                isConnected={isConnected}
+                messages={messages}
+                chat={activeChat}
+                isChatMember={isChatMember}
+                joinChat={joinChat}
+                sendMessage={sendMessage}
+                userId={userId}
+              /> :
+              <Paper className={classes.introMessage} elevation={4} rounded={20}>
+                <Typography variant="headline" component="h2" align="center">
+                    Please select some chat (or create new) to start messaging...
+                </Typography>
+              </Paper>
             }
           </main>
         </div>
@@ -152,6 +156,6 @@ class ChatPage extends React.Component {
       </div>
     );
   }
-};
+}
 
 export default withStyles(styles)(ChatPage);

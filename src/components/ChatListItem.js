@@ -17,35 +17,33 @@ import classnames from 'classnames';
 import Avatar from './Avatar';
 import DateView from './DateView';
 
-const styles = theme => ({
+const styles = () => ({
   selected: {
     backgroundColor: grey[200],
-  }
-})
+  },
+});
 
-class ChatListItem extends React.Component {
-  render() {
-    const { classes, item, activeId, disabled } = this.props;
+const ChatListItem = ({
+  classes, item, activeId, disabled,
+}) => {
+  const itemClasses = classnames({
+    [classes.selected]: item._id === activeId,
+  });
 
-    const itemClasses = classnames({
-      [classes.selected]: item._id === activeId,
-    });
-
-    return (
-      <ListItem
-        disabled={disabled}
-        className={itemClasses}
-        button
-        component={Link}
-        to={`/chat/${item._id}`}
-      >
-        <Avatar>
-          {item.title}
-        </Avatar>
-        <ListItemText primary={item.title} secondary={<DateView date={item.createdAt} />} />
-      </ListItem>
-    );
-  }
+  return (
+    <ListItem
+      disabled={disabled}
+      className={itemClasses}
+      button
+      component={Link}
+      to={`/chat/${item._id}`}
+    >
+      <Avatar>
+        {item.title}
+      </Avatar>
+      <ListItemText primary={item.title} secondary={DateView(item.createdAt)} />
+    </ListItem>
+  );
 };
 
 export default withStyles(styles)(ChatListItem);

@@ -10,7 +10,7 @@ export default (state = initialState, action) => {
       return [
         ...state,
         action.payload.message,
-      ]
+      ];
     default:
       return state;
   }

@@ -25,17 +25,17 @@ export function signup(username, password) {
         password,
       },
       requestOptions: {
-        method: "POST"
+        method: 'POST',
       },
     })
-      .then(data => {
+      .then((data) => {
         if (!data.token) {
           throw new Error('Token hasn\'t provided');
         }
 
         return data;
       })
-      .then(data => {
+      .then((data) => {
         // Caching JWT token
         cachedToken.set(data.token);
 
@@ -48,7 +48,7 @@ export function signup(username, password) {
         type: actTypes.SIGNUP_FAILURE,
         payload: error,
       }));
-  }
+  };
 }
 
 export function login(username, password) {
@@ -70,17 +70,17 @@ export function login(username, password) {
         password,
       },
       requestOptions: {
-        method: "POST"
+        method: 'POST',
       },
     })
-      .then(data => {
+      .then((data) => {
         if (!data.token) {
           throw new Error('Token hasn\'t provided');
         }
 
         return data;
       })
-      .then(data => {
+      .then((data) => {
         // Caching JWT token
         cachedToken.set(data.token);
 
@@ -93,7 +93,7 @@ export function login(username, password) {
         type: actTypes.LOGIN_FAILURE,
         payload: error,
       }));
-  }
+  };
 }
 
 export function logout() {
@@ -111,7 +111,7 @@ export function logout() {
     return makeRequest({
       endpoint: '/logout',
     })
-      .then(data => {
+      .then((data) => {
         // Remove cached JWT token
         cachedToken.remove();
 
@@ -124,7 +124,7 @@ export function logout() {
         type: actTypes.LOGOUT_FAILURE,
         payload: error,
       }));
-  }
+  };
 }
 
 export function verifyAuth() {
@@ -147,7 +147,7 @@ export function verifyAuth() {
       endpoint: '/users/me',
       token,
     })
-      .then(data => {
+      .then((data) => {
         dispatch({
           type: actTypes.VERIFY_AUTH_SUCCESS,
           payload: data,
@@ -157,7 +157,7 @@ export function verifyAuth() {
         type: actTypes.VERIFY_AUTH_FAILURE,
         payload: error,
       }));
-  }
+  };
 }
 
 export function editProfile({ username, firstName = '', lastName = '' }) {
@@ -191,10 +191,10 @@ export function editProfile({ username, firstName = '', lastName = '' }) {
         },
       },
       requestOptions: {
-        method: "POST"
+        method: 'POST',
       },
     })
-      .then(data => {
+      .then((data) => {
         dispatch({
           type: actTypes.EDIT_PROFILE_SUCCESS,
           payload: data,
@@ -204,5 +204,5 @@ export function editProfile({ username, firstName = '', lastName = '' }) {
         type: actTypes.EDIT_PROFILE_FAILURE,
         payload: error,
       }));
-  }
+  };
 }

@@ -73,9 +73,9 @@ const MessageListItem = ({ classes, item, userId }) => {
 
   return (
     <ListItem className={itemClasses}>
-        <Avatar>
-          {senderName}
-        </Avatar>
+      <Avatar>
+        {senderName}
+      </Avatar>
 
       <Paper elevation={elevation} className={paperClasses}>
         <Typography variant="caption" component="strong" style={{ color: getColorBasedOnString(senderName) }}>

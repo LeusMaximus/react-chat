@@ -1,3 +1,4 @@
+/* eslint import/prefer-default-export: "off" */
 import * as actTypes from '../constants/services';
 import history from '../utils/history';
 

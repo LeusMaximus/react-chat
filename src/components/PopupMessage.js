@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import ErrorIcon from '@material-ui/icons/Error';
@@ -47,7 +47,9 @@ const styles1 = theme => ({
 });
 
 function MySnackbarContent(props) {
-  const { classes, className, message, onClose, variant, ...other } = props;
+  const {
+    classes, className, message, onClose, variant, ...other
+  } = props;
   const Icon = variantIcon[variant];
 
   return (
@@ -75,18 +77,18 @@ function MySnackbarContent(props) {
   );
 }
 
-MySnackbarContent.propTypes = {
-  classes: PropTypes.object.isRequired,
-  className: PropTypes.string,
-  message: PropTypes.node,
-  onClose: PropTypes.func,
-  variant: PropTypes.oneOf(['success', 'warning', 'error', 'info']).isRequired,
-};
+// MySnackbarContent.propTypes = {
+//   classes: PropTypes.object.isRequired,
+//   className: PropTypes.string,
+//   message: PropTypes.node,
+//   onClose: PropTypes.func,
+//   variant: PropTypes.oneOf(['success', 'warning', 'error', 'info']).isRequired,
+// };
 
 const MySnackbarContentWrapper = withStyles(styles1)(MySnackbarContent);
 
 class PopupMessage extends React.Component {
-  state = {
+  state = { // eslint-disable-line
     open: false,
   };
 

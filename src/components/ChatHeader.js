@@ -7,16 +7,16 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
+// Vendor modules
+import isEmpty from 'lodash/isEmpty';
+import _get from 'lodash/get';
+
 // Own modules
 import Avatar from './Avatar';
 import UserNav from '../containers/UserNav';
 import ChatMenu from '../components/ChatMenu';
 
-// Vendor modules
-import isEmpty from 'lodash/isEmpty';
-import _get from 'lodash/get';
-
-const styles = theme => ({
+const styles = () => ({
   appBar: {
     flexShrink: 1,
     minHeight: 64,
@@ -32,13 +32,13 @@ const styles = theme => ({
 
   chatMenu: {
     marginRight: 10,
-  }
+  },
 });
 
 const ChatHeader = ({
   classes, activeChat, activeId,
   isMember, isCreator, isChatMember,
-  leaveChat, deleteChat, isConnected
+  leaveChat, deleteChat, isConnected,
 }) => (
   <AppBar
     position="static"

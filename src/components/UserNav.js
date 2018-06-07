@@ -20,7 +20,7 @@ class UserNav extends React.Component {
     modalOpen: false,
   };
 
-  handleClick = event => {
+  handleClick = (event) => {
     this.setState({ anchorEl: event.currentTarget });
   };
 
@@ -31,7 +31,7 @@ class UserNav extends React.Component {
   handleModalOpen = () => {
     this.setState({
       anchorEl: null,
-      modalOpen: true
+      modalOpen: true,
     });
   };
 
@@ -39,9 +39,9 @@ class UserNav extends React.Component {
     this.setState({ modalOpen: false });
   };
 
-  handleSubmit = params => {
+  handleSubmit = (params) => {
     this.props.editProfile(params)
-      .then(data => {
+      .then((data) => {
         this.handleModalClose();
         return data;
       });
@@ -49,7 +49,9 @@ class UserNav extends React.Component {
 
   render() {
     const { anchorEl, modalOpen } = this.state;
-    const { logout, className, user, disabled } = this.props;
+    const {
+      logout, className, user, disabled,
+    } = this.props;
 
     return (
       <div className={className}>
@@ -81,7 +83,7 @@ class UserNav extends React.Component {
             Edit profile
           </Typography>
 
-          <EditProfileForm onSubmit={this.handleSubmit} user={user}/>
+          <EditProfileForm onSubmit={this.handleSubmit} user={user} />
         </ChatModal>
       </div>
     );

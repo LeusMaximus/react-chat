@@ -3,7 +3,7 @@
  * @param {string} title
  * @return {string}
  */
-export default function(title) {
+export default function (title) {
   try {
     return title
       .split(' ')
@@ -14,4 +14,4 @@ export default function(title) {
     // console.warn(e);
     return '';
   }
-};
+}

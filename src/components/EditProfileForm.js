@@ -11,8 +11,8 @@ import isTextFieldValid from '../utils/isTextFieldValid';
 
 const styles = theme => ({
   button: {
-    marginTop: theme.spacing.unit * 4
-  }
+    marginTop: theme.spacing.unit * 4,
+  },
 });
 
 class EditProfileForm extends React.Component {
@@ -20,7 +20,7 @@ class EditProfileForm extends React.Component {
     super(props);
 
     const { user } = this.props;
-    const getObjValue = (obj, key) => obj && obj[key] ? obj[key] : '';
+    const getObjValue = (obj, key) => (obj && obj[key] ? obj[key] : '');
 
     this.state = {
       username: {
@@ -50,18 +50,18 @@ class EditProfileForm extends React.Component {
     return isUserNameValid;
   }
 
-  handleChange = event => {
+  handleChange = (event) => {
     const { name, value } = event.target;
 
     this.setState(prevState => ({
       [name]: {
         ...prevState[name],
         value,
-      }
+      },
     }));
   }
 
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     event.preventDefault();
 
     const isValid = this.validate();

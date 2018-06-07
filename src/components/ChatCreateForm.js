@@ -11,8 +11,8 @@ import isTextFieldValid from '../utils/isTextFieldValid';
 
 const styles = theme => ({
   button: {
-    marginTop: theme.spacing.unit * 4
-  }
+    marginTop: theme.spacing.unit * 4,
+  },
 });
 
 class ChatCreateForm extends React.Component {
@@ -37,18 +37,18 @@ class ChatCreateForm extends React.Component {
     return isChatNameValid;
   }
 
-  handleChange = event => {
+  handleChange = (event) => {
     const { name, value } = event.target;
 
     this.setState(prevState => ({
       [name]: {
         ...prevState[name],
         value,
-      }
+      },
     }));
   }
 
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     event.preventDefault();
 
     const isValid = this.validate();

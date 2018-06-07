@@ -10,7 +10,7 @@ import nanoid from 'nanoid';
 // Own modules
 import MessageListItem from './MessageListItem';
 
-const MessagesList = ({ classes, messages, userId }) => (
+const MessagesList = ({ messages, userId }) => (
   <List>
     {messages.map(item => <MessageListItem key={nanoid()} item={item} userId={userId} />)}
   </List>

@@ -8,12 +8,12 @@ import Typography from '@material-ui/core/Typography';
 import moment from 'moment';
 
 const DateView = ({ date }) => {
-  const formatDate = moment(date).format("MMM Do YY");
+  const formatDate = moment(date).format('MMM Do YY');
   const formatDateFromNow = moment(date).fromNow();
 
   return (
     <Tooltip title={formatDate} placement="right">
-      <Typography variant="caption" component="em" style={{display: 'inline-block'}}>
+      <Typography variant="caption" component="em" style={{ display: 'inline-block' }}>
         {formatDateFromNow}
       </Typography>
     </Tooltip>

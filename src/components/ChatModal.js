@@ -28,32 +28,28 @@ const styles = theme => ({
   },
 });
 
-class ChatCreate extends React.Component {
-  render() {
-    const { classes, modalOpen, handleModalClose } = this.props;
+const ChatCreate = ({
+  classes, modalOpen, handleModalClose, children,
+}) => (
+  <React.Fragment>
+    <Modal
+      aria-labelledby="simple-modal-title"
+      aria-describedby="simple-modal-description"
+      open={modalOpen}
+      onClose={handleModalClose}
+    >
+      <div className={classes.modalPaper}>
+        {children}
 
-    return (
-      <React.Fragment>
-        <Modal
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
-          open={modalOpen}
-          onClose={handleModalClose}
+        <IconButton
+          className={classes.btnClose}
+          onClick={handleModalClose}
         >
-          <div className={classes.modalPaper}>
-            {this.props.children}
-
-            <IconButton
-              className={classes.btnClose}
-              onClick={handleModalClose}
-            >
-              <Close />
-            </IconButton>
-          </div>
-        </Modal>
-      </React.Fragment>
-    );
-  }
-};
+          <Close />
+        </IconButton>
+      </div>
+    </Modal>
+  </React.Fragment>
+);
 
 export default withStyles(styles)(ChatCreate);

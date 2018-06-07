@@ -8,18 +8,18 @@ export default function makeRequest({
   endpoint = '',
   token = '',
   body,
-  requestOptions = {}
+  requestOptions = {},
 }) {
   const authHeaders = token
-  ? {
-      'Authorization': `Bearer ${token}`,
+    ? {
+      Authorization: `Bearer ${token}`,
     }
-  : {};
+    : {};
 
   return fetch(`${config.API_URI}${endpoint}`, {
-    method: "GET",
+    method: 'GET',
     headers: {
-      'Accept': 'spplication/json',
+      Accept: 'spplication/json',
       'Content-Type': 'application/json',
       ...authHeaders,
     },
@@ -27,7 +27,7 @@ export default function makeRequest({
     ...requestOptions,
   })
     .then(response => response.json())
-    .then(data => {
+    .then((data) => {
       if (!data.success) {
         throw new Error(data.message);
       }

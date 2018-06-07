@@ -46,18 +46,18 @@ class MessageField extends React.Component {
     return isMessageValid;
   }
 
-  handleChange = event => {
+  handleChange = (event) => {
     const { name, value } = event.target;
 
     this.setState(prevState => ({
       [name]: {
         ...prevState[name],
         value,
-      }
+      },
     }));
   }
 
-   handleKeyPress = event => {
+  handleKeyPress = (event) => {
     const { message } = this.state;
 
     if (event.key === 'Enter' && this.validate()) {
@@ -73,36 +73,40 @@ class MessageField extends React.Component {
   };
 
   render() {
-    const { classes, isChatMember, joinChat, activeId, disabled } = this.props;
+    const {
+      classes, isChatMember, joinChat, activeId, disabled,
+    } = this.props;
+
     const { message } = this.state;
 
     return (
       <Paper elevation={10} className={classes.messageField}>
-        {isChatMember
-          ? <FormControl fullWidth>
-              <Input
-                disabled={disabled}
-                placeholder="Type your message..."
-                name="message"
-                value={message.value}
-                onChange={this.handleChange}
-                onKeyPress={this.handleKeyPress}
-              />
-            </FormControl>
-          : <Button
+        {isChatMember ? (
+          <FormControl fullWidth>
+            <Input
               disabled={disabled}
-              variant="raised"
-              color="primary"
-              fullWidth
-              type="button"
-              onClick={() => joinChat(activeId)}
-            >
-              Join
-            </Button>
-        }
+              placeholder="Type your message..."
+              name="message"
+              value={message.value}
+              onChange={this.handleChange}
+              onKeyPress={this.handleKeyPress}
+            />
+          </FormControl>
+        ) : (
+          <Button
+            disabled={disabled}
+            variant="raised"
+            color="primary"
+            fullWidth
+            type="button"
+            onClick={() => joinChat(activeId)}
+          >
+            Join
+          </Button>
+        )}
       </Paper>
     );
   }
-};
+}
 
 export default withStyles(styles)(MessageField);
