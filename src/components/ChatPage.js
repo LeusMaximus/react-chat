@@ -91,7 +91,7 @@ class ChatPage extends React.Component {
       .then(()=>{
         const { chatId } = match.params;
 
-        if (chatId && chatId !== this.state.activeId) {
+        if (chatId) {
           setActiveChat(chatId);
           mountChat(chatId);
         }
