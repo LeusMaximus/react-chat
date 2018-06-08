@@ -89,7 +89,6 @@ const MySnackbarContentWrapper = withStyles(styles1)(MySnackbarContent);
 
 class PopupMessage extends React.Component {
   state = {
-    // eslint-disable-line
     open: false,
   };
 

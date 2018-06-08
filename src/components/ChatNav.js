@@ -11,7 +11,6 @@ import Rowing from '@material-ui/icons/Rowing';
 
 class ChatNav extends React.Component {
   state = {
-    // eslint-disable-line
     value: 0,
   };
 

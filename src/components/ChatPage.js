@@ -49,14 +49,6 @@ const styles = theme => ({
 });
 
 class ChatPage extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      activeId: props.activeId,
-    };
-  }
-
   componentDidMount() {
     const {
       getAllChats, getMyChats, setActiveChat, match, socketsConnect, mountChat,

@@ -16,6 +16,38 @@ export function missingSocketConnection() {
   };
 }
 
+export function mountChat(chatId) {
+  return (dispatch) => {
+    if (!socket) {
+      dispatch(missingSocketConnection());
+      return;
+    }
+
+    socket.emit('mount-chat', chatId);
+
+    dispatch({
+      type: actTypes.MOUNT_CHAT,
+      payload: { chatId },
+    });
+  };
+}
+
+export function unmountChat(chatId) {
+  return (dispatch) => {
+    if (!socket) {
+      dispatch(missingSocketConnection());
+      return;
+    }
+
+    socket.emit('unmount-chat', chatId);
+
+    dispatch({
+      type: actTypes.UNMOUNT_CHAT,
+      payload: { chatId },
+    });
+  };
+}
+
 export function socketsConnect() {
   return (dispatch, getState) => {
     const { isFetching } = getState().services;
@@ -94,7 +126,8 @@ export function socketsConnect() {
 export function sendMessage(content) {
   return (dispatch, getState) => {
     if (!socket) {
-      return dispatch(missingSocketConnection());
+      dispatch(missingSocketConnection());
+      return;
     }
 
     const { activeId } = getState().chats;
@@ -115,35 +148,5 @@ export function sendMessage(content) {
         });
       },
     );
-  };
-}
-
-export function mountChat(chatId) {
-  return (dispatch) => {
-    if (!socket) {
-      return dispatch(missingSocketConnection());
-    }
-
-    socket.emit('mount-chat', chatId);
-
-    dispatch({
-      type: actTypes.MOUNT_CHAT,
-      payload: { chatId },
-    });
-  };
-}
-
-export function unmountChat(chatId) {
-  return (dispatch) => {
-    if (!socket) {
-      return dispatch(missingSocketConnection());
-    }
-
-    socket.emit('unmount-chat', chatId);
-
-    dispatch({
-      type: actTypes.UNMOUNT_CHAT,
-      payload: { chatId },
-    });
   };
 }
