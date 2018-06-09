@@ -1,5 +1,6 @@
 // React
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // MUI components
 import { withStyles } from '@material-ui/core';
@@ -8,6 +9,7 @@ import Button from '@material-ui/core/Button';
 
 // Own modules
 import isTextFieldValid from '../utils/isTextFieldValid';
+import { IClasses } from '../interfaces/propTypes';
 
 const styles = theme => ({
   button: {
@@ -16,6 +18,11 @@ const styles = theme => ({
 });
 
 class ChatCreateForm extends React.Component {
+  static propTypes = {
+    classes: IClasses.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+  };
+
   state = {
     chatName: {
       value: '',

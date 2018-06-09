@@ -1,5 +1,6 @@
 // React
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // MUI components
 import { withStyles } from '@material-ui/core/styles';
@@ -16,6 +17,7 @@ import SearchChat from './SearchChat';
 import ChatList from './ChatList';
 import ChatNav from './ChatNav';
 import ChatCreate from '../containers/ChatCreate';
+import { IClasses, IChatItem } from '../interfaces/propTypes';
 
 const styles = theme => ({
   drawerPaper: {
@@ -51,6 +53,15 @@ const styles = theme => ({
 });
 
 class Sidebar extends React.Component {
+  static propTypes = {
+    classes: IClasses.isRequired,
+    allChats: PropTypes.arrayOf(IChatItem).isRequired,
+    myChats: PropTypes.arrayOf(IChatItem).isRequired,
+    setActiveChat: PropTypes.func.isRequired,
+    activeId: PropTypes.string.isRequired,
+    isConnected: PropTypes.bool.isRequired,
+  };
+
   state = {
     isMyChatsActive: true,
     chatsFilterTerm: '',

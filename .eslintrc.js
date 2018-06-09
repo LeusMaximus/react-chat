@@ -7,7 +7,7 @@ module.exports = {
   rules: {
     'react/jsx-filename-extension': 'off',
     'no-underscore-dangle': 'off',
-    'react/prop-types': 'off',
+    'react/prop-types': 1,
     'react/sort-comp': 'off',
     'jsx-a11y/anchor-is-valid': [
       'error',

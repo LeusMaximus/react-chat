@@ -1,5 +1,6 @@
 // React
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // MUI components
 import { withStyles } from '@material-ui/core';
@@ -9,6 +10,7 @@ import Button from '@material-ui/core/Button';
 // Own modules
 import isTextFieldValid from '../utils/isTextFieldValid';
 import isEqualStrings from '../utils/isEqualStrings';
+import { IClasses } from '../interfaces/propTypes';
 
 const styles = theme => ({
   button: {
@@ -17,6 +19,11 @@ const styles = theme => ({
 });
 
 class SignupForm extends React.Component {
+  static propTypes = {
+    classes: IClasses.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+  };
+
   state = {
     username: {
       value: '',

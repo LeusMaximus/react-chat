@@ -1,5 +1,6 @@
 // React
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // MUI components
 import { withStyles } from '@material-ui/core/styles';
@@ -10,6 +11,7 @@ import Button from '@material-ui/core/Button';
 
 // Own modules
 import isTextFieldValid from '../utils/isTextFieldValid';
+import { IClasses } from '../interfaces/propTypes';
 
 const styles = theme => ({
   messageField: {
@@ -25,6 +27,15 @@ const styles = theme => ({
 });
 
 class MessageField extends React.Component {
+  static propTypes = {
+    classes: IClasses.isRequired,
+    isChatMember: PropTypes.bool.isRequired,
+    joinChat: PropTypes.func.isRequired,
+    sendMessage: PropTypes.func.isRequired,
+    activeId: PropTypes.string.isRequired,
+    disabled: PropTypes.bool.isRequired,
+  };
+
   state = {
     message: {
       value: '',

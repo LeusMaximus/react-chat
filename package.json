@@ -12,6 +12,7 @@
     "lodash": "^4.17.10",
     "moment": "^2.22.2",
     "nanoid": "^1.0.2",
+    "prop-types": "^15.6.1",
     "react": "^16.3.2",
     "react-app-rewire-eslint": "^0.2.3",
     "react-app-rewire-polyfills": "^0.2.0",

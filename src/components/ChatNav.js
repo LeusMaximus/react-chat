@@ -1,5 +1,6 @@
 // React
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // MUI components
 import BottomNavigation from '@material-ui/core/BottomNavigation';
@@ -12,6 +13,10 @@ import Rowing from '@material-ui/icons/Rowing';
 class ChatNav extends React.Component {
   state = {
     value: 0,
+  };
+
+  static propTypes = {
+    tabsChange: PropTypes.func.isRequired,
   };
 
   static getDerivedStateFromProps(nextProps) {

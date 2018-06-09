@@ -1,5 +1,6 @@
 // React
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // MUI components
 import { withStyles } from '@material-ui/core/styles';
@@ -14,6 +15,7 @@ import debounce from 'debounce';
 // Own modules
 import MessagesList from './MessagesList';
 import MessageField from './MessageField';
+import { IClasses, IChatItem, IMessage } from '../interfaces/propTypes';
 
 const styles = () => ({
   chatArea: {
@@ -39,6 +41,16 @@ const styles = () => ({
 });
 
 class MessagesSection extends React.Component {
+  static propTypes = {
+    classes: IClasses.isRequired,
+    chat: IChatItem.isRequired,
+    isChatMember: PropTypes.bool.isRequired,
+    joinChat: PropTypes.func.isRequired,
+    sendMessage: PropTypes.func.isRequired,
+    userId: PropTypes.string.isRequired,
+    messages: PropTypes.arrayOf(IMessage.isRequired).isRequired,
+    isConnected: PropTypes.bool.isRequired,
+  };
   constructor(props) {
     super(props);
     this.chatAreaRef = React.createRef();

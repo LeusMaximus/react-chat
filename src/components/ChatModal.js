@@ -1,5 +1,6 @@
 // React
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // MUI Components
 import { withStyles } from '@material-ui/core/styles';
@@ -8,6 +9,8 @@ import IconButton from '@material-ui/core/IconButton';
 
 // MUI Icons
 import Close from '@material-ui/icons/Close';
+
+import { IClasses } from '../interfaces/propTypes';
 
 const styles = theme => ({
   modalPaper: {
@@ -28,7 +31,7 @@ const styles = theme => ({
   },
 });
 
-const ChatCreate = ({
+const ChatModal = ({
   classes, modalOpen, handleModalClose, children,
 }) => (
   <React.Fragment>
@@ -49,4 +52,15 @@ const ChatCreate = ({
   </React.Fragment>
 );
 
-export default withStyles(styles)(ChatCreate);
+ChatModal.defaultProps = {
+  classes: null,
+};
+
+ChatModal.propTypes = {
+  classes: IClasses,
+  modalOpen: PropTypes.bool.isRequired,
+  handleModalClose: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
+};
+
+export default withStyles(styles)(ChatModal);

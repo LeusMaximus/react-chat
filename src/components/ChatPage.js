@@ -1,5 +1,6 @@
 // React
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // MUI components
 import { withStyles } from '@material-ui/core/styles';
@@ -14,6 +15,7 @@ import Sidebar from './Sidebar';
 import ChatHeader from './ChatHeader';
 import MessagesSection from './MessagesSection';
 import PopupMessage from './PopupMessage';
+import { IClasses, IChatItem, IMessage } from '../interfaces/propTypes';
 
 const styles = theme => ({
   appFrame: {
@@ -49,6 +51,40 @@ const styles = theme => ({
 });
 
 class ChatPage extends React.Component {
+  static defaultProps = {
+    activeChat: null,
+    userId: null,
+    error: null,
+  };
+
+  static propTypes = {
+    classes: IClasses.isRequired,
+    match: PropTypes.shape({
+      params: PropTypes.object.isRequired,
+    }).isRequired,
+    getAllChats: PropTypes.func.isRequired,
+    getMyChats: PropTypes.func.isRequired,
+    setActiveChat: PropTypes.func.isRequired,
+    socketsConnect: PropTypes.func.isRequired,
+    mountChat: PropTypes.func.isRequired,
+    unmountChat: PropTypes.func.isRequired,
+    activeId: PropTypes.string.isRequired,
+    allChats: PropTypes.arrayOf(IChatItem).isRequired,
+    myChats: PropTypes.arrayOf(IChatItem).isRequired,
+    activeChat: IChatItem,
+    joinChat: PropTypes.func.isRequired,
+    leaveChat: PropTypes.func.isRequired,
+    deleteChat: PropTypes.func.isRequired,
+    sendMessage: PropTypes.func.isRequired,
+    isMember: PropTypes.bool.isRequired,
+    isCreator: PropTypes.bool.isRequired,
+    isChatMember: PropTypes.bool.isRequired,
+    userId: PropTypes.string,
+    messages: PropTypes.arrayOf(IMessage).isRequired,
+    error: PropTypes.instanceOf(Error),
+    isConnected: PropTypes.bool.isRequired,
+  };
+
   componentDidMount() {
     const {
       getAllChats, getMyChats, setActiveChat, match, socketsConnect, mountChat,

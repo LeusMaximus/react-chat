@@ -1,5 +1,7 @@
+// React
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
+
 import classNames from 'classnames';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import ErrorIcon from '@material-ui/icons/Error';
@@ -77,17 +79,22 @@ function MySnackbarContent(props) {
   );
 }
 
-// MySnackbarContent.propTypes = {
-//   classes: PropTypes.object.isRequired,
-//   className: PropTypes.string,
-//   message: PropTypes.node,
-//   onClose: PropTypes.func,
-//   variant: PropTypes.oneOf(['success', 'warning', 'error', 'info']).isRequired,
-// };
+MySnackbarContent.propTypes = {
+  classes: PropTypes.objectOf(PropTypes.string).isRequired,
+  className: PropTypes.string.isRequired,
+  message: PropTypes.node.isRequired,
+  onClose: PropTypes.func.isRequired,
+  variant: PropTypes.oneOf(['success', 'warning', 'error', 'info']).isRequired,
+};
 
 const MySnackbarContentWrapper = withStyles(styles1)(MySnackbarContent);
 
 class PopupMessage extends React.Component {
+  static propTypes = {
+    variant: PropTypes.oneOf(['success', 'warning', 'error', 'info']).isRequired,
+    message: PropTypes.node.isRequired,
+  };
+
   state = {
     open: false,
   };

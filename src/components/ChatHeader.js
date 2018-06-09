@@ -1,5 +1,6 @@
 // React
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // MUI components
 import { withStyles } from '@material-ui/core/styles';
@@ -15,6 +16,7 @@ import _get from 'lodash/get';
 import Avatar from './Avatar';
 import UserNav from '../containers/UserNav';
 import ChatMenu from '../components/ChatMenu';
+import { IClasses, IChatItem } from '../interfaces/propTypes';
 
 const styles = () => ({
   appBar: {
@@ -71,5 +73,22 @@ const ChatHeader = ({
     </Toolbar>
   </AppBar>
 );
+
+ChatHeader.defaultProps = {
+  classes: null,
+  activeChat: {},
+};
+
+ChatHeader.propTypes = {
+  classes: IClasses,
+  activeChat: IChatItem,
+  activeId: PropTypes.string.isRequired,
+  isMember: PropTypes.bool.isRequired,
+  isCreator: PropTypes.bool.isRequired,
+  isChatMember: PropTypes.bool.isRequired,
+  leaveChat: PropTypes.func.isRequired,
+  deleteChat: PropTypes.func.isRequired,
+  isConnected: PropTypes.bool.isRequired,
+};
 
 export default withStyles(styles)(ChatHeader);

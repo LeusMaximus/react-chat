@@ -1,5 +1,6 @@
 // React
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // MUI Components
 import { withStyles } from '@material-ui/core/styles';
@@ -18,6 +19,7 @@ import Avatar from './Avatar';
 import getColorBasedOnString from '../utils/getColorBasedOnString';
 import getUserName from '../utils/getUserName';
 import DateView from './DateView';
+import { IClasses, IMessage } from '../interfaces/propTypes';
 
 const styles = theme => ({
   ownMessageItem: {
@@ -90,6 +92,12 @@ const MessageListItem = ({ classes, item, userId }) => {
       </Paper>
     </ListItem>
   );
+};
+
+MessageListItem.propTypes = {
+  classes: IClasses.isRequired,
+  item: IMessage.isRequired,
+  userId: PropTypes.string.isRequired,
 };
 
 export default withStyles(styles)(MessageListItem);

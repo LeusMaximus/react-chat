@@ -1,6 +1,7 @@
 // React
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 // MUI components
 import { withStyles } from '@material-ui/core/styles';
@@ -16,6 +17,7 @@ import classnames from 'classnames';
 // Own modules
 import Avatar from './Avatar';
 import DateView from './DateView';
+import { IClasses, IChatItem } from '../interfaces/propTypes';
 
 const styles = () => ({
   selected: {
@@ -42,6 +44,13 @@ const ChatListItem = ({
       <ListItemText primary={item.title} secondary={DateView(item.createdAt)} />
     </ListItem>
   );
+};
+
+ChatListItem.propTypes = {
+  classes: IClasses.isRequired,
+  item: IChatItem.isRequired,
+  activeId: PropTypes.string.isRequired,
+  disabled: PropTypes.bool.isRequired,
 };
 
 export default withStyles(styles)(ChatListItem);

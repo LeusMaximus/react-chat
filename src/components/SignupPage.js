@@ -1,6 +1,7 @@
 // React
 import React from 'react';
 import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 // MUI components
 import { withStyles } from '@material-ui/core';
@@ -11,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import PageHeader from './PageHeader';
 import SignupForm from './SignupForm';
 import PopupMessage from './PopupMessage';
+import { IClasses } from '../interfaces/propTypes';
 
 const styles = theme => ({
   contentWrapper: {
@@ -53,6 +55,13 @@ const SignupPage = ({
       {error && <PopupMessage variant="error" message={error.message} />}
     </div>
   );
+};
+
+SignupPage.propTypes = {
+  classes: IClasses.isRequired,
+  signup: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool.isRequired,
+  error: PropTypes.instanceOf(Error).isRequired,
 };
 
 export default withStyles(styles)(SignupPage);

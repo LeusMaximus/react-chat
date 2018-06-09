@@ -1,5 +1,6 @@
 // React
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // MUI Components
 import { withStyles } from '@material-ui/core/styles';
@@ -12,6 +13,7 @@ import AddIcon from '@material-ui/icons/Add';
 // Own modules
 import ChatCreateForm from './ChatCreateForm';
 import ChatModal from './ChatModal';
+import { IClasses } from '../interfaces/propTypes';
 
 const styles = theme => ({
   buttonAdd: {
@@ -31,6 +33,12 @@ const styles = theme => ({
 });
 
 class ChatCreate extends React.Component {
+  static propTypes = {
+    classes: IClasses.isRequired,
+    disabled: PropTypes.bool.isRequired,
+    createChat: PropTypes.func.isRequired,
+  };
+
   state = {
     modalOpen: false,
   };

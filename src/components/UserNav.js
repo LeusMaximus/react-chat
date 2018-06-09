@@ -1,5 +1,7 @@
 // React
 import React from 'react';
+import PropTypes from 'prop-types';
+
 // MUI Components
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -13,8 +15,21 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import ChatModal from './ChatModal';
 import EditProfileForm from './EditProfileForm';
 import getUserName from '../utils/getUserName';
+import { IUser } from '../interfaces/propTypes';
 
 class UserNav extends React.Component {
+  static defaultProps = {
+    user: null,
+  };
+
+  static propTypes = {
+    logout: PropTypes.func.isRequired,
+    className: PropTypes.string.isRequired,
+    user: IUser,
+    disabled: PropTypes.bool.isRequired,
+    editProfile: PropTypes.func.isRequired,
+  };
+
   state = {
     anchorEl: null,
     modalOpen: false,

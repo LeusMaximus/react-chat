@@ -1,5 +1,7 @@
 // React
 import React from 'react';
+import PropTypes from 'prop-types';
+
 // MUI Components
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -9,6 +11,16 @@ import IconButton from '@material-ui/core/IconButton';
 import MoreVert from '@material-ui/icons/MoreVert';
 
 class ChatMenu extends React.Component {
+  static propTypes = {
+    className: PropTypes.string.isRequired,
+    isMember: PropTypes.bool.isRequired,
+    isCreator: PropTypes.bool.isRequired,
+    leaveChat: PropTypes.func.isRequired,
+    deleteChat: PropTypes.func.isRequired,
+    activeId: PropTypes.string.isRequired,
+    disabled: PropTypes.bool.isRequired,
+  };
+
   state = {
     anchorEl: null,
   };

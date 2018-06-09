@@ -1,10 +1,19 @@
+// React
 import React from 'react';
 import { connect } from 'react-redux';
 import { Route, Redirect, withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
+// Own modules
 import { verifyAuth } from '../actions/auth';
 
 class PrivateRoute extends React.Component {
+  static propTypes = {
+    verifyAuth: PropTypes.func.isRequired,
+    component: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool.isRequired,
+  };
+
   componentDidMount() {
     this.props.verifyAuth();
   }

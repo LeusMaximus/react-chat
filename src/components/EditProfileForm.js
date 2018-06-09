@@ -1,5 +1,6 @@
 // React
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // MUI components
 import { withStyles } from '@material-ui/core';
@@ -8,6 +9,7 @@ import Button from '@material-ui/core/Button';
 
 // Own modules
 import isTextFieldValid from '../utils/isTextFieldValid';
+import { IClasses, IUser } from '../interfaces/propTypes';
 
 const styles = theme => ({
   button: {
@@ -16,6 +18,12 @@ const styles = theme => ({
 });
 
 class EditProfileForm extends React.Component {
+  static propTypes = {
+    classes: IClasses.isRequired,
+    user: IUser.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+  };
+
   constructor(props) {
     super(props);
 
