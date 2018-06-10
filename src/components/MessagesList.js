@@ -18,10 +18,14 @@ const MessagesList = ({ messages, userId }) => (
   </List>
 );
 
+MessagesList.defaultProps = {
+  userId: '',
+};
+
 MessagesList.propTypes = {
   messages: PropTypes.arrayOf(IMessage.isRequired).isRequired,
 
-  userId: PropTypes.string.isRequired,
+  userId: PropTypes.string,
 };
 
 export default MessagesList;

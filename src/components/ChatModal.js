@@ -54,13 +54,14 @@ const ChatModal = ({
 
 ChatModal.defaultProps = {
   classes: null,
+  children: '',
 };
 
 ChatModal.propTypes = {
   classes: IClasses,
   modalOpen: PropTypes.bool.isRequired,
   handleModalClose: PropTypes.func.isRequired,
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
 };
 
 export default withStyles(styles)(ChatModal);

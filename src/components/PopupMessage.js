@@ -14,6 +14,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 import WarningIcon from '@material-ui/icons/Warning';
 import { withStyles } from '@material-ui/core/styles';
+import { IClasses } from '../interfaces/propTypes';
 
 const variantIcon = {
   success: CheckCircleIcon,
@@ -79,9 +80,14 @@ function MySnackbarContent(props) {
   );
 }
 
+MySnackbarContent.defaultProps = {
+  classes: null,
+  className: '',
+};
+
 MySnackbarContent.propTypes = {
-  classes: PropTypes.objectOf(PropTypes.string).isRequired,
-  className: PropTypes.string.isRequired,
+  classes: IClasses,
+  className: PropTypes.string,
   message: PropTypes.node.isRequired,
   onClose: PropTypes.func.isRequired,
   variant: PropTypes.oneOf(['success', 'warning', 'error', 'info']).isRequired,

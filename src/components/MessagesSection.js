@@ -41,16 +41,21 @@ const styles = () => ({
 });
 
 class MessagesSection extends React.Component {
+  static defaultProps = {
+    userId: '',
+  };
+
   static propTypes = {
     classes: IClasses.isRequired,
     chat: IChatItem.isRequired,
     isChatMember: PropTypes.bool.isRequired,
     joinChat: PropTypes.func.isRequired,
     sendMessage: PropTypes.func.isRequired,
-    userId: PropTypes.string.isRequired,
+    userId: PropTypes.string,
     messages: PropTypes.arrayOf(IMessage.isRequired).isRequired,
     isConnected: PropTypes.bool.isRequired,
   };
+
   constructor(props) {
     super(props);
     this.chatAreaRef = React.createRef();

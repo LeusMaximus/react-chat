@@ -94,10 +94,14 @@ const MessageListItem = ({ classes, item, userId }) => {
   );
 };
 
+MessageListItem.defaultProps = {
+  userId: '',
+};
+
 MessageListItem.propTypes = {
   classes: IClasses.isRequired,
   item: IMessage.isRequired,
-  userId: PropTypes.string.isRequired,
+  userId: PropTypes.string,
 };
 
 export default withStyles(styles)(MessageListItem);

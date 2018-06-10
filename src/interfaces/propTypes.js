@@ -19,7 +19,6 @@ export const IMessage = PropTypes.shape({
 
 export const IUser = PropTypes.shape({
   _id: PropTypes.string.isRequired,
-  createdAt: PropTypes.string.isRequired,
   username: PropTypes.string.isRequired,
   lastName: PropTypes.string.isRequired,
   firstName: PropTypes.string.isRequired,

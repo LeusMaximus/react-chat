@@ -57,11 +57,15 @@ const SignupPage = ({
   );
 };
 
+SignupPage.defaultProps = {
+  error: null,
+};
+
 SignupPage.propTypes = {
   classes: IClasses.isRequired,
   signup: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
-  error: PropTypes.instanceOf(Error).isRequired,
+  error: PropTypes.instanceOf(Error),
 };
 
 export default withStyles(styles)(SignupPage);

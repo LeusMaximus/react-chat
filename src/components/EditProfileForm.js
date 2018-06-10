@@ -18,9 +18,13 @@ const styles = theme => ({
 });
 
 class EditProfileForm extends React.Component {
+  static defaultProps = {
+    user: null,
+  };
+
   static propTypes = {
     classes: IClasses.isRequired,
-    user: IUser.isRequired,
+    user: IUser,
     onSubmit: PropTypes.func.isRequired,
   };
 

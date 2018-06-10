@@ -53,6 +53,7 @@ const styles = theme => ({
 class ChatPage extends React.Component {
   static defaultProps = {
     activeChat: null,
+    activeId: '',
     userId: null,
     error: null,
   };
@@ -68,7 +69,7 @@ class ChatPage extends React.Component {
     socketsConnect: PropTypes.func.isRequired,
     mountChat: PropTypes.func.isRequired,
     unmountChat: PropTypes.func.isRequired,
-    activeId: PropTypes.string.isRequired,
+    activeId: PropTypes.string,
     allChats: PropTypes.arrayOf(IChatItem).isRequired,
     myChats: PropTypes.arrayOf(IChatItem).isRequired,
     activeChat: IChatItem,

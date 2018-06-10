@@ -53,12 +53,16 @@ const styles = theme => ({
 });
 
 class Sidebar extends React.Component {
+  static defaultProps = {
+    activeId: '',
+  };
+
   static propTypes = {
     classes: IClasses.isRequired,
     allChats: PropTypes.arrayOf(IChatItem).isRequired,
     myChats: PropTypes.arrayOf(IChatItem).isRequired,
     setActiveChat: PropTypes.func.isRequired,
-    activeId: PropTypes.string.isRequired,
+    activeId: PropTypes.string,
     isConnected: PropTypes.bool.isRequired,
   };
 
