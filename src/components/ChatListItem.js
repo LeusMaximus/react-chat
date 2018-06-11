@@ -41,7 +41,7 @@ const ChatListItem = ({
       to={`/chat/${item._id}`}
     >
       <Avatar>{item.title}</Avatar>
-      <ListItemText primary={item.title} secondary={DateView(item.createdAt)} />
+      <ListItemText primary={item.title} secondary={<DateView date={item.createdAt} />} />
     </ListItem>
   );
 };
