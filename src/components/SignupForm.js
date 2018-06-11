@@ -43,7 +43,7 @@ class SignupForm extends React.Component {
     const { username, password, repeatPassword } = this.state;
     const isUserNameValid = isTextFieldValid(username.value);
     const isPasswordValid = isTextFieldValid(password.value);
-    const isRepeatPasswordValid = isEqualStrings(password.value, repeatPassword.value);
+    const isRepeatPasswordValid = isEqualStrings([password.value, repeatPassword.value]);
 
     this.setState({
       username: {
