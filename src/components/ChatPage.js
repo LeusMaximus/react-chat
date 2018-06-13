@@ -99,7 +99,7 @@ class ChatPage extends React.Component {
         const { chatId } = match.params;
 
         if (chatId) {
-          setActiveChat(chatId);
+          setActiveChat(chatId, true);
           mountChat(chatId);
         }
       });
@@ -113,13 +113,13 @@ class ChatPage extends React.Component {
     const { chatId: currChatId } = this.props.match.params;
 
     if (activeId && prevChatId && !currChatId) {
-      setActiveChat('');
+      setActiveChat('', true);
       unmountChat(prevChatId);
       mountChat(currChatId);
     }
 
     if (currChatId && currChatId !== prevChatId) {
-      setActiveChat(currChatId, true);
+      setActiveChat(currChatId, false);
       if (prevChatId) {
         unmountChat(prevChatId);
       }

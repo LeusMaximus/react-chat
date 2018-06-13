@@ -34,7 +34,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => ({
   getAllChats: () => dispatch(getAllChats()),
   getMyChats: () => dispatch(getMyChats()),
-  setActiveChat: (chatId, notNeedRedirect) => dispatch(setActiveChat(chatId, notNeedRedirect)),
+  setActiveChat: (chatId, shouldRedirect) => dispatch(setActiveChat(chatId, shouldRedirect)),
   joinChat: chatId => dispatch(joinChat(chatId)),
   leaveChat: chatId => dispatch(leaveChat(chatId)),
   deleteChat: chatId => dispatch(deleteChat(chatId)),

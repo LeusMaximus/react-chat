@@ -101,7 +101,7 @@ export function getChat(chatId) {
   };
 }
 
-export function setActiveChat(chatId, notNeedRedirect) {
+export function setActiveChat(chatId, shouldRedirect) {
   return dispatch =>
     dispatch(getChat(chatId)).then((data) => {
       if (!data || !data.chat) {
@@ -117,7 +117,7 @@ export function setActiveChat(chatId, notNeedRedirect) {
         payload: data,
       });
 
-      if (!notNeedRedirect) {
+      if (shouldRedirect) {
         dispatch(redirect(`/chat/${data.chat._id}`));
       }
 
@@ -157,7 +157,7 @@ export function createChat(title) {
           payload: data,
         });
 
-        dispatch(setActiveChat(data.chat._id));
+        dispatch(setActiveChat(data.chat._id, true));
 
         return data;
       })
