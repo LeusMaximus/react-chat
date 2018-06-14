@@ -6,8 +6,8 @@ import PropTypes from 'prop-types';
 import MUIAvatar from '@material-ui/core/Avatar';
 
 // Own modules
-import getInitials from '../utils/getInitials';
-import getColorBasedOnString from '../utils/getColorBasedOnString';
+import getInitials from '../../utils/getInitials';
+import getColorBasedOnString from '../../utils/getColorBasedOnString';
 
 const Avatar = ({ children, ...rest }) => (
   <MUIAvatar style={{ backgroundColor: getColorBasedOnString(children) }} {...rest}>
