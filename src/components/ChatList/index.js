@@ -11,8 +11,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import nanoid from 'nanoid';
 
 // Own modules
-import ChatListItem from './ChatListItem';
-import { IChatItem } from '../interfaces/propTypes';
+import ChatListItem from '../ChatListItem';
+import { IChatItem } from '../../interfaces/propTypes';
 
 const ChatList = ({
   chats, setActiveChat, activeId, searchTerm, disabled,

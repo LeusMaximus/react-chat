@@ -13,10 +13,10 @@ import isEmpty from 'lodash/isEmpty';
 import _get from 'lodash/get';
 
 // Own modules
-import Avatar from './Avatar';
-import UserNav from '../containers/UserNav';
-import ChatMenu from '../components/ChatMenu';
-import { IClasses, IChatItem } from '../interfaces/propTypes';
+import Avatar from '../../components/Avatar';
+import UserNav from '../../containers/UserNav';
+import ChatMenu from '../../components/ChatMenu';
+import { IClasses, IChatItem } from '../../interfaces/propTypes';
 
 const styles = () => ({
   appBar: {

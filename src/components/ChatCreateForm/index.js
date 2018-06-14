@@ -8,8 +8,8 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
 // Own modules
-import isTextFieldValid from '../utils/isTextFieldValid';
-import { IClasses } from '../interfaces/propTypes';
+import isTextFieldValid from '../../utils/isTextFieldValid';
+import { IClasses } from '../../interfaces/propTypes';
 
 const styles = theme => ({
   button: {
