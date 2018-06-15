@@ -1,4 +1,10 @@
 export default {
-  API_URI: 'http://localhost:8000/v1',
-  API_WS: 'ws://localhost:8000',
+  API_URI:
+    process.env.NODE_ENV === 'production'
+      ? 'https://dogecodes-chat-api.herokuapp.com/v1'
+      : 'http://localhost:8000/v1',
+  WS_URI:
+    process.env.NODE_ENV === 'production'
+      ? 'wss://dogecodes-chat-api.herokuapp.com/'
+      : 'ws://localhost:8000',
 };

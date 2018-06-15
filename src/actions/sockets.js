@@ -62,7 +62,7 @@ export function socketsConnect() {
       type: actTypes.SOCKETS_CONNECTION_REQUEST,
     });
 
-    socket = SocketIOClient(config.API_WS, {
+    socket = SocketIOClient(config.WS_URI, {
       query: { token },
     });
 
