@@ -1,5 +1,6 @@
 // React
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // MUI components
 import { withStyles } from '@material-ui/core/styles';
@@ -16,6 +17,7 @@ import SearchChat from './SearchChat';
 import ChatList from './ChatList';
 import ChatNav from './ChatNav';
 import ChatCreate from '../containers/ChatCreate';
+import { IClasses, IChatItem } from '../interfaces/propTypes';
 
 const styles = theme => ({
   drawerPaper: {
@@ -33,7 +35,7 @@ const styles = theme => ({
   chatsListHolder: {
     flexShrink: 1,
     flexGrow: 1,
-    overflowY: 'scroll'
+    overflowY: 'scroll',
   },
 
   chatNavHolder: {
@@ -51,6 +53,19 @@ const styles = theme => ({
 });
 
 class Sidebar extends React.Component {
+  static defaultProps = {
+    activeId: '',
+  };
+
+  static propTypes = {
+    classes: IClasses.isRequired,
+    allChats: PropTypes.arrayOf(IChatItem).isRequired,
+    myChats: PropTypes.arrayOf(IChatItem).isRequired,
+    setActiveChat: PropTypes.func.isRequired,
+    activeId: PropTypes.string,
+    isConnected: PropTypes.bool.isRequired,
+  };
+
   state = {
     isMyChatsActive: true,
     chatsFilterTerm: '',
@@ -62,7 +77,7 @@ class Sidebar extends React.Component {
     });
   };
 
-  handleSearchChats = event => {
+  handleSearchChats = (event) => {
     const { value } = event.target;
 
     this.setState({
@@ -71,7 +86,9 @@ class Sidebar extends React.Component {
   };
 
   render() {
-    const { classes, allChats, myChats, setActiveChat, activeId, isConnected } = this.props;
+    const {
+      classes, allChats, myChats, setActiveChat, activeId, isConnected,
+    } = this.props;
     const { isMyChatsActive } = this.state;
     const chats = isMyChatsActive ? myChats : allChats;
 
@@ -85,26 +102,27 @@ class Sidebar extends React.Component {
         <div className={classes.drawerTopToolbar}>
           <SearchChat onChange={this.handleSearchChats} term={this.state.chatsFilterTerm} />
         </div>
+
         <Divider />
 
         <div className={classes.chatsListHolder}>
-          {
-            chats.length
-              ? <ChatList
-                  disabled={!isConnected}
-                  chats={isMyChatsActive ? myChats : allChats}
-                  setActiveChat={setActiveChat}
-                  activeId={activeId}
-                  searchTerm={this.state.chatsFilterTerm}
-                />
-              : <Paper elevation={4} className={classes.notChatsMessage}>
-                  <Typography variant="body1" align="center">
-                    There is not chats yet...
-                  </Typography>
+          {chats.length ? (
+            <ChatList
+              disabled={!isConnected}
+              chats={isMyChatsActive ? myChats : allChats}
+              setActiveChat={setActiveChat}
+              activeId={activeId}
+              searchTerm={this.state.chatsFilterTerm}
+            />
+          ) : (
+            <Paper elevation={4} className={classes.notChatsMessage}>
+              <Typography variant="body1" align="center">
+                There is not chats yet...
+              </Typography>
 
-                  <SentimentVeryDissatisfied style={{ marginLeft: 10 }} />
-                </Paper>
-          }
+              <SentimentVeryDissatisfied style={{ marginLeft: 10 }} />
+            </Paper>
+          )}
         </div>
 
         <div className={classes.chatNavHolder}>
@@ -117,6 +135,6 @@ class Sidebar extends React.Component {
       </Drawer>
     );
   }
-};
+}
 
 export default withStyles(styles)(Sidebar);

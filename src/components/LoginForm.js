@@ -1,5 +1,6 @@
 // React
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // MUI components
 import { withStyles } from '@material-ui/core';
@@ -8,14 +9,20 @@ import Button from '@material-ui/core/Button';
 
 // Own modules
 import isTextFieldValid from '../utils/isTextFieldValid';
+import { IClasses } from '../interfaces/propTypes';
 
 const styles = theme => ({
   button: {
-    marginTop: theme.spacing.unit * 4
-  }
+    marginTop: theme.spacing.unit * 4,
+  },
 });
 
 class LoginForm extends React.Component {
+  static propTypes = {
+    classes: IClasses.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+  };
+
   state = {
     username: {
       value: '',
@@ -23,9 +30,9 @@ class LoginForm extends React.Component {
     },
     password: {
       value: '',
-      isValid: true
+      isValid: true,
     },
-  }
+  };
 
   validate = () => {
     const { username, password } = this.state;
@@ -44,20 +51,20 @@ class LoginForm extends React.Component {
     });
 
     return isUserNameValid && isPasswordValid;
-  }
+  };
 
-  handleChange = event => {
+  handleChange = (event) => {
     const { name, value } = event.target;
 
     this.setState(prevState => ({
       [name]: {
         ...prevState[name],
         value,
-      }
+      },
     }));
-  }
+  };
 
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     event.preventDefault();
 
     const isValid = this.validate();
@@ -67,7 +74,7 @@ class LoginForm extends React.Component {
     const { username, password } = this.state;
 
     this.props.onSubmit(username.value, password.value);
-  }
+  };
 
   render() {
     const { classes } = this.props;
@@ -98,13 +105,7 @@ class LoginForm extends React.Component {
           error={!password.isValid}
         />
 
-        <Button
-          variant="raised"
-          color="primary"
-          fullWidth
-          className={classes.button}
-          type="submit"
-        >
+        <Button variant="raised" color="primary" fullWidth className={classes.button} type="submit">
           Login
         </Button>
       </form>

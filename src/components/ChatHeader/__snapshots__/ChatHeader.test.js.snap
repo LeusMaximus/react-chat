@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ChatHeader /> snapshot test when active chat is 1`] = `
+<header
+  className="MuiPaper-root-78 MuiPaper-elevation4-84 MuiAppBar-root-70 MuiAppBar-positionStatic-74 MuiAppBar-colorPrimary-76 ChatHeader-appBar-66"
+>
+  <div
+    className="MuiToolbar-root-105 MuiToolbar-gutters-106"
+  >
+    ChatMenu
+    Avatar
+    <h2
+      className="MuiTypography-root-107 MuiTypography-title-113 MuiTypography-colorInherit-126 MuiTypography-noWrap-123"
+    >
+      Test Chat
+    </h2>
+    UserNav
+  </div>
+</header>
+`;
+
+exports[`<ChatHeader /> snapshot test when no any active chats 1`] = `
+<header
+  className="MuiPaper-root-78 MuiPaper-elevation4-84 MuiAppBar-root-70 MuiAppBar-positionStatic-74 MuiAppBar-colorPrimary-76 ChatHeader-appBar-66"
+>
+  <div
+    className="MuiToolbar-root-105 MuiToolbar-gutters-106"
+  >
+    <h2
+      className="MuiTypography-root-107 MuiTypography-title-113 MuiTypography-colorInherit-126 MuiTypography-noWrap-123"
+    >
+      Super Messenger
+    </h2>
+    UserNav
+  </div>
+</header>
+`;

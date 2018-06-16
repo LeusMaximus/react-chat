@@ -3,15 +3,16 @@
  * @param {string} title
  * @return {string}
  */
-export default function(title) {
+export default function (title) {
   try {
     return title
+      .trim()
       .split(' ')
       .slice(0, 2)
       .map(word => word[0].toUpperCase())
       .join('');
   } catch (e) {
     // console.warn(e);
-    return '';
+    return '-';
   }
-};
+}

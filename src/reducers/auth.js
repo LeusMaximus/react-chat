@@ -30,7 +30,7 @@ export default function auth(state = initialState, action) {
       return {
         ...state,
         user: action.payload.user,
-      }
+      };
     case actTypes.SIGNUP_FAILURE:
     case actTypes.LOGIN_FAILURE:
     case actTypes.VERIFY_AUTH_FAILURE:

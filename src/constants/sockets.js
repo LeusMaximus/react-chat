@@ -11,4 +11,3 @@ export const SEND_MESSAGE = Symbol('sockets/SEND_MESAGE');
 export const RECIEVE_MESSAGE = Symbol('sockets/RECIEVE_MESAGE');
 export const RECIEVE_NEW_CHAT = Symbol('sockets/RECIEVE_NEW_CHAT');
 export const RECIEVE_DELETE_CHAT = Symbol('sockets/RECIEVE_DELETE_CHAT');
-

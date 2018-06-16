@@ -1,5 +1,6 @@
 // React
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // MUI components
 import { withStyles } from '@material-ui/core';
@@ -7,15 +8,21 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
 // Own modules
-import isTextFieldValid from '../utils/isTextFieldValid';
+import isTextFieldValid from '../../utils/isTextFieldValid';
+import { IClasses } from '../../interfaces/propTypes';
 
 const styles = theme => ({
   button: {
-    marginTop: theme.spacing.unit * 4
-  }
+    marginTop: theme.spacing.unit * 4,
+  },
 });
 
 class ChatCreateForm extends React.Component {
+  static propTypes = {
+    classes: IClasses.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+  };
+
   state = {
     chatName: {
       value: '',
@@ -35,20 +42,20 @@ class ChatCreateForm extends React.Component {
     });
 
     return isChatNameValid;
-  }
+  };
 
-  handleChange = event => {
+  handleChange = (event) => {
     const { name, value } = event.target;
 
     this.setState(prevState => ({
       [name]: {
         ...prevState[name],
         value,
-      }
+      },
     }));
-  }
+  };
 
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     event.preventDefault();
 
     const isValid = this.validate();
@@ -58,7 +65,7 @@ class ChatCreateForm extends React.Component {
     const { chatName } = this.state;
 
     this.props.onSubmit(chatName.value);
-  }
+  };
 
   render() {
     const { classes } = this.props;
@@ -78,13 +85,7 @@ class ChatCreateForm extends React.Component {
           error={!chatName.isValid}
         />
 
-        <Button
-          variant="raised"
-          color="primary"
-          fullWidth
-          className={classes.button}
-          type="submit"
-        >
+        <Button variant="raised" color="primary" fullWidth className={classes.button} type="submit">
           Create
         </Button>
       </form>

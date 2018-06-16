@@ -1,19 +1,21 @@
 // React
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // MUI components
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
+// Vendor modules
+import isEmpty from 'lodash/isEmpty';
+
 // Own modules
 import Sidebar from './Sidebar';
 import ChatHeader from './ChatHeader';
 import MessagesSection from './MessagesSection';
 import PopupMessage from './PopupMessage';
-
-// Vendor modules
-import isEmpty from 'lodash/isEmpty';
+import { IClasses, IChatItem, IMessage } from '../interfaces/propTypes';
 
 const styles = theme => ({
   appFrame: {
@@ -28,7 +30,7 @@ const styles = theme => ({
     position: 'relative',
     width: '100%',
     height: '100%',
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
 
   content: {
@@ -49,27 +51,75 @@ const styles = theme => ({
 });
 
 class ChatPage extends React.Component {
-  constructor (props) {
-    super(props);
+  static defaultProps = {
+    activeChat: null,
+    activeId: '',
+    userId: null,
+    error: null,
+  };
 
-    this.state = {
-      activeId: props.activeId,
-    };
+  static propTypes = {
+    classes: IClasses.isRequired,
+    match: PropTypes.shape({
+      params: PropTypes.object.isRequired,
+    }).isRequired,
+    getAllChats: PropTypes.func.isRequired,
+    getMyChats: PropTypes.func.isRequired,
+    setActiveChat: PropTypes.func.isRequired,
+    socketsConnect: PropTypes.func.isRequired,
+    mountChat: PropTypes.func.isRequired,
+    unmountChat: PropTypes.func.isRequired,
+    activeId: PropTypes.string,
+    allChats: PropTypes.arrayOf(IChatItem).isRequired,
+    myChats: PropTypes.arrayOf(IChatItem).isRequired,
+    activeChat: IChatItem,
+    joinChat: PropTypes.func.isRequired,
+    leaveChat: PropTypes.func.isRequired,
+    deleteChat: PropTypes.func.isRequired,
+    sendMessage: PropTypes.func.isRequired,
+    isMember: PropTypes.bool.isRequired,
+    isCreator: PropTypes.bool.isRequired,
+    isChatMember: PropTypes.bool.isRequired,
+    userId: PropTypes.string,
+    messages: PropTypes.arrayOf(IMessage).isRequired,
+    error: PropTypes.instanceOf(Error),
+    isConnected: PropTypes.bool.isRequired,
+  };
+
+  componentDidMount() {
+    const {
+      getAllChats, getMyChats, setActiveChat, match, socketsConnect, mountChat,
+    } = this.props;
+
+    Promise.all([getAllChats(), getMyChats()])
+      .then(() => {
+        socketsConnect();
+      })
+      .then(() => {
+        const { chatId } = match.params;
+
+        if (chatId) {
+          setActiveChat(chatId, true);
+          mountChat(chatId);
+        }
+      });
   }
 
-  componentDidUpdate(prevProps, state) {
-    const { setActiveChat, activeId, mountChat, unmountChat } = this.props;
+  componentDidUpdate(prevProps) {
+    const {
+      setActiveChat, activeId, mountChat, unmountChat,
+    } = this.props;
     const { chatId: prevChatId } = prevProps.match.params;
     const { chatId: currChatId } = this.props.match.params;
 
     if (activeId && prevChatId && !currChatId) {
-      setActiveChat('');
+      setActiveChat('', true);
       unmountChat(prevChatId);
       mountChat(currChatId);
     }
 
     if (currChatId && currChatId !== prevChatId) {
-      setActiveChat(currChatId, true);
+      setActiveChat(currChatId, false);
       if (prevChatId) {
         unmountChat(prevChatId);
       }
@@ -78,31 +128,25 @@ class ChatPage extends React.Component {
     }
   }
 
-  componentDidMount() {
-    const { getAllChats, getMyChats, setActiveChat, match, socketsConnect, mountChat } = this.props;
-
-    Promise.all([
-      getAllChats(),
-      getMyChats(),
-    ])
-      .then(() => {
-        socketsConnect();
-      })
-      .then(()=>{
-        const { chatId } = match.params;
-
-        if (chatId) {
-          setActiveChat(chatId);
-          mountChat(chatId);
-        }
-      })
-  }
-
   render() {
     const {
-      classes, allChats, myChats, activeChat, activeId,
-      setActiveChat, joinChat, leaveChat, deleteChat, sendMessage,
-      isMember, isCreator, isChatMember, userId, messages, error, isConnected,
+      classes,
+      allChats,
+      myChats,
+      activeChat,
+      activeId,
+      setActiveChat,
+      joinChat,
+      leaveChat,
+      deleteChat,
+      sendMessage,
+      isMember,
+      isCreator,
+      isChatMember,
+      userId,
+      messages,
+      error,
+      isConnected,
     } = this.props;
 
     return (
@@ -120,23 +164,23 @@ class ChatPage extends React.Component {
           />
 
           <main className={classes.content}>
-            {
-              !isEmpty(activeChat)
-                ? <MessagesSection
-                    isConnected={isConnected}
-                    messages={messages}
-                    chat={activeChat}
-                    isChatMember={isChatMember}
-                    joinChat={joinChat}
-                    sendMessage={sendMessage}
-                    userId={userId}
-                  />
-                : <Paper className={classes.introMessage} elevation={4} rounded={20}>
-                    <Typography variant="headline" component="h2" align="center">
-                      Please select some chat (or create new) to start messaging...
-                    </Typography>
-                  </Paper>
-            }
+            {!isEmpty(activeChat) ? (
+              <MessagesSection
+                isConnected={isConnected}
+                messages={messages}
+                chat={activeChat}
+                isChatMember={isChatMember}
+                joinChat={joinChat}
+                sendMessage={sendMessage}
+                userId={userId}
+              />
+            ) : (
+              <Paper className={classes.introMessage} elevation={4} rounded={20}>
+                <Typography variant="headline" component="h2" align="center">
+                  Please select some chat (or create new) to start messaging...
+                </Typography>
+              </Paper>
+            )}
           </main>
         </div>
 
@@ -152,6 +196,6 @@ class ChatPage extends React.Component {
       </div>
     );
   }
-};
+}
 
 export default withStyles(styles)(ChatPage);

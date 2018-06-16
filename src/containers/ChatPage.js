@@ -1,10 +1,17 @@
 import { connect } from 'react-redux';
 import ChatPage from '../components/ChatPage';
-import { getAllChats, getMyChats, setActiveChat, joinChat, leaveChat, deleteChat } from '../actions/chat';
+import {
+  getAllChats,
+  getMyChats,
+  setActiveChat,
+  joinChat,
+  leaveChat,
+  deleteChat,
+} from '../actions/chat';
 import { sendMessage, mountChat, unmountChat, socketsConnect } from '../actions/sockets';
 import * as fromChats from '../reducers/chats';
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const stateChats = state.chats;
   const userId = state.auth.user && state.auth.user._id;
   const activeChat = fromChats.getById(state.chats, state.chats.activeId);
@@ -21,13 +28,13 @@ const mapStateToProps = state => {
     messages: state.messages,
     error: state.services.errors.chat,
     isConnected: state.services.isConnected,
-  }
+  };
 };
 
 const mapDispatchToProps = dispatch => ({
   getAllChats: () => dispatch(getAllChats()),
   getMyChats: () => dispatch(getMyChats()),
-  setActiveChat: (chatId, notNeedRedirect) => dispatch(setActiveChat(chatId, notNeedRedirect)),
+  setActiveChat: (chatId, shouldRedirect) => dispatch(setActiveChat(chatId, shouldRedirect)),
   joinChat: chatId => dispatch(joinChat(chatId)),
   leaveChat: chatId => dispatch(leaveChat(chatId)),
   deleteChat: chatId => dispatch(deleteChat(chatId)),

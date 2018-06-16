@@ -1,5 +1,6 @@
 // React
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // MUI Components
 import { withStyles } from '@material-ui/core/styles';
@@ -8,6 +9,8 @@ import IconButton from '@material-ui/core/IconButton';
 
 // MUI Icons
 import Close from '@material-ui/icons/Close';
+
+import { IClasses } from '../interfaces/propTypes';
 
 const styles = theme => ({
   modalPaper: {
@@ -28,32 +31,37 @@ const styles = theme => ({
   },
 });
 
-class ChatCreate extends React.Component {
-  render() {
-    const { classes, modalOpen, handleModalClose } = this.props;
+const ChatModal = ({
+  classes, modalOpen, handleModalClose, children,
+}) => (
+  <React.Fragment>
+    <Modal
+      aria-labelledby="simple-modal-title"
+      aria-describedby="simple-modal-description"
+      open={modalOpen}
+      onClose={handleModalClose}
+    >
+      <div className={classes.modalPaper}>
+        {children}
 
-    return (
-      <React.Fragment>
-        <Modal
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
-          open={modalOpen}
-          onClose={handleModalClose}
-        >
-          <div className={classes.modalPaper}>
-            {this.props.children}
+        <IconButton className={classes.btnClose} onClick={handleModalClose}>
+          <Close />
+        </IconButton>
+      </div>
+    </Modal>
+  </React.Fragment>
+);
 
-            <IconButton
-              className={classes.btnClose}
-              onClick={handleModalClose}
-            >
-              <Close />
-            </IconButton>
-          </div>
-        </Modal>
-      </React.Fragment>
-    );
-  }
+ChatModal.defaultProps = {
+  classes: null,
+  children: '',
 };
 
-export default withStyles(styles)(ChatCreate);
+ChatModal.propTypes = {
+  classes: IClasses,
+  modalOpen: PropTypes.bool.isRequired,
+  handleModalClose: PropTypes.func.isRequired,
+  children: PropTypes.node,
+};
+
+export default withStyles(styles)(ChatModal);

@@ -1,10 +1,19 @@
+// React
 import React from 'react';
 import { connect } from 'react-redux';
 import { Route, Redirect, withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-import { verifyAuth } from '../actions';
+// Own modules
+import { verifyAuth } from '../actions/auth';
 
 class PrivateRoute extends React.Component {
+  static propTypes = {
+    verifyAuth: PropTypes.func.isRequired,
+    component: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool.isRequired,
+  };
+
   componentDidMount() {
     this.props.verifyAuth();
   }
@@ -13,14 +22,21 @@ class PrivateRoute extends React.Component {
     const { component: Component, isAuthenticated, ...rest } = this.props;
 
     return (
-      <Route {...rest} render={props => (
-        isAuthenticated
-          ? <Component {...props} />
-          : <Redirect to={{
-              pathname: '/login',
-              state: { from: props.location }
-            }} />
-      )} />
+      <Route
+        {...rest}
+        render={props =>
+          (isAuthenticated ? (
+            <Component {...props} />
+          ) : (
+            <Redirect
+              to={{
+                pathname: '/login',
+                state: { from: props.location },
+              }}
+            />
+          ))
+        }
+      />
     );
   }
 }
@@ -30,10 +46,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  verifyAuth: () => dispatch(verifyAuth())
+  verifyAuth: () => dispatch(verifyAuth()),
 });
 
 export default withRouter(connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(PrivateRoute));

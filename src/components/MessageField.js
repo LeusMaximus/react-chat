@@ -1,5 +1,6 @@
 // React
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // MUI components
 import { withStyles } from '@material-ui/core/styles';
@@ -10,6 +11,7 @@ import Button from '@material-ui/core/Button';
 
 // Own modules
 import isTextFieldValid from '../utils/isTextFieldValid';
+import { IClasses } from '../interfaces/propTypes';
 
 const styles = theme => ({
   messageField: {
@@ -25,6 +27,19 @@ const styles = theme => ({
 });
 
 class MessageField extends React.Component {
+  static defaultProps = {
+    activeId: '',
+  };
+
+  static propTypes = {
+    classes: IClasses.isRequired,
+    isChatMember: PropTypes.bool.isRequired,
+    joinChat: PropTypes.func.isRequired,
+    sendMessage: PropTypes.func.isRequired,
+    activeId: PropTypes.string,
+    disabled: PropTypes.bool.isRequired,
+  };
+
   state = {
     message: {
       value: '',
@@ -44,20 +59,20 @@ class MessageField extends React.Component {
     });
 
     return isMessageValid;
-  }
+  };
 
-  handleChange = event => {
+  handleChange = (event) => {
     const { name, value } = event.target;
 
     this.setState(prevState => ({
       [name]: {
         ...prevState[name],
         value,
-      }
+      },
     }));
-  }
+  };
 
-   handleKeyPress = event => {
+  handleKeyPress = (event) => {
     const { message } = this.state;
 
     if (event.key === 'Enter' && this.validate()) {
@@ -73,36 +88,40 @@ class MessageField extends React.Component {
   };
 
   render() {
-    const { classes, isChatMember, joinChat, activeId, disabled } = this.props;
+    const {
+      classes, isChatMember, joinChat, activeId, disabled,
+    } = this.props;
+
     const { message } = this.state;
 
     return (
       <Paper elevation={10} className={classes.messageField}>
-        {isChatMember
-          ? <FormControl fullWidth>
-              <Input
-                disabled={disabled}
-                placeholder="Type your message..."
-                name="message"
-                value={message.value}
-                onChange={this.handleChange}
-                onKeyPress={this.handleKeyPress}
-              />
-            </FormControl>
-          : <Button
+        {isChatMember ? (
+          <FormControl fullWidth>
+            <Input
               disabled={disabled}
-              variant="raised"
-              color="primary"
-              fullWidth
-              type="button"
-              onClick={() => joinChat(activeId)}
-            >
-              Join
-            </Button>
-        }
+              placeholder="Type your message..."
+              name="message"
+              value={message.value}
+              onChange={this.handleChange}
+              onKeyPress={this.handleKeyPress}
+            />
+          </FormControl>
+        ) : (
+          <Button
+            disabled={disabled}
+            variant="raised"
+            color="primary"
+            fullWidth
+            type="button"
+            onClick={() => joinChat(activeId)}
+          >
+            Join
+          </Button>
+        )}
       </Paper>
     );
   }
-};
+}
 
 export default withStyles(styles)(MessageField);

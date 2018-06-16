@@ -5,7 +5,7 @@ import { redirect } from './services';
 // Constants
 import * as actTypes from '../constants/chats';
 
-export function getMyChats () {
+export function getMyChats() {
   return (dispatch, getState) => {
     const { isFetching } = getState().services;
 
@@ -16,25 +16,27 @@ export function getMyChats () {
     const { token } = getState().auth;
 
     dispatch({
-      type: actTypes.GET_MY_CHATS_REQUEST
+      type: actTypes.GET_MY_CHATS_REQUEST,
     });
 
     return makeRequest({
       endpoint: '/chats/my',
       token,
     })
-      .then(data => dispatch({
-        type: actTypes.GET_MY_CHATS_SUCCESS,
-        payload: data,
-      }))
-      .catch(error => dispatch({
-        type: actTypes.GET_MY_CHATS_FAILURE,
-        payload: error,
-      }));
+      .then(data =>
+        dispatch({
+          type: actTypes.GET_MY_CHATS_SUCCESS,
+          payload: data,
+        }))
+      .catch(error =>
+        dispatch({
+          type: actTypes.GET_MY_CHATS_FAILURE,
+          payload: error,
+        }));
   };
 }
 
-export function getAllChats () {
+export function getAllChats() {
   return (dispatch, getState) => {
     const { isFetching } = getState().services;
 
@@ -45,21 +47,23 @@ export function getAllChats () {
     const { token } = getState().auth;
 
     dispatch({
-      type: actTypes.GET_ALL_CHATS_REQUEST
+      type: actTypes.GET_ALL_CHATS_REQUEST,
     });
 
     return makeRequest({
       endpoint: '/chats',
       token,
     })
-      .then(data => dispatch({
-        type: actTypes.GET_ALL_CHATS_SUCCESS,
-        payload: data,
-      }))
-      .catch(error => dispatch({
-        type: actTypes.GET_ALL_CHATS_FAILURE,
-        payload: error,
-      }));
+      .then(data =>
+        dispatch({
+          type: actTypes.GET_ALL_CHATS_SUCCESS,
+          payload: data,
+        }))
+      .catch(error =>
+        dispatch({
+          type: actTypes.GET_ALL_CHATS_FAILURE,
+          payload: error,
+        }));
   };
 }
 
@@ -81,7 +85,7 @@ export function getChat(chatId) {
       endpoint: `/chats/${chatId}`,
       token,
     })
-      .then(data => {
+      .then((data) => {
         dispatch({
           type: actTypes.GET_CHAT_SUCCESS,
           payload: data,
@@ -89,37 +93,36 @@ export function getChat(chatId) {
 
         return data;
       })
-      .catch(error => dispatch({
-        type: actTypes.GET_CHAT_FAILURE,
-        payload: error,
-      }));
+      .catch(error =>
+        dispatch({
+          type: actTypes.GET_CHAT_FAILURE,
+          payload: error,
+        }));
   };
 }
 
-export function setActiveChat (chatId, notNeedRedirect) {
-  return (dispatch) => {
-    return dispatch(getChat(chatId))
-      .then(data => {
-        if (!data || !data.chat) {
-          dispatch(redirect('/chat'));
+export function setActiveChat(chatId, shouldRedirect) {
+  return dispatch =>
+    dispatch(getChat(chatId)).then((data) => {
+      if (!data || !data.chat) {
+        dispatch(redirect('/chat'));
 
-          return dispatch({
-            type: actTypes.UNSET_ACTIVE_CHAT,
-          });
-        }
-
-        dispatch({
-          type: actTypes.SET_ACTIVE_CHAT,
-          payload: data,
+        return dispatch({
+          type: actTypes.UNSET_ACTIVE_CHAT,
         });
+      }
 
-        if (!notNeedRedirect) {
-          dispatch(redirect(`/chat/${data.chat._id}`));
-        }
-
-        return data;
+      dispatch({
+        type: actTypes.SET_ACTIVE_CHAT,
+        payload: data,
       });
-  };
+
+      if (shouldRedirect) {
+        dispatch(redirect(`/chat/${data.chat._id}`));
+      }
+
+      return data;
+    });
 }
 
 export function createChat(title) {
@@ -137,31 +140,32 @@ export function createChat(title) {
     });
 
     return makeRequest({
-      endpoint: `/chats`,
+      endpoint: '/chats',
       token,
       body: {
         data: {
           title,
-        }
+        },
       },
       requestOptions: {
         method: 'POST',
-      }
+      },
     })
-      .then(data => {
+      .then((data) => {
         dispatch({
           type: actTypes.CREATE_CHAT_SUCCESS,
           payload: data,
         });
 
-        dispatch(setActiveChat(data.chat._id));
+        dispatch(setActiveChat(data.chat._id, true));
 
         return data;
       })
-      .catch(error => dispatch({
-        type: actTypes.CREATE_CHAT_FAILURE,
-        payload: error,
-      }));
+      .catch(error =>
+        dispatch({
+          type: actTypes.CREATE_CHAT_FAILURE,
+          payload: error,
+        }));
   };
 }
 
@@ -184,9 +188,9 @@ export function deleteChat(chatId) {
       token,
       requestOptions: {
         method: 'DELETE',
-      }
+      },
     })
-      .then(data => {
+      .then((data) => {
         dispatch({
           type: actTypes.DELETE_CHAT_SUCCESS,
           payload: data,
@@ -196,10 +200,11 @@ export function deleteChat(chatId) {
 
         return data;
       })
-      .catch(error => dispatch({
-        type: actTypes.DELETE_CHAT_FAILURE,
-        payload: error,
-      }));
+      .catch(error =>
+        dispatch({
+          type: actTypes.DELETE_CHAT_FAILURE,
+          payload: error,
+        }));
   };
 }
 
@@ -221,7 +226,7 @@ export function joinChat(id) {
       endpoint: `/chats/${id}/join`,
       token,
     })
-      .then(data => {
+      .then((data) => {
         dispatch({
           type: actTypes.JOIN_CHAT_SUCCESS,
           payload: data,
@@ -229,10 +234,11 @@ export function joinChat(id) {
 
         return data;
       })
-      .catch(error => dispatch({
-        type: actTypes.JOIN_CHAT_FAILURE,
-        payload: error,
-      }));
+      .catch(error =>
+        dispatch({
+          type: actTypes.JOIN_CHAT_FAILURE,
+          payload: error,
+        }));
   };
 }
 
@@ -254,7 +260,7 @@ export function leaveChat(id) {
       endpoint: `/chats/${id}/leave`,
       token,
     })
-      .then(data => {
+      .then((data) => {
         dispatch({
           type: actTypes.LEAVE_CHAT_SUCCESS,
           payload: data,
@@ -262,9 +268,10 @@ export function leaveChat(id) {
 
         return data;
       })
-      .catch(error => dispatch({
-        type: actTypes.LEAVE_CHAT_FAILURE,
-        payload: error,
-      }));
+      .catch(error =>
+        dispatch({
+          type: actTypes.LEAVE_CHAT_FAILURE,
+          payload: error,
+        }));
   };
 }

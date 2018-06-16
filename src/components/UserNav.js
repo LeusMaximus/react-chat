@@ -1,5 +1,7 @@
 // React
 import React from 'react';
+import PropTypes from 'prop-types';
+
 // MUI Components
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -13,14 +15,27 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import ChatModal from './ChatModal';
 import EditProfileForm from './EditProfileForm';
 import getUserName from '../utils/getUserName';
+import { IUser } from '../interfaces/propTypes';
 
 class UserNav extends React.Component {
+  static defaultProps = {
+    user: null,
+  };
+
+  static propTypes = {
+    logout: PropTypes.func.isRequired,
+    className: PropTypes.string.isRequired,
+    user: IUser,
+    disabled: PropTypes.bool.isRequired,
+    editProfile: PropTypes.func.isRequired,
+  };
+
   state = {
     anchorEl: null,
     modalOpen: false,
   };
 
-  handleClick = event => {
+  handleClick = (event) => {
     this.setState({ anchorEl: event.currentTarget });
   };
 
@@ -31,7 +46,7 @@ class UserNav extends React.Component {
   handleModalOpen = () => {
     this.setState({
       anchorEl: null,
-      modalOpen: true
+      modalOpen: true,
     });
   };
 
@@ -39,17 +54,18 @@ class UserNav extends React.Component {
     this.setState({ modalOpen: false });
   };
 
-  handleSubmit = params => {
-    this.props.editProfile(params)
-      .then(data => {
-        this.handleModalClose();
-        return data;
-      });
+  handleSubmit = (params) => {
+    this.props.editProfile(params).then((data) => {
+      this.handleModalClose();
+      return data;
+    });
   };
 
   render() {
     const { anchorEl, modalOpen } = this.state;
-    const { logout, className, user, disabled } = this.props;
+    const {
+      logout, className, user, disabled,
+    } = this.props;
 
     return (
       <div className={className}>
@@ -65,13 +81,7 @@ class UserNav extends React.Component {
           <AccountCircle />
         </IconButton>
 
-
-        <Menu
-          id="user-nav"
-          anchorEl={anchorEl}
-          open={Boolean(anchorEl)}
-          onClose={this.handleClose}
-        >
+        <Menu id="user-nav" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={this.handleClose}>
           <MenuItem onClick={this.handleModalOpen}>Edit Profile</MenuItem>
           <MenuItem onClick={logout}>Logout</MenuItem>
         </Menu>
@@ -81,7 +91,7 @@ class UserNav extends React.Component {
             Edit profile
           </Typography>
 
-          <EditProfileForm onSubmit={this.handleSubmit} user={user}/>
+          <EditProfileForm onSubmit={this.handleSubmit} user={user} />
         </ChatModal>
       </div>
     );

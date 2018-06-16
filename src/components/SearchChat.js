@@ -1,5 +1,6 @@
 // React
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // MUI components
 import { withStyles } from '@material-ui/core';
@@ -38,5 +39,11 @@ const SearchChat = ({ classes, onChange, term }) => (
     </FormControl>
   </div>
 );
+
+SearchChat.propTypes = {
+  classes: PropTypes.objectOf(PropTypes.string).isRequired,
+  onChange: PropTypes.func.isRequired,
+  term: PropTypes.string.isRequired,
+};
 
 export default withStyles(styles)(SearchChat);

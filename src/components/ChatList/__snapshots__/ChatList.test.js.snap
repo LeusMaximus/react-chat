@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ChatList /> snapshot test with chats 1`] = `
+<div
+  className="MuiList-root-5 MuiList-padding-6"
+>
+  Chat 1
+  Chat 2
+</div>
+`;
+
+exports[`<ChatList /> snapshot test without chats 1`] = `
+<div
+  className="MuiList-root-5 MuiList-padding-6"
+>
+  <div
+    className="MuiListItem-root-9 MuiListItem-default-12 MuiListItem-gutters-16"
+    disabled={false}
+  >
+    <div
+      className="MuiListItemText-root-19"
+    >
+      <span
+        className="MuiTypography-root-25 MuiTypography-subheading-32 MuiListItemText-primary-22"
+      >
+        No chats found...
+      </span>
+    </div>
+  </div>
+</div>
+`;

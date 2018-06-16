@@ -1,5 +1,6 @@
 // React
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // MUI components
 import { withStyles } from '@material-ui/core';
@@ -8,19 +9,30 @@ import Button from '@material-ui/core/Button';
 
 // Own modules
 import isTextFieldValid from '../utils/isTextFieldValid';
+import { IClasses, IUser } from '../interfaces/propTypes';
 
 const styles = theme => ({
   button: {
-    marginTop: theme.spacing.unit * 4
-  }
+    marginTop: theme.spacing.unit * 4,
+  },
 });
 
 class EditProfileForm extends React.Component {
+  static defaultProps = {
+    user: null,
+  };
+
+  static propTypes = {
+    classes: IClasses.isRequired,
+    user: IUser,
+    onSubmit: PropTypes.func.isRequired,
+  };
+
   constructor(props) {
     super(props);
 
     const { user } = this.props;
-    const getObjValue = (obj, key) => obj && obj[key] ? obj[key] : '';
+    const getObjValue = (obj, key) => (obj && obj[key] ? obj[key] : '');
 
     this.state = {
       username: {
@@ -48,20 +60,20 @@ class EditProfileForm extends React.Component {
     });
 
     return isUserNameValid;
-  }
+  };
 
-  handleChange = event => {
+  handleChange = (event) => {
     const { name, value } = event.target;
 
     this.setState(prevState => ({
       [name]: {
         ...prevState[name],
         value,
-      }
+      },
     }));
-  }
+  };
 
-  handleSubmit = event => {
+  handleSubmit = (event) => {
     event.preventDefault();
 
     const isValid = this.validate();
@@ -75,7 +87,7 @@ class EditProfileForm extends React.Component {
       firstName: firstName.value,
       lastName: lastName.value,
     });
-  }
+  };
 
   render() {
     const { classes } = this.props;
@@ -113,13 +125,7 @@ class EditProfileForm extends React.Component {
           onChange={this.handleChange}
         />
 
-        <Button
-          variant="raised"
-          color="primary"
-          fullWidth
-          className={classes.button}
-          type="submit"
-        >
+        <Button variant="raised" color="primary" fullWidth className={classes.button} type="submit">
           Save
         </Button>
       </form>

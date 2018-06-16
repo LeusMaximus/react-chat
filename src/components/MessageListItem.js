@@ -1,5 +1,6 @@
 // React
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // MUI Components
 import { withStyles } from '@material-ui/core/styles';
@@ -18,6 +19,7 @@ import Avatar from './Avatar';
 import getColorBasedOnString from '../utils/getColorBasedOnString';
 import getUserName from '../utils/getUserName';
 import DateView from './DateView';
+import { IClasses, IMessage } from '../interfaces/propTypes';
 
 const styles = theme => ({
   ownMessageItem: {
@@ -73,23 +75,33 @@ const MessageListItem = ({ classes, item, userId }) => {
 
   return (
     <ListItem className={itemClasses}>
-        <Avatar>
-          {senderName}
-        </Avatar>
+      <Avatar>{senderName}</Avatar>
 
       <Paper elevation={elevation} className={paperClasses}>
-        <Typography variant="caption" component="strong" style={{ color: getColorBasedOnString(senderName) }}>
+        <Typography
+          variant="caption"
+          component="strong"
+          style={{ color: getColorBasedOnString(senderName) }}
+        >
           {senderName}
         </Typography>
 
-        <Typography component="p">
-          {item.content}
-        </Typography>
+        <Typography component="p">{item.content}</Typography>
 
         <DateView date={item.createdAt} />
       </Paper>
     </ListItem>
   );
+};
+
+MessageListItem.defaultProps = {
+  userId: '',
+};
+
+MessageListItem.propTypes = {
+  classes: IClasses.isRequired,
+  item: IMessage.isRequired,
+  userId: PropTypes.string,
 };
 
 export default withStyles(styles)(MessageListItem);

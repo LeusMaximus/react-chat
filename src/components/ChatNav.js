@@ -1,5 +1,6 @@
 // React
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // MUI components
 import BottomNavigation from '@material-ui/core/BottomNavigation';
@@ -14,10 +15,14 @@ class ChatNav extends React.Component {
     value: 0,
   };
 
-  static getDerivedStateFromProps(nextProps, prevState) {
+  static propTypes = {
+    tabsChange: PropTypes.func.isRequired,
+  };
+
+  static getDerivedStateFromProps(nextProps) {
     return {
-      value: nextProps.tabNumber
-    }
+      value: nextProps.tabNumber,
+    };
   }
 
   render() {
@@ -25,16 +30,12 @@ class ChatNav extends React.Component {
     const { tabsChange } = this.props;
 
     return (
-      <BottomNavigation
-        value={value}
-        onChange={tabsChange}
-        showLabels
-      >
+      <BottomNavigation value={value} onChange={tabsChange} showLabels>
         <BottomNavigationAction label="My Chats" icon={<ChildCare />} />
         <BottomNavigationAction label="All Chats" icon={<Rowing />} />
       </BottomNavigation>
     );
   }
-};
+}
 
 export default ChatNav;
