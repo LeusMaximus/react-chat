@@ -15,9 +15,9 @@ import grey from '@material-ui/core/colors//grey';
 import classnames from 'classnames';
 
 // Own modules
-import Avatar from './Avatar';
-import DateView from './DateView';
-import { IClasses, IChatItem } from '../interfaces/propTypes';
+import Avatar from '../Avatar';
+import DateView from '../DateView';
+import { IClasses, IChatItem } from '../../interfaces/propTypes';
 
 const styles = () => ({
   selected: {
