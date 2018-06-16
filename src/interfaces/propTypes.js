@@ -6,7 +6,7 @@ export const IChatItem = PropTypes.shape({
   _id: PropTypes.string.isRequired,
   updatedAt: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
 });
 
 export const IMessage = PropTypes.shape({
